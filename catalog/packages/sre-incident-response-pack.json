@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "sre-incident-response-pack",
+  "name": "SRE Incident Response Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "sre",
+  "description": "Bundles the incident triage prompt and runbook generator skill so on-call engineers have a complete first-response toolkit. Covers the first 30 minutes of any incident.",
+  "entry_asset": "sre-runbook-generator",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["incident-response", "runbook", "on-call", "sre"],
+
+  "assets": [
+    {
+      "id": "sre-runbook-generator",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/sre/skills/runbook-generator.md",
+      "required": true
+    },
+    {
+      "id": "sre-incident-triage-prompt",
+      "role": "prompt",
+      "source_folder": "prompts",
+      "path": "workstreams/sre/prompts/incident-triage.md",
+      "required": true
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "During an incident, paste the incident-triage prompt into Copilot Chat with the alert details. Use runbook-generator to create a runbook if one does not exist."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "POST to the portal API. The portal will route to the correct skill based on the 'skill_id' field.",
+      "endpoint": "{{API_BASE_URL}}/packages/sre-incident-response-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool callable from a PagerDuty or Slack bot integration.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/sre-runbook-generator"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill reachable from the incident management Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy via internal API layer for on-premises SRE tooling where external LLM calls are restricted."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.1,
+    "max_tokens": 3000,
+    "additional_notes": "Very low temperature for deterministic, consistent incident guidance. Increase only when generating runbook prose sections."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with runbook generator, incident triage prompt, and shared utility skills."
+    }
+  ]
+}

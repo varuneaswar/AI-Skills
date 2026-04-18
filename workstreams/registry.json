@@ -1,0 +1,72 @@
+{
+  "$schema": "../schemas/workstream-registry.schema.json",
+  "version": "1.0.0",
+  "updated": "2024-01-01",
+  "description": "Single source of truth for all registered work streams. Add a new entry here — and create the matching folder structure — to register a new work stream. Schemas and portal tooling read this file to build workstream dropdown lists and route assets.",
+  "workstreams": [
+    {
+      "id": "architects",
+      "label": "Architects",
+      "description": "Solution architects and enterprise architects working on design, ADRs, trade-off analysis, and technical proposals.",
+      "path": "workstreams/architects",
+      "owner": "",
+      "tags": ["architecture", "design", "adr"],
+      "status": "active"
+    },
+    {
+      "id": "capacity-management",
+      "label": "Capacity Management",
+      "description": "Engineers responsible for demand forecasting, resource sizing, utilization analysis, and cost optimisation.",
+      "path": "workstreams/capacity-management",
+      "owner": "",
+      "tags": ["capacity", "forecasting", "resources"],
+      "status": "active"
+    },
+    {
+      "id": "developers",
+      "label": "Developers",
+      "description": "Software engineers focused on code generation, review, refactoring, documentation, and testing.",
+      "path": "workstreams/developers",
+      "owner": "",
+      "tags": ["code", "development", "engineering"],
+      "status": "active"
+    },
+    {
+      "id": "performance-engineers",
+      "label": "Performance Engineers",
+      "description": "Engineers who design and run load tests, analyse profiles, and drive performance improvements.",
+      "path": "workstreams/performance-engineers",
+      "owner": "",
+      "tags": ["performance", "load-testing", "profiling"],
+      "status": "active"
+    },
+    {
+      "id": "sre",
+      "label": "Site Reliability Engineers",
+      "description": "SREs responsible for incident response, runbooks, alerting, SLOs, and reliability automation.",
+      "path": "workstreams/sre",
+      "owner": "",
+      "tags": ["sre", "reliability", "incidents"],
+      "status": "active"
+    },
+    {
+      "id": "system-designers",
+      "label": "System Designers",
+      "description": "Engineers who produce system design documents, sequence diagrams, API contracts, and data models.",
+      "path": "workstreams/system-designers",
+      "owner": "",
+      "tags": ["system-design", "diagrams", "api"],
+      "status": "active"
+    },
+    {
+      "id": "testers",
+      "label": "Testers",
+      "description": "QA engineers who generate test cases, analyse coverage gaps, write exploratory charters, and automate test suites.",
+      "path": "workstreams/testers",
+      "owner": "",
+      "tags": ["testing", "qa", "bdd"],
+      "status": "active"
+    }
+  ],
+  "adding_new_workstream": "See docs/adding-workstreams.md for the step-by-step guide."
+}

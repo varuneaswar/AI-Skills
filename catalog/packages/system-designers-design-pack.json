@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "system-designers-design-pack",
+  "name": "System Designers Design Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "system-designers",
+  "description": "Bundles sequence diagram generation and trade-off analysis for system designers. Covers the two most time-consuming design documentation tasks: visualisation and option comparison.",
+  "entry_asset": "sysdesign-sequence-diagram-generator",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["system-design", "sequence-diagram", "trade-off", "documentation"],
+
+  "assets": [
+    {
+      "id": "sysdesign-sequence-diagram-generator",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/system-designers/skills/sequence-diagram-generator.md",
+      "required": true
+    },
+    {
+      "id": "arch-trade-off-analysis",
+      "role": "supporting_skill",
+      "source_folder": "skills",
+      "path": "workstreams/architects/skills/trade-off-analysis.md",
+      "required": false
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Describe the interaction in plain English in Copilot Chat using the skill definition as the system prompt. Copy the Mermaid output directly into your Markdown doc."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "The portal generates both a sequence diagram and a trade-off matrix in a single call.",
+      "endpoint": "{{API_BASE_URL}}/packages/system-designers-design-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool callable from documentation tooling (Confluence, Notion, GitHub Wiki).",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/sysdesign-sequence-diagram-generator"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill accessible from the system design review Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy via internal API layer for confidential system design documentation."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "max_tokens": 3000,
+    "additional_notes": "Slightly higher temperature allows more natural diagram labelling. Claude 3.5 Sonnet performs better on complex multi-branch diagrams."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with sequence diagram generator and trade-off analysis support."
+    }
+  ]
+}

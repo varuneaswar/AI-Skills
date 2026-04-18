@@ -1,0 +1,143 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/varuneaswar/AI-Skills/schemas/package.schema.json",
+  "title": "Skill Package",
+  "description": "Schema for a package manifest in catalog/packages/. A package bundles one or more assets from a work stream so they can be delivered as a cohesive unit through the portal.",
+  "type": "object",
+  "required": ["id", "name", "version", "status", "workstream", "description", "entry_asset", "assets", "delivery_modes", "created", "updated"],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Globally unique kebab-case package identifier"
+    },
+    "name": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "Human-readable package name shown in the portal"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated"]
+    },
+    "workstream": {
+      "type": "string",
+      "description": "The primary work stream this package serves"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "entry_asset": {
+      "type": "string",
+      "description": "Asset ID of the primary skill or agent that is the package entry point"
+    },
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "description": "All assets bundled in this package, explicitly stating which sub-folder each comes from.",
+      "items": {
+        "type": "object",
+        "required": ["id", "role", "source_folder", "path"],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Asset ID matching the id field in the asset front matter"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["entry_skill", "supporting_skill", "prompt", "workflow", "automation", "agent", "idea"],
+            "description": "Semantic role of this asset within the package"
+          },
+          "source_folder": {
+            "type": "string",
+            "enum": ["skills", "prompts", "workflows", "automations", "agents", "ideas", "shared/skills", "shared/prompts", "shared/workflows", "shared/automations", "shared/agents"],
+            "description": "Which sub-folder this asset was drawn from"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative path from repo root to the asset file"
+          },
+          "required": {
+            "type": "boolean",
+            "default": true,
+            "description": "Whether this asset is mandatory for the package to function"
+          }
+        }
+      }
+    },
+    "delivery_modes": {
+      "type": "array",
+      "minItems": 1,
+      "description": "How this package can be consumed. Differentiates current IDE use from future portal/API delivery.",
+      "items": {
+        "type": "object",
+        "required": ["mode", "availability"],
+        "additionalProperties": false,
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"],
+            "description": "copilot-chat = current IDE use; api-endpoint/mcp-tool/copilot-studio/in-house-llm = future portal delivery"
+          },
+          "availability": {
+            "type": "string",
+            "enum": ["current", "planned"],
+            "description": "current = works today; planned = roadmap item"
+          },
+          "instructions": {
+            "type": "string",
+            "description": "Brief usage instructions specific to this delivery mode"
+          },
+          "endpoint": {
+            "type": "string",
+            "description": "Placeholder URL for API/MCP endpoint (use {{PLACEHOLDER}} format for real values)"
+          }
+        }
+      }
+    },
+    "configuration": {
+      "type": "object",
+      "description": "Default model configuration for this package",
+      "properties": {
+        "model": { "type": "string" },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "max_tokens": { "type": "integer" },
+        "additional_notes": { "type": "string" }
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "created": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "author": {
+      "type": "string"
+    },
+    "changelog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["version", "date", "notes"],
+        "properties": {
+          "version": { "type": "string" },
+          "date": { "type": "string" },
+          "notes": { "type": "string" }
+        }
+      }
+    }
+  }
+}
