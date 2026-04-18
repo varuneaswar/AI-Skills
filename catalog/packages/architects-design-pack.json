@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "architects-design-pack",
+  "name": "Architects Design Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "architects",
+  "description": "Bundles trade-off analysis skill and ADR generator prompt to give architects a complete decision-documentation toolkit. From comparing options to publishing a formal ADR.",
+  "entry_asset": "arch-trade-off-analysis",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["architecture", "adr", "trade-off", "decision-record"],
+
+  "assets": [
+    {
+      "id": "arch-trade-off-analysis",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/architects/skills/trade-off-analysis.md",
+      "required": true
+    },
+    {
+      "id": "arch-adr-generator",
+      "role": "prompt",
+      "source_folder": "prompts",
+      "path": "workstreams/architects/prompts/adr-generator.md",
+      "required": true
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Run trade-off analysis first to compare options, then feed the output into the ADR generator prompt."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "The portal chains the two skills automatically: trade-off analysis → ADR generation as a single invocation.",
+      "endpoint": "{{API_BASE_URL}}/packages/architects-design-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool callable from architecture review tooling.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/arch-trade-off-analysis"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill accessible from the architecture review Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy via internal API layer for air-gapped architecture reviews."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.3,
+    "max_tokens": 4096,
+    "additional_notes": "Slightly higher temperature than operational packs to allow richer prose in ADR sections."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with trade-off analysis skill and ADR generator prompt."
+    }
+  ]
+}

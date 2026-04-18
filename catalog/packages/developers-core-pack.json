@@ -1,0 +1,90 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "developers-core-pack",
+  "name": "Developers Core Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "developers",
+  "description": "Core AI skills for software developers covering code review, PR summarization, and shared utility capabilities. This pack is the entry point for the developer work stream.",
+  "entry_asset": "dev-code-review-skill",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["code-review", "pull-request", "development"],
+
+  "assets": [
+    {
+      "id": "dev-code-review-skill",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/developers/skills/code-review.md",
+      "required": true
+    },
+    {
+      "id": "dev-summarize-pull-request",
+      "role": "prompt",
+      "source_folder": "prompts",
+      "path": "workstreams/developers/prompts/summarize-pull-request.md",
+      "required": true
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Copy the skill definition from workstreams/developers/skills/code-review.md and paste it as a system prompt in GitHub Copilot Chat. Use @workspace and #file: references to provide code context."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "POST to the portal API with skill_id and inputs payload. See docs/packaging.md for the request schema.",
+      "endpoint": "{{API_BASE_URL}}/packages/developers-core-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Register using the MCP tool definition generated from this package's entry_asset front matter.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/dev-code-review-skill"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Import as a Copilot Studio custom skill using the connector definition exported from this package."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy the skill definition as a system prompt to your in-house LLM endpoint via the internal API layer."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 4096,
+    "additional_notes": "Lower temperature produces consistent, structured code review output. Increase to 0.4 for more creative refactoring suggestions."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with code-review skill, PR summarization prompt, and shared utility skills."
+    }
+  ]
+}

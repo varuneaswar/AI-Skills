@@ -1,0 +1,83 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "testers-quality-pack",
+  "name": "Testers Quality Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "testers",
+  "description": "Bundles test-case generation, coverage gap analysis, and shared utility skills for QA engineers. Covers the full test design cycle from requirements to coverage review.",
+  "entry_asset": "test-coverage-gap-analysis",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["testing", "bdd", "coverage", "quality-assurance"],
+
+  "assets": [
+    {
+      "id": "test-coverage-gap-analysis",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/testers/skills/coverage-gap-analysis.md",
+      "required": true
+    },
+    {
+      "id": "test-generate-test-cases-from-user-story",
+      "role": "prompt",
+      "source_folder": "prompts",
+      "path": "workstreams/testers/prompts/generate-test-cases-from-user-story.md",
+      "required": true
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Use the test-case generation prompt for new features, then run the coverage gap analysis skill against the resulting test list."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "Portal chains: test-case generation → coverage gap analysis as a single workflow invocation.",
+      "endpoint": "{{API_BASE_URL}}/packages/testers-quality-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool callable from Jira or ADO ticket processing workflows.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/test-coverage-gap-analysis"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill accessible from the QA planning Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy via internal API layer for teams with strict data residency requirements."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 4096,
+    "additional_notes": "Low temperature for consistent, reproducible test case generation."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with coverage gap analysis skill and test-case generation prompt."
+    }
+  ]
+}

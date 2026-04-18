@@ -1,0 +1,83 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "performance-engineers-analysis-pack",
+  "name": "Performance Engineers Analysis Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "performance-engineers",
+  "description": "Provides bottleneck analysis and document summarization for performance engineers. Turns raw load test output into prioritised, actionable findings.",
+  "entry_asset": "perf-bottleneck-analysis",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["performance", "bottleneck", "load-testing", "profiling"],
+
+  "assets": [
+    {
+      "id": "perf-bottleneck-analysis",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/performance-engineers/skills/bottleneck-analysis.md",
+      "required": true
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "After a load test run, paste the summary results into Copilot Chat with the skill definition as the system prompt."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "Integrate with your load test runner (k6, Locust, JMeter) to automatically POST results to this endpoint after each run.",
+      "endpoint": "{{API_BASE_URL}}/packages/performance-engineers-analysis-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool for integration with CI/CD pipelines.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/perf-bottleneck-analysis"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill accessible from the performance engineering Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Deploy via internal API layer for environments where performance data is confidential."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 3000,
+    "additional_notes": "Consistent low-temperature settings produce reproducible analysis reports across test runs."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with bottleneck analysis skill and shared utility skills."
+    }
+  ]
+}

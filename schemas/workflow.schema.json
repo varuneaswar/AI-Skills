@@ -31,7 +31,7 @@
       "type": "array",
       "items": {
         "type": "string",
-        "enum": ["architects", "capacity-management", "developers", "performance-engineers", "sre", "system-designers", "testers", "shared"]
+        "description": "Workstream ID from workstreams/registry.json — no enum constraint"
       },
       "minItems": 1
     },

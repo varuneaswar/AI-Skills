@@ -1,0 +1,83 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "capacity-management-analysis-pack",
+  "name": "Capacity Management Analysis Pack",
+  "version": "1.0.0",
+  "status": "active",
+  "workstream": "capacity-management",
+  "description": "Provides utilization analysis and plain-language explanation capabilities for capacity management engineers. Covers data interpretation and stakeholder communication.",
+  "entry_asset": "cap-utilization-analysis",
+  "author": "ai-skills-maintainer",
+  "created": "2024-01-01",
+  "updated": "2024-01-01",
+  "tags": ["capacity", "utilization", "cost-optimisation", "forecasting"],
+
+  "assets": [
+    {
+      "id": "cap-utilization-analysis",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/capacity-management/skills/utilization-analysis.md",
+      "required": true
+    },
+    {
+      "id": "shared-summarize-document",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/summarize-document.md",
+      "required": false
+    },
+    {
+      "id": "shared-explain-concept",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/explain-concept.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Paste your utilization data into Copilot Chat with the skill definition as the system prompt."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "The portal can ingest metrics data from connected monitoring tools and pass it directly to this skill.",
+      "endpoint": "{{API_BASE_URL}}/packages/capacity-management-analysis-pack/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Expose as an MCP tool for integration with Grafana or Datadog dashboards.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/cap-utilization-analysis"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Deploy as a Copilot Studio skill accessible from the capacity planning Teams channel."
+    },
+    {
+      "mode": "in-house-llm",
+      "availability": "planned",
+      "instructions": "Preferred delivery mode for teams with sensitive infrastructure data that cannot leave the corporate network."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 3000,
+    "additional_notes": "Low temperature for consistent analytical output. The skill handles diverse data formats well."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2024-01-01",
+      "notes": "Initial package with utilization analysis skill and shared utility skills."
+    }
+  ]
+}

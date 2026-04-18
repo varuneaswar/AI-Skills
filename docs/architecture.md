@@ -44,7 +44,17 @@ A flat list of all assets with key metadata. This file is the integration point 
 - CLI tooling to list or retrieve assets.
 - An internal API layer that serves assets to Copilot Studio or other consumers.
 
-### `.github/`
+### `workstreams/registry.json`
+
+The **single source of truth** for all registered work streams. Adding a new work stream requires only:
+1. Appending an entry to `workstreams/registry.json`.
+2. Creating the matching folder structure.
+
+No schema files need to be modified — the `workstream` field in all schemas accepts any string value and defers to the registry for the authoritative list. See `docs/adding-workstreams.md` for the full guide.
+
+### `catalog/packages/`
+
+Package manifests define the unit of delivery. Each manifest lists exactly which asset files are included and from which sub-folder (`skills/`, `prompts/`, `workflows/`, `shared/skills/`, etc.), so the portal knows precisely what to bundle when a user requests a capability. See `docs/packaging.md` for the complete packaging guide.
 
 Issue and PR templates guide contributors to provide the information maintainers need, reducing back-and-forth in reviews.
 
@@ -83,7 +93,19 @@ Version changes must be documented in a `## Changelog` section at the bottom of 
 
 ## Future Extensibility
 
-### Portal Integration
+### Delivery Mode Differentiation: Current vs Future
+
+Every asset and package manifest declares which delivery modes it supports and whether each is `current` or `planned`. This is the mechanism that differentiates the current IDE-based workflow from the future portal-and-API-layer workflow:
+
+| Delivery Mode | Availability | Description |
+|---|---|---|
+| `copilot-chat` | **Current** | Skill definition is copied from the Markdown file and pasted into any LLM interface (GitHub Copilot Chat, ChatGPT, Claude, etc.) |
+| `api-endpoint` | **Planned** | A portal REST API accepts a skill invocation request and returns the LLM response |
+| `mcp-tool` | **Planned** | Skill is registered as an MCP (Model Context Protocol) tool, callable by agents and IDEs |
+| `copilot-studio` | **Planned** | Package imported as a Copilot Studio connector for Teams / M365 Copilot |
+| `in-house-llm` | **Planned** | Skill routed to an internal API layer — no data leaves the corporate network |
+
+Assets that support all delivery modes simply declare `"delivery_modes": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]`. The same asset file works for all delivery modes because the skill definition (system prompt) is format-agnostic.
 
 The `catalog/index.json` file is designed to be consumed by a web portal. Each entry contains enough metadata for a search card (id, title, type, description, tags, work stream). A backend API can serve this file or read individual Markdown files on demand.
 

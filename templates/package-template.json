@@ -1,0 +1,78 @@
+{
+  "$schema": "../../schemas/package.schema.json",
+  "id": "replace-with-unique-kebab-case-id",
+  "name": "Replace With Human-Readable Package Name",
+  "version": "1.0.0",
+  "status": "draft",
+  "workstream": "replace-with-workstream-id",
+  "description": "One or two sentences describing what this package does and when to use it.",
+  "entry_asset": "replace-with-entry-skill-id",
+  "author": "your-github-username",
+  "created": "YYYY-MM-DD",
+  "updated": "YYYY-MM-DD",
+  "tags": ["tag1", "tag2"],
+
+  "assets": [
+    {
+      "id": "replace-with-skill-id",
+      "role": "entry_skill",
+      "source_folder": "skills",
+      "path": "workstreams/<workstream>/skills/<skill-filename>.md",
+      "required": true
+    },
+    {
+      "id": "replace-with-prompt-id",
+      "role": "prompt",
+      "source_folder": "prompts",
+      "path": "workstreams/<workstream>/prompts/<prompt-filename>.md",
+      "required": true
+    },
+    {
+      "id": "replace-with-shared-skill-id",
+      "role": "supporting_skill",
+      "source_folder": "shared/skills",
+      "path": "shared/skills/<shared-skill-filename>.md",
+      "required": false
+    }
+  ],
+
+  "delivery_modes": [
+    {
+      "mode": "copilot-chat",
+      "availability": "current",
+      "instructions": "Copy the skill definition from the entry_skill file and paste it as a system prompt in GitHub Copilot Chat or any LLM interface."
+    },
+    {
+      "mode": "api-endpoint",
+      "availability": "planned",
+      "instructions": "POST to {{API_BASE_URL}}/packages/<package-id>/invoke with the inputs payload.",
+      "endpoint": "{{API_BASE_URL}}/packages/replace-with-unique-kebab-case-id/invoke"
+    },
+    {
+      "mode": "mcp-tool",
+      "availability": "planned",
+      "instructions": "Register the MCP tool definition from this package in your MCP server configuration.",
+      "endpoint": "{{MCP_SERVER_URL}}/tools/replace-with-unique-kebab-case-id"
+    },
+    {
+      "mode": "copilot-studio",
+      "availability": "planned",
+      "instructions": "Import the package as a Copilot Studio custom skill using the connector definition."
+    }
+  ],
+
+  "configuration": {
+    "model": "gpt-4o",
+    "temperature": 0.2,
+    "max_tokens": 2048,
+    "additional_notes": "Lower temperature values produce more consistent, structured output."
+  },
+
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "YYYY-MM-DD",
+      "notes": "Initial package definition."
+    }
+  ]
+}

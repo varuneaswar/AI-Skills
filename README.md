@@ -33,7 +33,9 @@ AI-Skills/
 ├── docs/
 │   ├── architecture.md        # Repository design decisions
 │   ├── getting-started.md     # Onboarding guide
-│   └── standards.md           # Naming, metadata, and quality standards
+│   ├── standards.md           # Naming, metadata, and quality standards
+│   ├── packaging.md           # How packages work and delivery modes explained
+│   └── adding-workstreams.md  # How to add a new work stream
 │
 ├── templates/                 # Starter files for each content type
 │   ├── skill-template.md
@@ -41,7 +43,8 @@ AI-Skills/
 │   ├── workflow-template.md
 │   ├── prompt-template.md
 │   ├── automation-template.md
-│   └── idea-template.md
+│   ├── idea-template.md
+│   └── package-template.json  # Template for new package manifests
 │
 ├── schemas/                   # JSON schemas for validation
 │   ├── skill.schema.json
@@ -49,9 +52,12 @@ AI-Skills/
 │   ├── workflow.schema.json
 │   ├── prompt.schema.json
 │   ├── automation.schema.json
-│   └── idea.schema.json
+│   ├── idea.schema.json
+│   ├── package.schema.json            # Package manifest schema
+│   └── workstream-registry.schema.json
 │
 ├── workstreams/               # Work-stream-specific content
+│   ├── registry.json          # Single source of truth for all registered work streams
 │   ├── architects/
 │   ├── capacity-management/
 │   ├── developers/
@@ -68,8 +74,16 @@ AI-Skills/
 │   ├── automations/
 │   └── ideas/
 │
-└── catalog/
-    └── index.json             # Machine-readable catalog of all entries
+├── catalog/
+│   ├── index.json             # Machine-readable catalog of all entries
+│   └── packages/              # Package manifests — one per work stream delivery bundle
+│       ├── developers-core-pack.json
+│       ├── sre-incident-response-pack.json
+│       ├── architects-design-pack.json
+│       ├── testers-quality-pack.json
+│       ├── capacity-management-analysis-pack.json
+│       ├── performance-engineers-analysis-pack.json
+│       └── system-designers-design-pack.json
 ```
 
 Each work stream folder follows the same internal layout:
@@ -114,9 +128,43 @@ workstreams/<work-stream>/
 
 > Content that is useful across multiple work streams belongs in `shared/`.
 
+> **Adding a new work stream?** See [docs/adding-workstreams.md](docs/adding-workstreams.md) — it takes fewer than 10 minutes and requires no schema changes.
+
 ---
 
-## Quick Start
+## Packaging
+
+Skills are delivered as **packages** — bundles of assets (skills, prompts, shared utilities) that together provide a complete capability. Each package is defined by a manifest in `catalog/packages/`.
+
+| Package | Work Stream | What It Bundles |
+|---|---|---|
+| `developers-core-pack` | developers | Code review skill + PR summarization prompt + shared utilities |
+| `sre-incident-response-pack` | sre | Runbook generator + incident triage prompt + shared utilities |
+| `architects-design-pack` | architects | Trade-off analysis + ADR generator + shared utilities |
+| `testers-quality-pack` | testers | Coverage gap analysis + test-case generation + shared utilities |
+| `capacity-management-analysis-pack` | capacity-management | Utilization analysis + shared utilities |
+| `performance-engineers-analysis-pack` | performance-engineers | Bottleneck analysis + shared utilities |
+| `system-designers-design-pack` | system-designers | Sequence diagram generator + trade-off analysis + shared utilities |
+
+See [docs/packaging.md](docs/packaging.md) for a detailed explanation of how packages work and how to create one.
+
+---
+
+## Delivery Modes: Current vs Future
+
+The same asset works across all delivery modes — the skill definition is format-agnostic:
+
+| Mode | Availability | How It Works |
+|---|---|---|
+| `copilot-chat` | ✅ **Current** | Copy the skill definition, paste as system prompt in Copilot Chat or any LLM |
+| `api-endpoint` | 🔄 Planned | Portal calls `POST /packages/<id>/invoke` and returns the LLM response |
+| `mcp-tool` | 🔄 Planned | Skill registered as an MCP tool for IDE/agent framework invocation |
+| `copilot-studio` | 🔄 Planned | Package imported as a Copilot Studio custom skill |
+| `in-house-llm` | 🔄 Planned | Routed via internal API layer — no data leaves the corporate network |
+
+---
+
+
 
 1. **Browse** existing content in `workstreams/` or `shared/`.
 2. **Use a template** from the `templates/` folder to create a new asset.
