@@ -1,0 +1,52 @@
+{
+  "$schema": "../schemas/catalog.schema.json",
+  "version": "1.0.0",
+  "updated": "2024-01-01",
+  "description": "Machine-readable catalog of all AI-Skills assets. Add an entry here every time you contribute a new asset.",
+  "assets": [
+    {
+      "id": "dev-summarize-pull-request",
+      "title": "Summarize Pull Request for Reviewers",
+      "type": "prompt",
+      "status": "active",
+      "workstream": ["developers"],
+      "tags": ["pull-request", "code-review", "documentation"],
+      "description": "Generates a concise, reviewer-friendly summary of a pull request from its title, description, and list of changed files.",
+      "path": "workstreams/developers/prompts/summarize-pull-request.md",
+      "updated": "2024-01-01"
+    },
+    {
+      "id": "sre-incident-triage-prompt",
+      "title": "Incident Triage First-Responder Guide",
+      "type": "prompt",
+      "status": "active",
+      "workstream": ["sre"],
+      "tags": ["incident-response", "triage", "on-call"],
+      "description": "Guides the on-call engineer through structured incident triage by analysing alert details and recent changes to suggest probable root causes and immediate mitigation steps.",
+      "path": "workstreams/sre/prompts/incident-triage.md",
+      "updated": "2024-01-01"
+    },
+    {
+      "id": "arch-adr-generator",
+      "title": "Architecture Decision Record (ADR) Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": ["architects", "system-designers"],
+      "tags": ["adr", "architecture", "decision-record", "documentation"],
+      "description": "Generates a well-structured Architecture Decision Record (ADR) in the MADR format from a brief description of the decision context, options considered, and the chosen option.",
+      "path": "workstreams/architects/prompts/adr-generator.md",
+      "updated": "2024-01-01"
+    },
+    {
+      "id": "test-generate-test-cases-from-user-story",
+      "title": "Generate Test Cases from User Story",
+      "type": "prompt",
+      "status": "active",
+      "workstream": ["testers"],
+      "tags": ["test-cases", "user-story", "bdd", "quality-assurance"],
+      "description": "Generates a comprehensive set of test cases (happy path, edge cases, and negative scenarios) from a user story and its acceptance criteria, formatted as Gherkin scenarios.",
+      "path": "workstreams/testers/prompts/generate-test-cases-from-user-story.md",
+      "updated": "2024-01-01"
+    }
+  ]
+}
