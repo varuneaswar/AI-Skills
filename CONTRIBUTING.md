@@ -96,10 +96,6 @@ idea:under-review
 
 ## Lane 1 — Technical: Contribute Assets via Pull Request
 
----
-
-## Lane 1 — Technical: Contribute Assets via Pull Request
-
 ### Before You Start
 
 1. Search the repository to ensure your contribution does not duplicate something that already exists.
