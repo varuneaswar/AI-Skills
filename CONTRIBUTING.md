@@ -6,22 +6,107 @@ Thank you for contributing! This guide explains how to add or improve content in
 
 ## Table of Contents
 
-- [Before You Start](#before-you-start)
-- [Content Types and When to Use Each](#content-types-and-when-to-use-each)
-- [Where to Place Your Contribution](#where-to-place-your-contribution)
-- [File Naming Conventions](#file-naming-conventions)
-- [Required Metadata](#required-metadata)
-- [Step-by-Step Contribution Guide](#step-by-step-contribution-guide)
-- [Review Process](#review-process)
-- [Quality Standards](#quality-standards)
+- [Two Ways to Contribute](#two-ways-to-contribute)
+- [Lane 2 — Non-Technical: Submit an Idea via GitHub Issues](#lane-2--non-technical-submit-an-idea-via-github-issues)
+- [Lane 1 — Technical: Contribute Assets via Pull Request](#lane-1--technical-contribute-assets-via-pull-request)
+  - [Before You Start](#before-you-start)
+  - [Content Types and When to Use Each](#content-types-and-when-to-use-each)
+  - [Where to Place Your Contribution](#where-to-place-your-contribution)
+  - [File Naming Conventions](#file-naming-conventions)
+  - [Required Metadata](#required-metadata)
+  - [Step-by-Step Contribution Guide](#step-by-step-contribution-guide)
+  - [Review Process](#review-process)
+  - [Quality Standards](#quality-standards)
 
 ---
 
-## Before You Start
+## Two Ways to Contribute
+
+**Not a developer? You can still contribute.** This repository supports two contribution lanes:
+
+| Lane | Who it's for | How |
+|---|---|---|
+| **Lane 2** | Anyone — product managers, domain experts, business analysts | Submit an idea as a GitHub Issue. Maintainers convert approved ideas to assets. |
+| **Lane 1** | Technical contributors — engineers, architects | Create or update Markdown assets directly via Pull Request. |
+
+---
+
+## Lane 2 — Non-Technical: Submit an Idea via GitHub Issues
+
+You do not need to know Git, YAML, or Markdown to contribute an idea. Here is all you need to do:
+
+### Step 1 — Open a GitHub Issue
+
+1. Go to [github.com/varuneaswar/AI-Skills/issues](https://github.com/varuneaswar/AI-Skills/issues).
+2. Click **New Issue**.
+3. Select the **Idea Submission** template.
+
+### Step 2 — Fill in the template
+
+Answer these questions in plain language — no technical jargon required:
+
+- **What problem does this idea solve?** Who is affected, and how often?
+- **What would a solution look like?** Describe it in plain English.
+- **Which team or workstream does this serve?** (e.g., developers, SRE, testers)
+- **How will we know it is working?** List 2–3 measurable success criteria.
+
+### Step 3 — Submit and wait for review
+
+A maintainer will:
+
+1. Add the label **`idea:under-review`** within 5 business days.
+2. Ask any clarifying questions as comments on the issue.
+3. Add **`idea:approved`** if the idea is accepted for development, or **`idea:needs-work`** if changes are needed.
+4. Once approved, a maintainer or volunteer engineer will convert the idea to a Markdown asset via a PR, and add the **`automation:in-progress`** label.
+5. When the asset is merged, the issue is closed with a link to the new asset file.
+
+### Idea Vetting Flow
+
+```
+idea:submitted
+    │
+    ▼ (maintainer reviews)
+idea:under-review
+    │
+    ├── needs more detail ──▶ idea:needs-work (author updates issue)
+    │                              │
+    │                              └──▶ idea:under-review (back to review)
+    │
+    └── accepted ──▶ idea:approved
+                          │
+                          ▼ (engineer picks it up)
+                    automation:in-progress
+                          │
+                          ▼ (PR opened and merged)
+                    asset status: active (issue closed)
+```
+
+### Issue Labels Reference
+
+| Label | Meaning |
+|---|---|
+| `idea:submitted` | New idea, not yet reviewed |
+| `idea:under-review` | Maintainer is reviewing |
+| `idea:approved` | Approved for development |
+| `idea:needs-work` | Returned to author for clarification |
+| `idea:declined` | Not accepted (reason given in comments) |
+| `automation:in-progress` | Engineer is building the asset |
+
+---
+
+## Lane 1 — Technical: Contribute Assets via Pull Request
+
+---
+
+## Lane 1 — Technical: Contribute Assets via Pull Request
+
+### Before You Start
 
 1. Search the repository to ensure your contribution does not duplicate something that already exists.
 2. If you have an early-stage idea, open a GitHub Issue using the **Idea Submission** template before writing content.
 3. Read [SECURITY.md](SECURITY.md) to ensure your content meets the responsible-AI and data-classification standards.
+4. Read [docs/best-practices.md](docs/best-practices.md) for prompt engineering tips and quality checklists.
+5. Read [docs/building-ideas.md](docs/building-ideas.md) for a step-by-step walkthrough of every asset type.
 
 ---
 
@@ -95,25 +180,35 @@ description: |
 Optional fields (include when relevant):
 
 ```yaml
+delivery_modes:
+  - copilot-chat          # current: copy-paste into any LLM interface
+  - api-endpoint          # future: portal REST API
+  - mcp-tool              # future: MCP server
+  - copilot-studio        # future: Copilot Studio connector
+  - in-house-llm          # future: internal LLM proxy
 dependencies:
   - id-of-another-asset
 inputs:
   - name: param_name
     type: string
     description: What this input represents
+    required: true
 outputs:
   - name: output_name
     type: string
     description: What this output represents
-examples:
-  - input: "example input"
-    output: "example output"
 security_classification: public | internal | confidential
 ```
+
+> **Note:** `inputs` and `outputs` are **required** for skills. They are strongly recommended for agents and workflows. See `schemas/skill.schema.json` for the full validation rules.
 
 ---
 
 ## Step-by-Step Contribution Guide
+
+For a detailed walkthrough of every asset type including examples, see **[docs/building-ideas.md](docs/building-ideas.md)**.
+
+**Quick steps:**
 
 1. **Fork** the repository (external contributors) or **create a branch** (internal contributors):
    ```
@@ -128,20 +223,14 @@ security_classification: public | internal | confidential
 
 3. **Fill in** the template — especially the YAML front matter and the body sections.
 
-4. **Validate** your front matter against the JSON schema in `schemas/`:
-   ```bash
-   # Using ajv-cli (npm install -g ajv-cli)
-   ajv validate -s schemas/prompt.schema.json -d workstreams/developers/prompts/explain-code-change.md
-   ```
+4. **Add an entry** to `catalog/index.json` for your new asset (follow the existing format).
 
-5. **Update** `catalog/index.json` by adding an entry for your new asset (follow the existing format).
-
-6. **Commit** your changes with a descriptive message:
+5. **Commit** your changes with a descriptive message:
    ```
    git commit -m "feat(developers/prompts): add explain-code-change prompt"
    ```
 
-7. **Open a pull request** against `main` using the PR template.
+6. **Open a pull request** against `main` using the PR template. The front-matter validation workflow will run automatically.
 
 ---
 
@@ -152,6 +241,7 @@ All contributions go through a pull-request review:
 1. A maintainer will review the content for quality, accuracy, and adherence to standards within **5 business days**.
 2. Security-sensitive content (agents, automations with external integrations) requires a secondary review from the security team.
 3. Once approved, the PR is merged and the asset status is changed from `draft` to `active`.
+4. `catalog/index.json` is automatically rebuilt on merge by the `catalog-sync` GitHub Action.
 
 ---
 
@@ -163,3 +253,6 @@ All contributions go through a pull-request review:
 - **No hard-coded endpoints** — use placeholder variables (e.g., `{{BASE_URL}}`) instead of real URLs.
 - **Idempotency** — automations should be safe to run multiple times without unintended side effects.
 - **Versioning** — when updating an existing asset, increment the `version` field and add a changelog entry at the bottom of the file.
+- **delivery_modes** — all skills, agents, and workflows must declare `delivery_modes` in the front-matter.
+
+See [docs/best-practices.md](docs/best-practices.md) for a full quality checklist per asset type.

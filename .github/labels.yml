@@ -1,0 +1,116 @@
+# GitHub Issue Labels for AI-Skills
+#
+# Apply these labels to your repository via the GitHub UI or CLI:
+#   gh label create "<name>" --color "<color>" --description "<description>"
+#
+# Or use the GitHub API / a labels sync action.
+
+labels:
+  # ── Idea Vetting Labels ──────────────────────────────────────────────────
+  - name: "idea:submitted"
+    color: "C5DEF5"
+    description: "New idea submitted via GitHub Issue — awaiting triage"
+
+  - name: "idea:under-review"
+    color: "0075CA"
+    description: "Maintainer is actively reviewing this idea"
+
+  - name: "idea:approved"
+    color: "0E8A16"
+    description: "Idea approved for development — ready to be built as an asset"
+
+  - name: "idea:needs-work"
+    color: "E4E669"
+    description: "Idea returned to author — more detail or clarification required"
+
+  - name: "idea:declined"
+    color: "B60205"
+    description: "Idea not accepted — reason given in comments"
+
+  # ── Automation / Build Labels ────────────────────────────────────────────
+  - name: "automation:in-progress"
+    color: "F9D0C4"
+    description: "An engineer is actively converting this idea to an asset"
+
+  - name: "automation:blocked"
+    color: "E11D48"
+    description: "Asset development is blocked — see comments for details"
+
+  # ── Asset Type Labels ────────────────────────────────────────────────────
+  - name: "type:prompt"
+    color: "BFD4F2"
+    description: "Relates to a Prompt asset"
+
+  - name: "type:skill"
+    color: "BFD4F2"
+    description: "Relates to a Skill asset"
+
+  - name: "type:agent"
+    color: "BFD4F2"
+    description: "Relates to an Agent asset"
+
+  - name: "type:workflow"
+    color: "BFD4F2"
+    description: "Relates to a Workflow asset"
+
+  - name: "type:automation"
+    color: "BFD4F2"
+    description: "Relates to an Automation asset"
+
+  # ── Workstream Labels ────────────────────────────────────────────────────
+  - name: "workstream:developers"
+    color: "D4E7CB"
+    description: "Relates to the developers workstream"
+
+  - name: "workstream:sre"
+    color: "D4E7CB"
+    description: "Relates to the SRE workstream"
+
+  - name: "workstream:architects"
+    color: "D4E7CB"
+    description: "Relates to the architects workstream"
+
+  - name: "workstream:testers"
+    color: "D4E7CB"
+    description: "Relates to the testers workstream"
+
+  - name: "workstream:capacity-management"
+    color: "D4E7CB"
+    description: "Relates to the capacity-management workstream"
+
+  - name: "workstream:performance-engineers"
+    color: "D4E7CB"
+    description: "Relates to the performance-engineers workstream"
+
+  - name: "workstream:system-designers"
+    color: "D4E7CB"
+    description: "Relates to the system-designers workstream"
+
+  - name: "workstream:shared"
+    color: "D4E7CB"
+    description: "Relates to shared / cross-workstream assets"
+
+  # ── Standard Labels ──────────────────────────────────────────────────────
+  - name: "bug"
+    color: "D73A4A"
+    description: "Something isn't working correctly"
+
+  - name: "documentation"
+    color: "0075CA"
+    description: "Improvements or additions to documentation"
+
+  - name: "enhancement"
+    color: "A2EEEF"
+    description: "New feature or improvement to an existing asset"
+
+  - name: "good first issue"
+    color: "7057FF"
+    description: "Good for newcomers — low complexity, well-scoped"
+
+  - name: "help wanted"
+    color: "008672"
+    description: "Extra attention is needed — community help welcome"
+
+  - name: "security"
+    color: "B60205"
+    description: "Security review required or security issue reported"

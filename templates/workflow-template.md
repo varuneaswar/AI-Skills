@@ -17,6 +17,12 @@ llm_compatibility:
 description: |
   One or two sentences describing what this workflow orchestrates and the end-to-end outcome.
 security_classification: internal
+delivery_modes:
+  - copilot-chat          # available now — copy/paste into any LLM interface
+  # - api-endpoint        # uncomment when portal REST API is available
+  # - mcp-tool            # uncomment when MCP server is deployed
+  # - copilot-studio      # uncomment when Copilot Studio connector is configured
+  # - in-house-llm        # uncomment when internal LLM API is available
 dependencies:
   - dependent-skill-or-prompt-id
 inputs:

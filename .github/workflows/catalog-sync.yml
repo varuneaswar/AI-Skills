@@ -1,0 +1,143 @@
+name: Reindex Catalog
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "workstreams/**/*.md"
+      - "shared/**/*.md"
+
+permissions:
+  contents: write
+
+jobs:
+  reindex:
+    name: Rebuild catalog/index.json from asset front-matter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install js-yaml
+
+      - name: Rebuild catalog index
+        run: |
+          node << 'EOF'
+          const fs = require('fs');
+          const path = require('path');
+          const yaml = require('js-yaml');
+
+          const ASSET_DIRS = ['workstreams', 'shared'];
+          const SKIP_FILES = new Set(['README.md']);
+
+          function findMarkdownFiles(dir) {
+            const results = [];
+            if (!fs.existsSync(dir)) return results;
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const fullPath = path.join(dir, entry.name);
+              if (entry.isDirectory()) {
+                results.push(...findMarkdownFiles(fullPath));
+              } else if (entry.isFile() && entry.name.endsWith('.md') && !SKIP_FILES.has(entry.name)) {
+                results.push(fullPath);
+              }
+            }
+            return results;
+          }
+
+          function extractFrontMatter(filePath) {
+            const content = fs.readFileSync(filePath, 'utf8');
+            const match = content.match(/^---\n([\s\S]*?)\n---/);
+            if (!match) return null;
+            try {
+              return yaml.load(match[1]);
+            } catch (e) {
+              console.error(`YAML parse error in ${filePath}: ${e.message}`);
+              return null;
+            }
+          }
+
+          // Load existing index to preserve package_ids associations
+          const existingIndex = JSON.parse(fs.readFileSync('catalog/index.json', 'utf8'));
+          const existingById = {};
+          for (const asset of existingIndex.assets) {
+            existingById[asset.id] = asset;
+          }
+
+          const assets = [];
+          for (const dir of ASSET_DIRS) {
+            for (const filePath of findMarkdownFiles(dir)) {
+              const fm = extractFrontMatter(filePath);
+              if (!fm || !fm.id || !fm.type) continue;
+
+              const relativePath = filePath.replace(/\\/g, '/');
+              const existing = existingById[fm.id] || {};
+
+              const entry = {
+                id: fm.id,
+                title: fm.title || '',
+                type: fm.type,
+                status: fm.status || 'draft',
+                workstream: fm.workstream || [],
+                tags: fm.tags || [],
+                description: (fm.description || '').trim(),
+                path: relativePath,
+                updated: fm.updated || fm.created || new Date().toISOString().split('T')[0],
+              };
+
+              // Preserve delivery_modes from front-matter or existing entry
+              if (fm.delivery_modes) entry.delivery_modes = fm.delivery_modes;
+              else if (existing.delivery_modes) entry.delivery_modes = existing.delivery_modes;
+
+              // Preserve package_ids from existing index (managed separately in catalog/packages/)
+              if (existing.package_ids) entry.package_ids = existing.package_ids;
+
+              assets.push(entry);
+            }
+          }
+
+          // Sort: active first, then by type, then by id
+          const STATUS_ORDER = { active: 0, draft: 1, deprecated: 2 };
+          assets.sort((a, b) => {
+            const sa = STATUS_ORDER[a.status] ?? 99;
+            const sb = STATUS_ORDER[b.status] ?? 99;
+            if (sa !== sb) return sa - sb;
+            if (a.type !== b.type) return a.type.localeCompare(b.type);
+            return a.id.localeCompare(b.id);
+          });
+
+          const newIndex = {
+            $schema: existingIndex['$schema'] || '../schemas/catalog.schema.json',
+            version: existingIndex.version || '1.1.0',
+            updated: new Date().toISOString().split('T')[0],
+            description: existingIndex.description || 'Machine-readable catalog of all AI-Skills assets.',
+            assets,
+          };
+
+          fs.writeFileSync(
+            'catalog/index.json',
+            JSON.stringify(newIndex, null, 2) + '\n'
+          );
+
+          console.log(`Catalog rebuilt: ${assets.length} assets indexed.`);
+          EOF
+
+      - name: Commit updated catalog
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add catalog/index.json
+          if git diff --cached --quiet; then
+            echo "No catalog changes to commit."
+          else
+            git commit -m "chore(catalog): auto-reindex from asset front-matter [skip ci]"
+            git push
+          fi
