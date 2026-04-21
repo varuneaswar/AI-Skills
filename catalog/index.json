@@ -1,25 +1,107 @@
 {
   "$schema": "../schemas/catalog.schema.json",
   "version": "1.1.0",
-  "updated": "2026-04-20",
+  "updated": "2026-04-21",
   "description": "Machine-readable catalog of all AI-Skills assets. Add an entry here every time you contribute a new asset.",
   "assets": [
     {
-      "id": "dev-summarize-pull-request",
-      "title": "Summarize Pull Request for Reviewers",
-      "type": "prompt",
+      "id": "arch-architecture-review-agent",
+      "title": "Architecture Review Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "architects"
+      ],
+      "tags": [
+        "architecture",
+        "review",
+        "quality-attributes",
+        "design",
+        "risk-assessment"
+      ],
+      "description": "An autonomous agent that reviews a proposed architecture design against a defined set\nof quality attributes, identifies risks and gaps, evaluates trade-offs, and produces\na structured review report with a risk register and actionable recommendations —\nreducing the time architects spend on first-pass design reviews.",
+      "path": "workstreams/architects/agents/architecture-review-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "cap-capacity-planning-agent",
+      "title": "Capacity Planning Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "capacity-management"
+      ],
+      "tags": [
+        "capacity",
+        "planning",
+        "forecasting",
+        "scaling",
+        "automation",
+        "agent"
+      ],
+      "description": "An autonomous agent that ingests a fleet-wide utilization report, forecasts capacity\nbreaches for each service over a 30/60/90-day horizon, identifies at-risk services,\nand produces a prioritised scaling recommendation report with draft GitHub Issue bodies\nfor P1 services — reducing manual capacity review effort across large service fleets.",
+      "path": "workstreams/capacity-management/agents/capacity-planning-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "data-analytics-data-insights-agent",
+      "title": "Data Insights Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "data-analytics"
+      ],
+      "tags": [
+        "agent",
+        "data-analysis",
+        "insights",
+        "automation",
+        "business-intelligence"
+      ],
+      "description": "An autonomous agent that orchestrates the complete data analysis pipeline: data\ntransformation, cleaning, statistical analysis, trend identification, and insight\ngeneration — producing a comprehensive analysis report with recommendations automatically.",
+      "path": "workstreams/data-analytics/agents/data-insights-agent.md",
+      "updated": "2026-04-21T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ]
+    },
+    {
+      "id": "dev-pr-review-agent",
+      "title": "Pull Request Review Agent",
+      "type": "agent",
       "status": "active",
       "workstream": [
         "developers"
       ],
       "tags": [
-        "pull-request",
         "code-review",
-        "documentation"
+        "pull-request",
+        "automation",
+        "quality"
       ],
-      "description": "Generates a concise, reviewer-friendly summary of a pull request from its title, description, and list of changed files.",
-      "path": "workstreams/developers/prompts/summarize-pull-request.md",
-      "updated": "2024-01-01",
+      "description": "An autonomous agent that reviews a pull request end-to-end: summarises changes, runs a\nstructured code review, checks test coverage adequacy, and posts a consolidated review\ncomment — reducing reviewer load while raising baseline quality.",
+      "path": "workstreams/developers/agents/pr-review-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -32,21 +114,217 @@
       ]
     },
     {
-      "id": "sre-incident-triage-prompt",
-      "title": "Incident Triage First-Responder Guide",
-      "type": "prompt",
+      "id": "perf-performance-regression-agent",
+      "title": "Performance Regression Analysis Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "performance",
+        "regression",
+        "load-testing",
+        "profiling",
+        "analysis",
+        "agent"
+      ],
+      "description": "An autonomous agent that compares two load test runs, identifies performance regressions\n(>5% degradation), classifies them by severity (Critical/>50%, High/20–50%, Medium/5–20%),\ncorrelates regressions with code changes, produces root cause hypotheses, and delivers\nprioritised fix recommendations — accelerating post-load-test triage and release decisions.",
+      "path": "workstreams/performance-engineers/agents/performance-regression-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "shared-platform-health-agent",
+      "title": "Platform Health Assessment Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "sre",
+        "performance-engineers",
+        "capacity-management"
+      ],
+      "tags": [
+        "platform-health",
+        "cross-workstream",
+        "sre",
+        "performance",
+        "capacity",
+        "agent"
+      ],
+      "description": "An autonomous cross-workstream agent that assesses overall platform health by combining\nSRE incident awareness, performance regression detection, and capacity utilisation\nforecasting into a single unified Platform Health Report. Each service is scored 🟢/🟡/🔴\nand the report concludes with prioritised recommended actions across all three disciplines.",
+      "path": "shared/agents/platform-health-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sre-incident-response-agent",
+      "title": "Incident Response Agent",
+      "type": "agent",
       "status": "active",
       "workstream": [
         "sre"
       ],
       "tags": [
         "incident-response",
+        "on-call",
+        "automation",
         "triage",
-        "on-call"
+        "sre"
       ],
-      "description": "Guides the on-call engineer through structured incident triage by analysing alert details and recent changes to suggest probable root causes and immediate mitigation steps.",
-      "path": "workstreams/sre/prompts/incident-triage.md",
-      "updated": "2024-01-01",
+      "description": "An autonomous agent that manages the full incident response lifecycle: triages alert\nseverity, retrieves or generates the relevant runbook, proposes concrete mitigation\nsteps, and drafts a stakeholder summary — so that on-call engineers spend their time\nfixing issues rather than assembling context.",
+      "path": "workstreams/sre/agents/incident-response-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sysdesign-system-design-review-agent",
+      "title": "System Design Review Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "system-designers"
+      ],
+      "tags": [
+        "system-design",
+        "review",
+        "api",
+        "completeness",
+        "agent"
+      ],
+      "description": "An autonomous agent that reviews a system design document for completeness, identifies\nmissing components and design smells, and produces a structured improvement report with\na completeness score and prioritised recommendations — reducing design review cycles.",
+      "path": "workstreams/system-designers/agents/system-design-review-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "test-generation-agent",
+      "title": "Test Generation Agent",
+      "type": "agent",
+      "status": "active",
+      "workstream": [
+        "testers"
+      ],
+      "tags": [
+        "testing",
+        "test-generation",
+        "bdd",
+        "gherkin",
+        "coverage",
+        "agent"
+      ],
+      "description": "An autonomous agent that takes a user story, generates a comprehensive test plan\n(functional, edge case, negative), produces BDD scenarios in Gherkin (Given/When/Then),\nand flags coverage gaps against an existing test suite — accelerating test design from\nhours to minutes.",
+      "path": "workstreams/testers/agents/test-generation-agent.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "arch-adr-sync-automation",
+      "title": "ADR Change Analysis Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "architects"
+      ],
+      "tags": [
+        "adr",
+        "architecture",
+        "automation",
+        "github-actions",
+        "documentation"
+      ],
+      "description": "A GitHub Actions automation that fires on pull requests that modify files under\ndocs/adr/*.md. It calls an LLM to analyse new or changed ADRs for conflicts,\ndependencies, and alignment with existing architecture decisions, then posts a\nstructured impact summary as a PR comment — keeping the architecture knowledge\nbase consistent without requiring a manual review of every ADR change.",
+      "path": "workstreams/architects/automations/adr-sync-automation.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "cap-scaling-recommendation-automation",
+      "title": "Scaling Recommendation Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "capacity-management"
+      ],
+      "tags": [
+        "capacity",
+        "scaling",
+        "automation",
+        "github-actions",
+        "weekly-report"
+      ],
+      "description": "A weekly scheduled GitHub Actions automation (Monday 08:00 UTC) that reads a fleet-wide\nutilization JSON file, calls an LLM for a 90-day capacity forecast, and opens or updates\na GitHub Issue labelled \"capacity-review\" with the scaling recommendations — ensuring\ncapacity reviews happen consistently without manual intervention.",
+      "path": "workstreams/capacity-management/automations/scaling-recommendation-automation.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "dev-pr-validator",
+      "title": "Pull Request Validation Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "pull-request",
+        "ci-cd",
+        "validation",
+        "github-actions",
+        "quality-gate"
+      ],
+      "description": "A GitHub Actions automation that runs the PR Quality Gate Workflow automatically on every\npull request, posts the review report as a PR comment, and blocks merge if Critical\nfindings are detected — removing the need for a manual first-pass review.",
+      "path": "workstreams/developers/automations/pr-validator.md",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -55,8 +333,118 @@
         "in-house-llm"
       ],
       "package_ids": [
-        "sre-incident-response-pack"
+        "developers-core-pack"
       ]
+    },
+    {
+      "id": "perf-benchmark-ci-automation",
+      "title": "Benchmark CI Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "performance",
+        "benchmark",
+        "ci-cd",
+        "automation",
+        "github-actions",
+        "regression"
+      ],
+      "description": "A GitHub Actions automation that runs on every pull request to main, executes the\nbenchmark script, compares JSON output to a stored baseline, calls an LLM for\nregression analysis, posts findings as an idempotent PR comment, and fails the CI\ncheck if any metric exceeds the configured regression threshold — preventing\nperformance regressions from reaching production.",
+      "path": "workstreams/performance-engineers/automations/benchmark-ci-automation.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sre-on-call-alert-handler",
+      "title": "On-Call Alert Handler Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "sre"
+      ],
+      "tags": [
+        "incident-response",
+        "on-call",
+        "automation",
+        "github-actions",
+        "slack"
+      ],
+      "description": "A GitHub Actions automation triggered via repository_dispatch from PagerDuty or\nAlertmanager. It calls an LLM with the incident triage prompt, then posts a\ncolour-coded structured Slack message containing triage result, top mitigation\nsteps, and a stakeholder summary — getting the right information to the on-call\nengineer within 60 seconds of alert firing.",
+      "path": "workstreams/sre/automations/on-call-alert-handler.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sysdesign-diagram-generation-automation",
+      "title": "Design Diagram Generation Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "system-designers"
+      ],
+      "tags": [
+        "system-design",
+        "mermaid",
+        "diagram",
+        "automation",
+        "github-actions",
+        "api"
+      ],
+      "description": "A GitHub Actions automation triggered on pull requests that modify design files\n(*.design.md or docs/design/*.md). It calls an LLM to generate a Mermaid sequence\ndiagram and an OpenAPI 3.0 contract stub from the design content, then posts both\nas a PR comment — making design artefacts immediately visible at review time.",
+      "path": "workstreams/system-designers/automations/diagram-generation-automation.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "test-coverage-automation",
+      "title": "Test Coverage Gap Automation",
+      "type": "automation",
+      "status": "active",
+      "workstream": [
+        "testers"
+      ],
+      "tags": [
+        "testing",
+        "coverage",
+        "automation",
+        "github-actions",
+        "pull-request"
+      ],
+      "description": "A GitHub Actions automation that triggers on pull requests, extracts changed source\nfiles, sends them to an LLM to identify functions and methods lacking test coverage,\nand posts a prioritised coverage gap report as a PR comment — making test gaps visible\nat review time without any manual analysis.",
+      "path": "workstreams/testers/automations/test-coverage-automation.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
     },
     {
       "id": "arch-adr-generator",
@@ -73,9 +461,9 @@
         "decision-record",
         "documentation"
       ],
-      "description": "Generates a well-structured Architecture Decision Record (ADR) in the MADR format from a brief description of the decision context, options considered, and the chosen option.",
+      "description": "Generates a well-structured Architecture Decision Record (ADR) in the MADR format from\na brief description of the decision context, options considered, and the chosen option.",
       "path": "workstreams/architects/prompts/adr-generator.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -86,6 +474,195 @@
       "package_ids": [
         "architects-design-pack"
       ]
+    },
+    {
+      "id": "cap-capacity-forecast-prompt",
+      "title": "Capacity Forecast Report Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "capacity-management"
+      ],
+      "tags": [
+        "capacity",
+        "forecasting",
+        "scaling",
+        "infrastructure",
+        "planning"
+      ],
+      "description": "Generates a 30/60/90-day capacity forecast from current utilization metrics, weekly\ngrowth trend data, and optional seasonality context — producing projected breach dates,\nheadroom timelines, and prioritised scaling recommendations in a structured Markdown table report.",
+      "path": "workstreams/capacity-management/prompts/capacity-forecast-prompt.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "data-analytics-statistical-analysis-prompt",
+      "title": "Statistical Analysis and Insights Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "data-analytics"
+      ],
+      "tags": [
+        "statistics",
+        "analysis",
+        "insights",
+        "data-science",
+        "reporting"
+      ],
+      "description": "Generates comprehensive statistical analysis and actionable insights from structured data,\nincluding descriptive statistics, trend identification, anomaly detection, and business\nrecommendations — transforming raw numbers into decision-ready insights.",
+      "path": "workstreams/data-analytics/prompts/statistical-analysis-prompt.md",
+      "updated": "2026-04-21T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ]
+    },
+    {
+      "id": "dev-commit-message-generator",
+      "title": "Conventional Commit Message Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "git",
+        "commit-message",
+        "conventional-commits",
+        "documentation"
+      ],
+      "description": "Generates a well-formed Conventional Commits message (type, scope, subject, body, footer)\nfrom a diff or a plain-language description of the change — keeping git history readable\nand automating changelog generation.",
+      "path": "workstreams/developers/prompts/commit-message-generator.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "developers-core-pack"
+      ]
+    },
+    {
+      "id": "dev-summarize-pull-request",
+      "title": "Summarize Pull Request for Reviewers",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "pull-request",
+        "code-review",
+        "documentation"
+      ],
+      "description": "Generates a concise, reviewer-friendly summary of a pull request from its title, description,\nand list of changed files. Reduces review time by surfacing intent and risk areas up front.",
+      "path": "workstreams/developers/prompts/summarize-pull-request.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "developers-core-pack"
+      ]
+    },
+    {
+      "id": "perf-performance-baseline-prompt",
+      "title": "Performance Baseline Report Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "performance",
+        "baseline",
+        "slo",
+        "latency",
+        "throughput"
+      ],
+      "description": "Generates a structured Performance Baseline Report that evaluates each metric against\ndefined SLOs, reports Pass/Fail per metric, calculates variance, classifies failures\nby severity (Critical/High/Medium), and produces an overall service readiness rating\n(Ready / Conditionally Ready / Not Ready) — providing a consistent baseline record\nbefore performance regression analysis.",
+      "path": "workstreams/performance-engineers/prompts/performance-baseline-prompt.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sre-incident-triage-prompt",
+      "title": "Incident Triage First-Responder Guide",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "sre"
+      ],
+      "tags": [
+        "incident-response",
+        "triage",
+        "on-call"
+      ],
+      "description": "Guides the on-call engineer through structured incident triage by analysing alert details\nand recent changes to suggest probable root causes and immediate mitigation steps.",
+      "path": "workstreams/sre/prompts/incident-triage.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "sre-incident-response-pack"
+      ]
+    },
+    {
+      "id": "sysdesign-api-contract-prompt",
+      "title": "API Contract Generator",
+      "type": "prompt",
+      "status": "active",
+      "workstream": [
+        "system-designers"
+      ],
+      "tags": [
+        "api",
+        "openapi",
+        "contract",
+        "system-design",
+        "documentation"
+      ],
+      "description": "Generates a complete OpenAPI 3.0 YAML contract stub from a plain-language API description,\nincluding paths, request/response schemas, authentication, and standard error responses —\naccelerating API-first design and ensuring consistent contracts across services.",
+      "path": "workstreams/system-designers/prompts/api-contract-prompt.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
     },
     {
       "id": "test-generate-test-cases-from-user-story",
@@ -101,9 +678,9 @@
         "bdd",
         "quality-assurance"
       ],
-      "description": "Generates a comprehensive set of test cases (happy path, edge cases, and negative scenarios) from a user story and its acceptance criteria, formatted as Gherkin scenarios.",
+      "description": "Generates a comprehensive set of test cases (happy path, edge cases, and negative scenarios)\nfrom a user story and its acceptance criteria, formatted as Gherkin scenarios.",
       "path": "workstreams/testers/prompts/generate-test-cases-from-user-story.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -113,6 +690,224 @@
       ],
       "package_ids": [
         "testers-quality-pack"
+      ]
+    },
+    {
+      "id": "data-analytics-csv-to-json-transformer",
+      "title": "CSV to JSON Transformer",
+      "type": "script",
+      "status": "active",
+      "workstream": [
+        "data-analytics"
+      ],
+      "tags": [
+        "python",
+        "csv",
+        "json",
+        "transformer",
+        "data-conversion"
+      ],
+      "description": "A Python script that converts CSV files to structured JSON with configurable schema\ninference, type conversion, and nested object support — preparing data for LLM-based\nanalysis by transforming flat CSV rows into rich JSON documents.",
+      "path": "workstreams/data-analytics/scripts/csv-to-json-transformer.md",
+      "updated": "2026-04-21T00:00:00.000Z"
+    },
+    {
+      "id": "perf-benchmark-delta-calculator",
+      "title": "Benchmark Delta Calculator",
+      "type": "script",
+      "status": "active",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "python",
+        "aggregator",
+        "performance",
+        "benchmark",
+        "regression",
+        "ci-cd"
+      ],
+      "description": "A Python script that reads a baseline benchmark JSON and a current-run benchmark JSON,\ncomputes percentage deltas for every metric, classifies each as PASS/WARN/FAIL against a\nconfigurable threshold, and writes a structured comparison JSON — ready for the LLM\nregression analysis step in the benchmark CI pipeline.",
+      "path": "workstreams/performance-engineers/scripts/benchmark-delta-calculator.md",
+      "updated": "2026-04-21T00:00:00.000Z"
+    },
+    {
+      "id": "shared-data-cleaner",
+      "title": "Data Cleaner and Validator",
+      "type": "script",
+      "status": "active",
+      "workstream": [
+        "data-analytics",
+        "developers",
+        "shared"
+      ],
+      "tags": [
+        "python",
+        "data-cleaning",
+        "validation",
+        "transformer",
+        "data-quality"
+      ],
+      "description": "A Python script that reads a JSON or CSV file, performs common data cleaning operations\n(removes duplicates, handles missing values, validates data types, detects outliers),\nand outputs a cleaned dataset with a quality report — ensuring LLM prompts receive\nclean, valid data.",
+      "path": "shared/scripts/data-cleaner.md",
+      "updated": "2026-04-21T00:00:00.000Z"
+    },
+    {
+      "id": "shared-utilization-data-transformer",
+      "title": "Utilization Data Transformer",
+      "type": "script",
+      "status": "active",
+      "workstream": [
+        "capacity-management",
+        "shared"
+      ],
+      "tags": [
+        "python",
+        "transformer",
+        "capacity",
+        "utilization",
+        "data-pipeline"
+      ],
+      "description": "A Python script that reads a raw fleet utilization JSON file, aggregates per-service\nmetrics into a structured summary, projects linear growth at 30/60/90 days, and\noutputs both a clean Markdown table and a compact JSON envelope ready for LLM\nconsumption — eliminating raw JSON dumping into prompts.",
+      "path": "shared/scripts/utilization-data-transformer.md",
+      "updated": "2026-04-21T00:00:00.000Z"
+    },
+    {
+      "id": "arch-trade-off-analysis",
+      "title": "Architecture Trade-Off Analysis",
+      "type": "skill",
+      "status": "active",
+      "workstream": [
+        "architects",
+        "system-designers"
+      ],
+      "tags": [
+        "trade-off",
+        "architecture",
+        "decision-support"
+      ],
+      "description": "Produces a structured trade-off analysis comparing two or more architecture or technology\noptions across configurable quality attributes, helping teams reach faster, better-documented\ndecisions.",
+      "path": "workstreams/architects/skills/trade-off-analysis.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "architects-design-pack",
+        "system-designers-design-pack"
+      ]
+    },
+    {
+      "id": "cap-utilization-analysis",
+      "title": "Resource Utilization Analysis",
+      "type": "skill",
+      "status": "active",
+      "workstream": [
+        "capacity-management"
+      ],
+      "tags": [
+        "utilization",
+        "capacity",
+        "cost-optimisation",
+        "resources"
+      ],
+      "description": "Analyses resource utilization data (CPU, memory, storage, network) to identify\nover-provisioned and under-provisioned resources, headroom risk, and cost-saving\nopportunities with concrete recommendations.",
+      "path": "workstreams/capacity-management/skills/utilization-analysis.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "capacity-management-analysis-pack"
+      ]
+    },
+    {
+      "id": "data-analytics-sales-trend-analyzer",
+      "title": "Sales Trend Analyzer",
+      "type": "skill",
+      "status": "active",
+      "workstream": [
+        "data-analytics"
+      ],
+      "tags": [
+        "sales",
+        "trends",
+        "forecasting",
+        "analysis",
+        "business-intelligence"
+      ],
+      "description": "Analyzes sales data to identify trends, growth patterns, seasonality, and anomalies,\nthen generates forecasts and actionable recommendations — helping businesses make\ndata-driven decisions about inventory, marketing, and resource allocation.",
+      "path": "workstreams/data-analytics/skills/sales-trend-analyzer.md",
+      "updated": "2026-04-21T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ]
+    },
+    {
+      "id": "dev-code-review-skill",
+      "title": "Structured Code Review",
+      "type": "skill",
+      "status": "active",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "code-review",
+        "quality",
+        "security"
+      ],
+      "description": "Reviews a code snippet or file for correctness, maintainability, security issues,\nand adherence to best practices, returning findings categorised by severity.",
+      "path": "workstreams/developers/skills/code-review.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "developers-core-pack"
+      ]
+    },
+    {
+      "id": "perf-bottleneck-analysis",
+      "title": "Performance Bottleneck Analysis",
+      "type": "skill",
+      "status": "active",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "performance",
+        "bottleneck",
+        "profiling",
+        "latency"
+      ],
+      "description": "Analyses load test results, profiling data, or performance metrics to identify bottlenecks,\nclassify them by root-cause category, and provide prioritised remediation recommendations.",
+      "path": "workstreams/performance-engineers/skills/bottleneck-analysis.md",
+      "updated": "2024-01-01T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": [
+        "performance-engineers-analysis-pack"
       ]
     },
     {
@@ -128,9 +923,9 @@
         "communication",
         "knowledge-sharing"
       ],
-      "description": "Translates any technical concept into clear, jargon-free language tailored to a specified audience level. Useful across all work streams.",
+      "description": "Translates any technical concept into clear, jargon-free language tailored to a specified\naudience level. Useful across all work streams for documentation, presentations, and onboarding.",
       "path": "shared/skills/explain-concept.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -160,9 +955,9 @@
         "documentation",
         "communication"
       ],
-      "description": "Produces a structured summary of any document or long text block with configurable detail level and output format.",
+      "description": "Produces a structured summary of any document or long text block with configurable detail\nlevel and output format. Used across all work streams to condense reports, runbooks, PRs,\ndesign docs, and incident reports.",
       "path": "shared/skills/summarize-document.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -181,33 +976,6 @@
       ]
     },
     {
-      "id": "dev-code-review-skill",
-      "title": "Structured Code Review",
-      "type": "skill",
-      "status": "active",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "code-review",
-        "quality",
-        "security"
-      ],
-      "description": "Reviews a code snippet or file for correctness, maintainability, security issues, and adherence to best practices, returning findings categorised by severity.",
-      "path": "workstreams/developers/skills/code-review.md",
-      "updated": "2024-01-01",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "developers-core-pack"
-      ]
-    },
-    {
       "id": "sre-runbook-generator",
       "title": "Runbook Generator",
       "type": "skill",
@@ -220,9 +988,9 @@
         "incident-response",
         "operations"
       ],
-      "description": "Generates a structured operational runbook for a service or alert, including description, escalation path, diagnostic steps, and resolution procedures.",
+      "description": "Generates a structured operational runbook for a service or alert, including\ndescription, escalation path, diagnostic steps, and resolution procedures.",
       "path": "workstreams/sre/skills/runbook-generator.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -232,119 +1000,6 @@
       ],
       "package_ids": [
         "sre-incident-response-pack"
-      ]
-    },
-    {
-      "id": "arch-trade-off-analysis",
-      "title": "Architecture Trade-Off Analysis",
-      "type": "skill",
-      "status": "active",
-      "workstream": [
-        "architects",
-        "system-designers"
-      ],
-      "tags": [
-        "trade-off",
-        "architecture",
-        "decision-support"
-      ],
-      "description": "Produces a structured trade-off analysis comparing two or more architecture or technology options across configurable quality attributes.",
-      "path": "workstreams/architects/skills/trade-off-analysis.md",
-      "updated": "2024-01-01",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "architects-design-pack",
-        "system-designers-design-pack"
-      ]
-    },
-    {
-      "id": "test-coverage-gap-analysis",
-      "title": "Test Coverage Gap Analysis",
-      "type": "skill",
-      "status": "active",
-      "workstream": [
-        "testers"
-      ],
-      "tags": [
-        "coverage",
-        "gap-analysis",
-        "quality-assurance",
-        "risk"
-      ],
-      "description": "Analyses an existing test suite description against feature requirements to identify untested scenarios, missing edge cases, and risk-weighted coverage gaps.",
-      "path": "workstreams/testers/skills/coverage-gap-analysis.md",
-      "updated": "2024-01-01",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "testers-quality-pack"
-      ]
-    },
-    {
-      "id": "cap-utilization-analysis",
-      "title": "Resource Utilization Analysis",
-      "type": "skill",
-      "status": "active",
-      "workstream": [
-        "capacity-management"
-      ],
-      "tags": [
-        "utilization",
-        "capacity",
-        "cost-optimisation",
-        "resources"
-      ],
-      "description": "Analyses resource utilization data to identify over-provisioned and under-provisioned resources, headroom risk, and cost-saving opportunities.",
-      "path": "workstreams/capacity-management/skills/utilization-analysis.md",
-      "updated": "2024-01-01",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "capacity-management-analysis-pack"
-      ]
-    },
-    {
-      "id": "perf-bottleneck-analysis",
-      "title": "Performance Bottleneck Analysis",
-      "type": "skill",
-      "status": "active",
-      "workstream": [
-        "performance-engineers"
-      ],
-      "tags": [
-        "performance",
-        "bottleneck",
-        "profiling",
-        "latency"
-      ],
-      "description": "Analyses load test results or performance metrics to identify bottlenecks, classify them by root-cause category, and provide prioritised remediation recommendations.",
-      "path": "workstreams/performance-engineers/skills/bottleneck-analysis.md",
-      "updated": "2024-01-01",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "performance-engineers-analysis-pack"
       ]
     },
     {
@@ -362,9 +1017,9 @@
         "documentation",
         "mermaid"
       ],
-      "description": "Generates a Mermaid sequence diagram from a prose description of a system interaction, API flow, or user journey.",
+      "description": "Generates a Mermaid sequence diagram from a prose description of a system interaction,\nAPI flow, or user journey. Output can be embedded directly in Markdown documentation.",
       "path": "workstreams/system-designers/skills/sequence-diagram-generator.md",
-      "updated": "2024-01-01",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -377,282 +1032,22 @@
       ]
     },
     {
-      "id": "dev-automated-refactoring-agent",
-      "title": "Automated Code Refactoring Agent",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "refactoring",
-        "technical-debt",
-        "agent",
-        "automation"
-      ],
-      "description": "An autonomous agent that continuously scans a codebase for technical debt, proposes and applies targeted refactors, and opens pull requests for human review.",
-      "path": "workstreams/developers/ideas/automated-refactoring-agent.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "dev-ai-test-generation",
-      "title": "AI-Assisted Unit Test Generation",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "testing",
-        "unit-test",
-        "automation",
-        "skill",
-        "developer-productivity"
-      ],
-      "description": "A skill that generates a comprehensive unit test suite for any function or class from its source code \u2014 covering happy paths, edge cases, and negative scenarios.",
-      "path": "workstreams/developers/ideas/ai-test-generation.md",
-      "updated": "2026-04-20"
-    },
-    {
-      "id": "dev-pr-review-agent",
-      "title": "Pull Request Review Agent",
-      "type": "agent",
+      "id": "test-coverage-gap-analysis",
+      "title": "Test Coverage Gap Analysis",
+      "type": "skill",
       "status": "active",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "code-review",
-        "pull-request",
-        "automation",
-        "quality"
-      ],
-      "description": "An autonomous agent that reviews a pull request end-to-end: summarises changes, runs a structured code review, checks test coverage adequacy, and posts a consolidated review comment.",
-      "path": "workstreams/developers/agents/pr-review-agent.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "developers-core-pack"
-      ]
-    },
-    {
-      "id": "dev-pr-review-workflow",
-      "title": "Pull Request Quality Gate Workflow",
-      "type": "workflow",
-      "status": "active",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "pull-request",
-        "code-review",
-        "quality-gate",
-        "workflow"
-      ],
-      "description": "A three-step workflow that takes a pull request from raw diff to a structured, actionable review: summarise, code review, then assess test coverage.",
-      "path": "workstreams/developers/workflows/pr-review-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "developers-core-pack"
-      ]
-    },
-    {
-      "id": "dev-commit-message-generator",
-      "title": "Conventional Commit Message Generator",
-      "type": "prompt",
-      "status": "active",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "git",
-        "commit-message",
-        "conventional-commits",
-        "documentation"
-      ],
-      "description": "Generates a well-formed Conventional Commits message from a diff or a plain-language description of the change.",
-      "path": "workstreams/developers/prompts/commit-message-generator.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "developers-core-pack"
-      ]
-    },
-    {
-      "id": "dev-pr-validator",
-      "title": "Pull Request Validation Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "developers"
-      ],
-      "tags": [
-        "pull-request",
-        "ci-cd",
-        "validation",
-        "github-actions",
-        "quality-gate"
-      ],
-      "description": "A GitHub Actions automation that runs the PR Quality Gate Workflow automatically on every pull request and posts the review report as a PR comment.",
-      "path": "workstreams/developers/automations/pr-validator.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": [
-        "developers-core-pack"
-      ]
-    },
-    {
-      "id": "sre-auto-runbook-maintenance",
-      "title": "Automated Runbook Currency Agent",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "sre"
-      ],
-      "tags": [
-        "runbook",
-        "automation",
-        "agent",
-        "operations"
-      ],
-      "description": "An agent that monitors service changes and automatically proposes runbook updates to keep operational documentation current.",
-      "path": "workstreams/sre/ideas/auto-runbook-maintenance.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "arch-drift-detector",
-      "title": "Architecture Drift Detector",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "architects"
-      ],
-      "tags": [
-        "architecture",
-        "governance",
-        "drift",
-        "compliance"
-      ],
-      "description": "An agent that compares the actual deployed system topology against documented architecture and flags deviations.",
-      "path": "workstreams/architects/ideas/architecture-drift-detector.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "test-intelligent-suite-maintenance",
-      "title": "Intelligent Test Suite Maintenance Agent",
-      "type": "idea",
-      "status": "draft",
       "workstream": [
         "testers"
       ],
       "tags": [
-        "test-maintenance",
-        "automation",
-        "agent",
-        "flaky-tests"
+        "coverage",
+        "gap-analysis",
+        "quality-assurance",
+        "risk"
       ],
-      "description": "An agent that monitors the test suite for flaky tests, outdated test data, and redundant coverage, and proposes targeted fixes.",
-      "path": "workstreams/testers/ideas/intelligent-suite-maintenance.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "cap-predictive-scaling-agent",
-      "title": "Predictive Auto-Scaling Recommendation Agent",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "capacity-management"
-      ],
-      "tags": [
-        "auto-scaling",
-        "forecasting",
-        "agent",
-        "cost-optimisation"
-      ],
-      "description": "An agent that analyses historical traffic patterns and business event calendars to pre-emptively recommend scaling actions.",
-      "path": "workstreams/capacity-management/ideas/predictive-scaling-agent.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "perf-continuous-benchmarking",
-      "title": "Continuous Performance Benchmarking Agent",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "performance-engineers"
-      ],
-      "tags": [
-        "benchmarking",
-        "regression",
-        "ci-cd",
-        "agent"
-      ],
-      "description": "An agent that runs lightweight performance benchmarks on every PR and blocks merge if a configurable regression threshold is exceeded.",
-      "path": "workstreams/performance-engineers/ideas/continuous-benchmarking.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "sysdesign-design-pattern-recommender",
-      "title": "Design Pattern Recommender",
-      "type": "idea",
-      "status": "draft",
-      "workstream": [
-        "system-designers",
-        "architects"
-      ],
-      "tags": [
-        "design-patterns",
-        "system-design",
-        "recommendations",
-        "agent"
-      ],
-      "description": "An agent that analyses a system design description and recommends the most appropriate design patterns with pros, cons, and implementation guidance.",
-      "path": "workstreams/system-designers/ideas/design-pattern-recommender.md",
-      "updated": "2024-01-01"
-    },
-    {
-      "id": "sre-incident-response-agent",
-      "title": "Incident Response Agent",
-      "type": "agent",
-      "status": "active",
-      "workstream": [
-        "sre"
-      ],
-      "tags": [
-        "incident-response",
-        "on-call",
-        "automation",
-        "triage",
-        "sre"
-      ],
-      "description": "Autonomous agent that manages the full incident response lifecycle \u2014 triage, runbook lookup, mitigation proposal, and stakeholder communication.",
-      "path": "workstreams/sre/agents/incident-response-agent.md",
-      "updated": "2026-04-20",
+      "description": "Analyses an existing test suite description or list of test cases against a feature's\nrequirements or source code to identify untested scenarios, missing edge cases, and\nrisk-weighted coverage gaps.",
+      "path": "workstreams/testers/skills/coverage-gap-analysis.md",
+      "updated": "2024-01-01T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -660,85 +1055,9 @@
         "copilot-studio",
         "in-house-llm"
       ],
-      "package_ids": []
-    },
-    {
-      "id": "sre-incident-response-workflow",
-      "title": "Incident Response Workflow",
-      "type": "workflow",
-      "status": "active",
-      "workstream": [
-        "sre"
-      ],
-      "tags": [
-        "incident-response",
-        "sre",
-        "on-call",
-        "workflow"
-      ],
-      "description": "A structured 4-step incident response workflow: triage, runbook lookup, mitigation, and stakeholder communication.",
-      "path": "workstreams/sre/workflows/incident-response-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "sre-on-call-alert-handler",
-      "title": "On-Call Alert Handler Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "sre"
-      ],
-      "tags": [
-        "incident-response",
-        "on-call",
-        "automation",
-        "github-actions",
-        "slack"
-      ],
-      "description": "GitHub Actions automation triggered by PagerDuty/Alertmanager that runs the incident response workflow and posts an AI-generated triage summary to Slack.",
-      "path": "workstreams/sre/automations/on-call-alert-handler.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "api-endpoint",
-        "mcp-tool",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "arch-architecture-review-agent",
-      "title": "Architecture Review Agent",
-      "type": "agent",
-      "status": "active",
-      "workstream": [
-        "architects"
-      ],
-      "tags": [
-        "architecture",
-        "review",
-        "quality-attributes",
-        "design",
-        "risk-assessment"
-      ],
-      "description": "Autonomous agent that reviews an architecture design document against quality attributes and produces a structured review report with prioritised recommendations.",
-      "path": "workstreams/architects/agents/architecture-review-agent.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
+      "package_ids": [
+        "testers-quality-pack"
+      ]
     },
     {
       "id": "arch-design-review-workflow",
@@ -754,169 +1073,9 @@
         "workflow",
         "quality-attributes"
       ],
-      "description": "A structured 4-step workflow for architecture design reviews: design summary, quality attribute evaluation, risk identification, and recommendations.",
+      "description": "A four-step workflow that takes an architecture design document through contextualisation,\nquality-attribute evaluation, risk and anti-pattern identification, and recommendations\nsynthesis — producing a consolidated design review report that architects and tech leads\ncan use directly in Architecture Review Board meetings.",
       "path": "workstreams/architects/workflows/design-review-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "arch-adr-sync-automation",
-      "title": "ADR Change Analysis Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "architects"
-      ],
-      "tags": [
-        "adr",
-        "architecture",
-        "automation",
-        "github-actions",
-        "documentation"
-      ],
-      "description": "GitHub Actions automation that detects new or modified ADR files in a PR, analyses them for conflicts with existing decisions, and posts an impact summary as a PR comment.",
-      "path": "workstreams/architects/automations/adr-sync-automation.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "api-endpoint",
-        "mcp-tool",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "test-generation-agent",
-      "title": "Test Generation Agent",
-      "type": "agent",
-      "status": "active",
-      "workstream": [
-        "testers"
-      ],
-      "tags": [
-        "testing",
-        "test-generation",
-        "bdd",
-        "gherkin",
-        "coverage",
-        "agent"
-      ],
-      "description": "Autonomous agent that generates a complete test plan and BDD scenarios from a user story, then identifies coverage gaps in the existing test suite.",
-      "path": "workstreams/testers/agents/test-generation-agent.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "test-generation-workflow",
-      "title": "Test Generation Workflow",
-      "type": "workflow",
-      "status": "active",
-      "workstream": [
-        "testers"
-      ],
-      "tags": [
-        "testing",
-        "bdd",
-        "gherkin",
-        "workflow",
-        "test-generation"
-      ],
-      "description": "A structured 4-step workflow that converts a user story into a complete test suite: behaviour extraction, test case generation, BDD scenarios, and coverage gap analysis.",
-      "path": "workstreams/testers/workflows/test-generation-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "test-coverage-automation",
-      "title": "Test Coverage Gap Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "testers"
-      ],
-      "tags": [
-        "testing",
-        "coverage",
-        "automation",
-        "github-actions",
-        "pull-request"
-      ],
-      "description": "GitHub Actions automation that analyses changed source files in a PR for test coverage gaps and posts specific test case suggestions as a PR comment.",
-      "path": "workstreams/testers/automations/test-coverage-automation.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "api-endpoint",
-        "mcp-tool",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "cap-capacity-forecast-prompt",
-      "title": "Capacity Forecast Report Generator",
-      "type": "prompt",
-      "status": "active",
-      "workstream": [
-        "capacity-management"
-      ],
-      "tags": [
-        "capacity",
-        "forecasting",
-        "scaling",
-        "infrastructure",
-        "planning"
-      ],
-      "description": "Generates a 30/60/90-day capacity forecast from utilization metrics and growth trends, projecting breach dates and recommending scaling actions.",
-      "path": "workstreams/capacity-management/prompts/capacity-forecast-prompt.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "cap-capacity-planning-agent",
-      "title": "Capacity Planning Agent",
-      "type": "agent",
-      "status": "active",
-      "workstream": [
-        "capacity-management"
-      ],
-      "tags": [
-        "capacity",
-        "planning",
-        "forecasting",
-        "scaling",
-        "automation",
-        "agent"
-      ],
-      "description": "Autonomous agent that analyses utilization trends across a fleet of services, forecasts capacity breaches, and produces a prioritised scaling recommendation report.",
-      "path": "workstreams/capacity-management/agents/capacity-planning-agent.md",
-      "updated": "2026-04-20",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -941,9 +1100,9 @@
         "forecasting",
         "scaling"
       ],
-      "description": "A 4-step workflow for quarterly capacity reviews: utilization analysis, demand forecasting, scaling option evaluation, and an action plan.",
+      "description": "A four-step workflow that takes raw utilization data for a set of services through\nhotspot identification, 30/60/90-day capacity projection, scaling option evaluation,\nand consolidated report generation — producing an actionable capacity review report\nwith a prioritised action plan ready for stakeholder review.",
       "path": "workstreams/capacity-management/workflows/capacity-review-workflow.md",
-      "updated": "2026-04-20",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -954,47 +1113,48 @@
       "package_ids": []
     },
     {
-      "id": "cap-scaling-recommendation-automation",
-      "title": "Scaling Recommendation Automation",
-      "type": "automation",
+      "id": "data-analytics-complete-data-analysis-workflow",
+      "title": "Complete Data Analysis Workflow",
+      "type": "workflow",
       "status": "active",
       "workstream": [
-        "capacity-management"
+        "data-analytics"
       ],
       "tags": [
-        "capacity",
-        "scaling",
-        "automation",
-        "github-actions",
-        "weekly-report"
+        "workflow",
+        "data-analysis",
+        "pipeline",
+        "end-to-end",
+        "multi-asset"
       ],
-      "description": "Weekly scheduled automation that reads utilization metrics, runs a capacity forecast via LLM, and opens a GitHub Issue with prioritised scaling recommendations.",
-      "path": "workstreams/capacity-management/automations/scaling-recommendation-automation.md",
-      "updated": "2026-04-20",
+      "description": "A comprehensive end-to-end workflow demonstrating how multiple assets (scripts, prompts,\nskills, and agents) work together in a complete data analysis pipeline — from raw CSV\nfiles to actionable business insights and recommendations.",
+      "path": "workstreams/data-analytics/workflows/complete-data-analysis-workflow.md",
+      "updated": "2026-04-21T00:00:00.000Z",
       "delivery_modes": [
+        "copilot-chat",
         "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
         "in-house-llm"
-      ],
-      "package_ids": []
+      ]
     },
     {
-      "id": "perf-performance-baseline-prompt",
-      "title": "Performance Baseline Report Generator",
-      "type": "prompt",
+      "id": "dev-pr-review-workflow",
+      "title": "Pull Request Quality Gate Workflow",
+      "type": "workflow",
       "status": "active",
       "workstream": [
-        "performance-engineers"
+        "developers"
       ],
       "tags": [
-        "performance",
-        "baseline",
-        "slo",
-        "latency",
-        "throughput"
+        "pull-request",
+        "code-review",
+        "quality-gate",
+        "workflow"
       ],
-      "description": "Generates a structured Performance Baseline Report from raw load test metrics, comparing against target SLOs and highlighting variance requiring investigation.",
-      "path": "workstreams/performance-engineers/prompts/performance-baseline-prompt.md",
-      "updated": "2026-04-20",
+      "description": "A three-step workflow that takes a pull request from raw diff to a structured, actionable\nreview: summarise the changes, run a code review, then assess test coverage — producing a\nconsolidated quality-gate report ready to post as a PR comment.",
+      "path": "workstreams/developers/workflows/pr-review-workflow.md",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -1002,35 +1162,36 @@
         "copilot-studio",
         "in-house-llm"
       ],
-      "package_ids": []
+      "package_ids": [
+        "developers-core-pack"
+      ]
     },
     {
-      "id": "perf-performance-regression-agent",
-      "title": "Performance Regression Analysis Agent",
-      "type": "agent",
+      "id": "perf-benchmark-regression-workflow",
+      "title": "Benchmark Regression Detection Workflow",
+      "type": "workflow",
       "status": "active",
       "workstream": [
         "performance-engineers"
       ],
       "tags": [
         "performance",
+        "benchmark",
         "regression",
-        "load-testing",
-        "profiling",
-        "analysis",
-        "agent"
+        "workflow",
+        "ci-cd",
+        "asset-chaining"
       ],
-      "description": "Autonomous agent that compares baseline vs current load test results, classifies regressions by severity, analyses probable root causes, and produces a prioritised fix report.",
-      "path": "workstreams/performance-engineers/agents/performance-regression-agent.md",
-      "updated": "2026-04-20",
+      "description": "A three-step workflow that chains a Python aggregator script, a bottleneck-analysis\nskill, and the benchmark CI automation to deliver a complete regression analysis on\nevery pull request — demonstrating how script, skill, and automation assets combine\nin a single end-to-end AI pipeline.",
+      "path": "workstreams/performance-engineers/workflows/benchmark-regression-workflow.md",
+      "updated": "2026-04-21T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
         "mcp-tool",
         "copilot-studio",
         "in-house-llm"
-      ],
-      "package_ids": []
+      ]
     },
     {
       "id": "perf-investigation-workflow",
@@ -1047,170 +1208,9 @@
         "load-testing",
         "regression"
       ],
-      "description": "A 4-step workflow for performance investigations: baseline comparison, bottleneck identification, regression classification, and root cause + fix recommendations.",
+      "description": "A four-step workflow that takes baseline and current load test results through metric\ncomparison and SLO compliance, bottleneck identification, severity classification and\nrelease recommendation, and root cause synthesis — producing a comprehensive performance\ninvestigation report with prioritised fix recommendations.",
       "path": "workstreams/performance-engineers/workflows/perf-investigation-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "perf-benchmark-ci-automation",
-      "title": "Benchmark CI Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "performance-engineers"
-      ],
-      "tags": [
-        "performance",
-        "benchmark",
-        "ci-cd",
-        "automation",
-        "github-actions",
-        "regression"
-      ],
-      "description": "CI automation that runs benchmarks on PR, compares to baseline, posts LLM-generated analysis as a PR comment, and fails the build if regressions exceed configured thresholds.",
-      "path": "workstreams/performance-engineers/automations/benchmark-ci-automation.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "api-endpoint",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "sysdesign-api-contract-prompt",
-      "title": "API Contract Generator",
-      "type": "prompt",
-      "status": "active",
-      "workstream": [
-        "system-designers"
-      ],
-      "tags": [
-        "api",
-        "openapi",
-        "contract",
-        "system-design",
-        "documentation"
-      ],
-      "description": "Generates a complete OpenAPI 3.0 contract stub from a plain-language API description, including paths, schemas, authentication, and error responses.",
-      "path": "workstreams/system-designers/prompts/api-contract-prompt.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "sysdesign-system-design-review-agent",
-      "title": "System Design Review Agent",
-      "type": "agent",
-      "status": "active",
-      "workstream": [
-        "system-designers"
-      ],
-      "tags": [
-        "system-design",
-        "review",
-        "api",
-        "completeness",
-        "agent"
-      ],
-      "description": "Autonomous agent that reviews a system design for completeness, identifies missing components and design smells, and produces a structured improvement report.",
-      "path": "workstreams/system-designers/agents/system-design-review-agent.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "sysdesign-system-design-workflow",
-      "title": "System Design Workflow",
-      "type": "workflow",
-      "status": "active",
-      "workstream": [
-        "system-designers"
-      ],
-      "tags": [
-        "system-design",
-        "workflow",
-        "sequence-diagram",
-        "api",
-        "design-review"
-      ],
-      "description": "A 4-step workflow for system design: component extraction, sequence diagram generation, API contract definition, and design completeness review.",
-      "path": "workstreams/system-designers/workflows/system-design-workflow.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "copilot-chat",
-        "api-endpoint",
-        "mcp-tool",
-        "copilot-studio",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "sysdesign-diagram-generation-automation",
-      "title": "Design Diagram Generation Automation",
-      "type": "automation",
-      "status": "active",
-      "workstream": [
-        "system-designers"
-      ],
-      "tags": [
-        "system-design",
-        "mermaid",
-        "diagram",
-        "automation",
-        "github-actions",
-        "api"
-      ],
-      "description": "GitHub Actions automation that generates Mermaid diagrams and API contract stubs from design documents changed in a PR and posts them as a comment.",
-      "path": "workstreams/system-designers/automations/diagram-generation-automation.md",
-      "updated": "2026-04-20",
-      "delivery_modes": [
-        "api-endpoint",
-        "mcp-tool",
-        "in-house-llm"
-      ],
-      "package_ids": []
-    },
-    {
-      "id": "shared-incident-to-fix-workflow",
-      "title": "Incident to Fix Workflow",
-      "type": "workflow",
-      "status": "active",
-      "workstream": [
-        "sre",
-        "developers",
-        "testers"
-      ],
-      "tags": [
-        "incident-response",
-        "cross-workstream",
-        "bug-fix",
-        "regression-testing",
-        "workflow"
-      ],
-      "description": "Cross-workstream workflow (SRE \u2192 Developers \u2192 Testers): takes a production incident from triage through code fix to regression test generation.",
-      "path": "shared/workflows/incident-to-fix-workflow.md",
-      "updated": "2026-04-20",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -1238,9 +1238,9 @@
         "delivery",
         "workflow"
       ],
-      "description": "Cross-workstream workflow (Architects + System Designers + Testers): takes a feature from ADR through sequence diagram and API contract to acceptance tests.",
+      "description": "A four-step cross-workstream workflow that takes a new feature from architectural decision\nall the way to acceptance tests. Architects produce an ADR, System Designers produce a\nsequence diagram and API contract, and Testers produce BDD acceptance test cases —\ndelivering a complete DELIVERY_PACKAGE that can be handed to developers to implement.",
       "path": "shared/workflows/design-to-delivery-workflow.md",
-      "updated": "2026-04-20",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -1251,26 +1251,25 @@
       "package_ids": []
     },
     {
-      "id": "shared-platform-health-agent",
-      "title": "Platform Health Assessment Agent",
-      "type": "agent",
+      "id": "shared-incident-to-fix-workflow",
+      "title": "Incident to Fix Workflow",
+      "type": "workflow",
       "status": "active",
       "workstream": [
         "sre",
-        "performance-engineers",
-        "capacity-management"
+        "developers",
+        "testers"
       ],
       "tags": [
-        "platform-health",
+        "incident-response",
         "cross-workstream",
-        "sre",
-        "performance",
-        "capacity",
-        "agent"
+        "bug-fix",
+        "regression-testing",
+        "workflow"
       ],
-      "description": "Cross-workstream autonomous agent combining incident patterns (SRE), performance regression analysis, and capacity forecasting into a unified platform health report.",
-      "path": "shared/agents/platform-health-agent.md",
-      "updated": "2026-04-20",
+      "description": "A four-step cross-workstream workflow that takes a live incident from initial alert all the\nway to a merged hotfix with regression tests. SRE triages and classifies the incident, the\nDevelopers workstream reviews the suspect code and drafts the fix, and the Testers workstream\ngenerates regression test cases — producing a complete, ready-to-act INCIDENT_REPORT package.",
+      "path": "shared/workflows/incident-to-fix-workflow.md",
+      "updated": "2026-04-20T00:00:00.000Z",
       "delivery_modes": [
         "copilot-chat",
         "api-endpoint",
@@ -1279,6 +1278,232 @@
         "in-house-llm"
       ],
       "package_ids": []
+    },
+    {
+      "id": "sre-incident-response-workflow",
+      "title": "Incident Response Workflow",
+      "type": "workflow",
+      "status": "active",
+      "workstream": [
+        "sre"
+      ],
+      "tags": [
+        "incident-response",
+        "sre",
+        "on-call",
+        "workflow"
+      ],
+      "description": "A four-step workflow that takes a raw alert through triage, runbook retrieval,\nmitigation planning, and stakeholder communication — giving on-call engineers a\ncomplete, structured incident response in minutes rather than having to assemble\ncontext from scratch under pressure.",
+      "path": "workstreams/sre/workflows/incident-response-workflow.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "sysdesign-system-design-workflow",
+      "title": "System Design Workflow",
+      "type": "workflow",
+      "status": "active",
+      "workstream": [
+        "system-designers"
+      ],
+      "tags": [
+        "system-design",
+        "workflow",
+        "sequence-diagram",
+        "api",
+        "design-review"
+      ],
+      "description": "A four-step workflow that transforms a design brief into a complete system design\ndocument: extract components, generate sequence diagrams for key flows, define API\ncontracts for inter-component communication, and review the design for completeness —\nproducing a structured, review-ready system design document.",
+      "path": "workstreams/system-designers/workflows/system-design-workflow.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "test-generation-workflow",
+      "title": "Test Generation Workflow",
+      "type": "workflow",
+      "status": "active",
+      "workstream": [
+        "testers"
+      ],
+      "tags": [
+        "testing",
+        "bdd",
+        "gherkin",
+        "workflow",
+        "test-generation"
+      ],
+      "description": "A four-step workflow that transforms a user story into a full test suite: extract\ntestable behaviours, generate test cases, write BDD Gherkin scenarios, and identify\ncoverage gaps — producing a ready-to-use test suite with minimal manual effort.",
+      "path": "workstreams/testers/workflows/test-generation-workflow.md",
+      "updated": "2026-04-20T00:00:00.000Z",
+      "delivery_modes": [
+        "copilot-chat",
+        "api-endpoint",
+        "mcp-tool",
+        "copilot-studio",
+        "in-house-llm"
+      ],
+      "package_ids": []
+    },
+    {
+      "id": "arch-drift-detector",
+      "title": "Architecture Drift Detector",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "architects"
+      ],
+      "tags": [
+        "architecture",
+        "governance",
+        "drift",
+        "compliance"
+      ],
+      "description": "An agent that compares the actual deployed system topology (inferred from infrastructure\ncode, service meshes, or dependency graphs) against the documented architecture and flags\ndeviations — keeping architecture documentation honest and triggering ADR reviews.",
+      "path": "workstreams/architects/ideas/architecture-drift-detector.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "cap-predictive-scaling-agent",
+      "title": "Predictive Auto-Scaling Recommendation Agent",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "capacity-management"
+      ],
+      "tags": [
+        "auto-scaling",
+        "forecasting",
+        "agent",
+        "cost-optimisation"
+      ],
+      "description": "An agent that analyses historical traffic patterns and business event calendars to\npre-emptively recommend or apply scaling actions — preventing capacity-driven incidents\nbefore reactive auto-scaling can respond.",
+      "path": "workstreams/capacity-management/ideas/predictive-scaling-agent.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "dev-ai-test-generation",
+      "title": "AI-Assisted Unit Test Generation",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "testing",
+        "unit-test",
+        "automation",
+        "skill",
+        "developer-productivity"
+      ],
+      "description": "A skill that generates a comprehensive unit test suite for any function or class from its\nsource code — covering happy paths, edge cases, and negative scenarios — eliminating the\nmost repetitive part of test authoring while maintaining test quality.",
+      "path": "workstreams/developers/ideas/ai-test-generation.md",
+      "updated": "2026-04-20T00:00:00.000Z"
+    },
+    {
+      "id": "dev-automated-refactoring-agent",
+      "title": "Automated Code Refactoring Agent",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "developers"
+      ],
+      "tags": [
+        "refactoring",
+        "technical-debt",
+        "agent",
+        "automation"
+      ],
+      "description": "An autonomous agent that continuously scans a codebase for technical debt, proposes and\napplies targeted refactors, and opens pull requests for human review — dramatically reducing\nthe manual effort of maintaining code quality.",
+      "path": "workstreams/developers/ideas/automated-refactoring-agent.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "perf-continuous-benchmarking",
+      "title": "Continuous Performance Benchmarking Agent",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "performance-engineers"
+      ],
+      "tags": [
+        "benchmarking",
+        "regression",
+        "ci-cd",
+        "agent"
+      ],
+      "description": "An agent that runs lightweight performance benchmarks on every PR, compares results\nagainst the historical baseline, and blocks merge if a configurable regression threshold\nis exceeded — making performance a first-class CI/CD gate.",
+      "path": "workstreams/performance-engineers/ideas/continuous-benchmarking.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sre-auto-runbook-maintenance",
+      "title": "Automated Runbook Currency Agent",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "sre"
+      ],
+      "tags": [
+        "runbook",
+        "automation",
+        "agent",
+        "operations"
+      ],
+      "description": "An agent that monitors service changes (deployments, infrastructure changes, alert\nthreshold updates) and automatically proposes runbook updates to keep operational\ndocumentation current — eliminating stale runbooks as a source of incident delay.",
+      "path": "workstreams/sre/ideas/auto-runbook-maintenance.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "sysdesign-design-pattern-recommender",
+      "title": "Design Pattern Recommender",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "system-designers",
+        "architects"
+      ],
+      "tags": [
+        "design-patterns",
+        "system-design",
+        "recommendations",
+        "agent"
+      ],
+      "description": "An agent that analyses a system design description or problem statement and recommends\nthe most appropriate design patterns (GoF, enterprise integration, cloud patterns) with\npros, cons, and implementation guidance tailored to the team's technology stack.",
+      "path": "workstreams/system-designers/ideas/design-pattern-recommender.md",
+      "updated": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "test-intelligent-suite-maintenance",
+      "title": "Intelligent Test Suite Maintenance Agent",
+      "type": "idea",
+      "status": "draft",
+      "workstream": [
+        "testers"
+      ],
+      "tags": [
+        "test-maintenance",
+        "automation",
+        "agent",
+        "flaky-tests"
+      ],
+      "description": "An agent that monitors the test suite for flaky tests, outdated test data, and redundant\ncoverage, and proposes targeted fixes — reducing the time teams spend maintaining tests\nrather than writing new ones.",
+      "path": "workstreams/testers/ideas/intelligent-suite-maintenance.md",
+      "updated": "2024-01-01T00:00:00.000Z"
     }
   ]
 }
