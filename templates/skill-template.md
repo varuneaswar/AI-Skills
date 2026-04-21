@@ -17,6 +17,12 @@ llm_compatibility:
 description: |
   One or two sentences describing what this skill does and when to use it.
 security_classification: internal
+delivery_modes:
+  - copilot-chat          # available now — copy/paste into any LLM interface
+  # - api-endpoint        # uncomment when portal REST API is available
+  # - mcp-tool            # uncomment when MCP server is deployed
+  # - copilot-studio      # uncomment when Copilot Studio connector is configured
+  # - in-house-llm        # uncomment when internal LLM API is available
 inputs:
   - name: INPUT_ONE
     type: string

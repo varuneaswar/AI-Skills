@@ -99,6 +99,14 @@
           "description": { "type": "string" }
         }
       }
+    },
+    "delivery_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]
+      },
+      "minItems": 1
     }
   }
 }

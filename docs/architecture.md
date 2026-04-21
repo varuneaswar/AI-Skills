@@ -119,3 +119,46 @@ A future `ai-skills` CLI could:
 - `ai-skills search "incident triage"` — search the catalog.
 - `ai-skills get sre/prompts/incident-triage` — print the prompt text.
 - `ai-skills validate workstreams/` — validate all front matter against schemas.
+
+---
+
+## Runtime Adapter Contract
+
+The `## Skill Definition` section in every skill and agent asset is the **canonical system prompt** — the single source of truth that all delivery modes read from.
+
+### How adapters consume assets
+
+```
+Markdown asset file
+       │
+       ├── YAML front-matter
+       │     ├── inputs[]  ──▶  request parameters (API / MCP / Copilot Studio)
+       │     ├── outputs[] ──▶  response shape
+       │     └── delivery_modes[] ──▶  which adapters activate this asset
+       │
+       └── Body: ## Skill Definition
+             └── ``` code block ``` ──▶  LLM system prompt (all delivery modes)
+```
+
+No changes to the Markdown file are required when adding a new delivery mode. The adapter reads the same file and wraps it differently.
+
+### Delivery mode adapter map
+
+| Delivery Mode | How the asset is consumed |
+|---|---|
+| `copilot-chat` | User copies `## Skill Definition` block and pastes into any LLM interface |
+| `api-endpoint` | Portal backend reads file, extracts system prompt, substitutes inputs, calls LLM |
+| `mcp-tool` | MCP server auto-generates tool definition from `inputs[]`; calls LLM with extracted system prompt |
+| `copilot-studio` | Connector YAML auto-generated from package manifest + asset `inputs[]`/`outputs[]` |
+| `in-house-llm` | Same as `api-endpoint` but LLM client points to internal proxy |
+
+For the full adapter specification — including pseudocode, request/response shapes, and MCP tool definition format — see **[docs/runtime-adapters.md](runtime-adapters.md)**.
+
+### CI / CD integration
+
+Two GitHub Actions enforce consistency:
+
+| Workflow | Trigger | What it does |
+|---|---|---|
+| `validate-frontmatter.yml` | Pull request | Validates all asset front-matter against JSON schemas; blocks merge on failure |
+| `catalog-sync.yml` | Push to main | Rebuilds `catalog/index.json` from asset front-matter automatically |

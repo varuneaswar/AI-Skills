@@ -100,6 +100,14 @@
         }
       }
     },
+    "delivery_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]
+      },
+      "minItems": 1
+    },
     "security_notes": {
       "type": "string",
       "description": "Required for confidential agents. Describe data handling and access scope."

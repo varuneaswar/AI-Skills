@@ -4,7 +4,7 @@
   "title": "Skill",
   "description": "Schema for an AI-Skills skill asset front matter",
   "type": "object",
-  "required": ["id", "title", "type", "version", "status", "workstream", "author", "created", "updated", "tags", "llm_compatibility", "description"],
+  "required": ["id", "title", "type", "version", "status", "workstream", "author", "created", "updated", "tags", "llm_compatibility", "description", "inputs", "outputs"],
   "additionalProperties": true,
   "properties": {
     "id": {
@@ -99,6 +99,14 @@
           "description": { "type": "string" }
         }
       }
+    },
+    "delivery_modes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]
+      },
+      "minItems": 1
     }
   }
 }

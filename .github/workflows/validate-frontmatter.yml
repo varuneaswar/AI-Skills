@@ -1,0 +1,214 @@
+name: Validate Asset Front-Matter
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "workstreams/**/*.md"
+      - "shared/**/*.md"
+      - "schemas/*.schema.json"
+
+permissions:
+  pull-requests: write
+  contents: read
+
+jobs:
+  validate:
+    name: Validate front-matter against JSON schemas
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install ajv-cli and js-yaml
+        run: |
+          npm install -g ajv-cli@5 ajv-formats
+          npm install js-yaml
+
+      - name: Extract and validate front-matter
+        id: validate
+        run: |
+          set +e
+          ERRORS=()
+          FILES_CHECKED=0
+          FILES_FAILED=0
+
+          # Map asset types to schema files
+          declare -A TYPE_TO_SCHEMA=(
+            [skill]="schemas/skill.schema.json"
+            [agent]="schemas/agent.schema.json"
+            [workflow]="schemas/workflow.schema.json"
+            [prompt]="schemas/prompt.schema.json"
+            [automation]="schemas/automation.schema.json"
+            [idea]="schemas/idea.schema.json"
+          )
+
+          # Process all Markdown files in workstreams/ and shared/
+          while IFS= read -r -d '' FILE; do
+            # Extract YAML front-matter (between first and second ---)
+            FRONTMATTER=$(awk '/^---/{p++} p==1{print} p==2{exit}' "$FILE" | tail -n +2)
+            if [ -z "$FRONTMATTER" ]; then
+              continue  # No front-matter — skip (not an asset file)
+            fi
+
+            # Determine asset type from front-matter
+            ASSET_TYPE=$(echo "$FRONTMATTER" | grep -m1 "^type:" | awk '{print $2}' | tr -d '"' ' ')
+            if [ -z "$ASSET_TYPE" ]; then
+              continue
+            fi
+
+            SCHEMA="${TYPE_TO_SCHEMA[$ASSET_TYPE]}"
+            if [ -z "$SCHEMA" ]; then
+              echo "::warning file=$FILE::Unknown asset type '$ASSET_TYPE' — no schema to validate against."
+              continue
+            fi
+
+            FILES_CHECKED=$((FILES_CHECKED + 1))
+
+            # Convert YAML front-matter to JSON for ajv
+            JSON_FILE=$(mktemp /tmp/frontmatter-XXXXXX.json)
+            node -e "
+              const yaml = require('js-yaml');
+              const fs = require('fs');
+              const fm = \
+              `"$FRONTMATTER"`;
+              try {
+                const data = yaml.load(fm);
+                fs.writeFileSync('$JSON_FILE', JSON.stringify(data, null, 2));
+              } catch(e) {
+                process.stderr.write('YAML parse error: ' + e.message + '\n');
+                process.exit(1);
+              }
+            " 2>&1
+            YAML_EXIT=$?
+
+            if [ $YAML_EXIT -ne 0 ]; then
+              ERRORS+=("$FILE: YAML parse error in front-matter")
+              FILES_FAILED=$((FILES_FAILED + 1))
+              rm -f "$JSON_FILE"
+              continue
+            fi
+
+            # Validate JSON against schema
+            VALIDATION_OUTPUT=$(ajv validate -s "$SCHEMA" -d "$JSON_FILE" --strict=false 2>&1)
+            VALIDATION_EXIT=$?
+            rm -f "$JSON_FILE"
+
+            if [ $VALIDATION_EXIT -ne 0 ]; then
+              ERRORS+=("$FILE: $VALIDATION_OUTPUT")
+              FILES_FAILED=$((FILES_FAILED + 1))
+            fi
+          done < <(find workstreams shared -name "*.md" -not -name "README.md" -print0)
+
+          echo "files_checked=$FILES_CHECKED" >> "$GITHUB_OUTPUT"
+          echo "files_failed=$FILES_FAILED" >> "$GITHUB_OUTPUT"
+
+          if [ ${#ERRORS[@]} -gt 0 ]; then
+            # Write error list to a file for the PR comment step
+            printf '%s\n' "${ERRORS[@]}" > /tmp/validation-errors.txt
+            exit 1
+          fi
+
+      - name: Post validation failure comment
+        if: failure() && steps.validate.outcome == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let errors = '';
+            try {
+              errors = fs.readFileSync('/tmp/validation-errors.txt', 'utf8');
+            } catch(e) {
+              errors = 'Could not read error file.';
+            }
+
+            const body = `## ❌ Front-Matter Validation Failed
+
+            One or more asset files have invalid or missing front-matter fields.
+
+            **Files checked:** ${{ steps.validate.outputs.files_checked }}
+            **Files with errors:** ${{ steps.validate.outputs.files_failed }}
+
+            ### Errors
+
+            \
+            \
+            ${errors}
+            \
+            ### How to fix
+
+            1. Open the failing file(s).
+            2. Check the YAML front-matter (the block between the first \
+            and second \
+            ).
+            3. Compare against the relevant template in \
+            and schema in \
+            .
+            4. Run \
+            locally to verify.
+
+            See [CONTRIBUTING.md](../CONTRIBUTING.md) for required front-matter fields.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+
+      - name: Post validation success comment
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `## ✅ Front-Matter Validation Passed\n\n**${{ steps.validate.outputs.files_checked }}** asset file(s) validated against JSON schemas — all passed.`
+            });
+
+  validate-workstreams:
+    name: Validate workstream folder registration
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check all workstream folders exist in registry.json
+        run: |
+          set -e
+          REGISTRY_IDS=$(node -e "
+            const r = require('./workstreams/registry.json');
+            console.log(r.workstreams.map(w => w.id).join('\n'));
+          ")
+
+          ERRORS=()
+          for DIR in workstreams/*/; do
+            DIR_NAME=$(basename "$DIR")
+            if [ "$DIR_NAME" = "." ] || [ "$DIR_NAME" = ".." ]; then continue; fi
+            # Skip non-workstream entries (registry.json itself)
+            if [ -f "workstreams/$DIR_NAME" ]; then continue; fi
+            if ! echo "$REGISTRY_IDS" | grep -qx "$DIR_NAME"; then
+              ERRORS+=("Folder 'workstreams/$DIR_NAME' exists but is not registered in workstreams/registry.json")
+            fi
+          done
+
+          for ID in $REGISTRY_IDS; do
+            if [ ! -d "workstreams/$ID" ]; then
+              ERRORS+=("Workstream '$ID' is registered in registry.json but folder 'workstreams/$ID' does not exist")
+            fi
+          done
+
+          if [ ${#ERRORS[@]} -gt 0 ]; then
+            printf '::error::%s\n' "${ERRORS[@]}"
+            exit 1
+          fi
+          echo "All workstream folders are correctly registered.";

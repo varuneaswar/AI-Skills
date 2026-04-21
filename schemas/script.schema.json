@@ -1,0 +1,132 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/varuneaswar/AI-Skills/schemas/script.schema.json",
+  "title": "Script",
+  "description": "Schema for an AI-Skills script asset front matter. A script is a standalone, versioned program (Python, bash, Node.js, etc.) that performs data aggregation, transformation, or validation as part of an AI pipeline. Scripts are invoked by automations, workflows, or agents — never directly by end users.",
+  "type": "object",
+  "required": ["id", "title", "type", "version", "status", "workstream", "author", "created", "updated", "tags", "description", "language", "script_type", "inputs", "outputs"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 80
+    },
+    "type": {
+      "type": "string",
+      "const": "script"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "active", "deprecated"]
+    },
+    "workstream": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "Workstream ID from workstreams/registry.json — no enum constraint"
+      },
+      "minItems": 1
+    },
+    "author": {
+      "type": "string"
+    },
+    "created": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "updated": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$"
+      },
+      "minItems": 1
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500
+    },
+    "language": {
+      "type": "string",
+      "description": "Primary programming language of the script.",
+      "enum": ["python", "bash", "node", "go", "ruby", "powershell", "other"]
+    },
+    "runtime_version": {
+      "type": "string",
+      "description": "Minimum runtime version required, e.g. '3.11+' or '20 LTS'."
+    },
+    "script_type": {
+      "type": "string",
+      "description": "Functional category of the script within an AI pipeline.",
+      "enum": ["transformer", "aggregator", "validator", "orchestrator", "extractor", "formatter"]
+    },
+    "entry_point": {
+      "type": "string",
+      "description": "File name or function name that callers should invoke, e.g. 'transform.py' or 'run()'."
+    },
+    "package_dependencies": {
+      "type": "array",
+      "description": "Third-party library requirements (pip, npm, etc.).",
+      "items": {
+        "type": "object",
+        "required": ["name", "version"],
+        "properties": {
+          "name": { "type": "string" },
+          "version": { "type": "string", "description": "pip/npm-style specifier, e.g. '>=1.26.0'" },
+          "ecosystem": { "type": "string", "enum": ["pip", "npm", "gem", "go", "other"] }
+        }
+      }
+    },
+    "asset_dependencies": {
+      "type": "array",
+      "description": "IDs of other AI-Skills assets this script is designed to be used with.",
+      "items": { "type": "string" }
+    },
+    "security_classification": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential"],
+      "default": "internal"
+    },
+    "inputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "description": { "type": "string" },
+          "required": { "type": "boolean" }
+        }
+      }
+    },
+    "outputs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "description"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "security_notes": {
+      "type": "string",
+      "description": "Describe what external systems are accessed, what data is read/written, and how credentials are managed."
+    }
+  }
+}
