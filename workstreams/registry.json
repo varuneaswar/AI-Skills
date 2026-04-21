@@ -1,7 +1,7 @@
 {
   "$schema": "../schemas/workstream-registry.schema.json",
-  "version": "1.0.0",
-  "updated": "2024-01-01",
+  "version": "1.1.0",
+  "updated": "2026-04-21",
   "description": "Single source of truth for all registered work streams. Add a new entry here — and create the matching folder structure — to register a new work stream. Schemas and portal tooling read this file to build workstream dropdown lists and route assets.",
   "workstreams": [
     {
@@ -65,6 +65,15 @@
       "path": "workstreams/testers",
       "owner": "",
       "tags": ["testing", "qa", "bdd"],
+      "status": "active"
+    },
+    {
+      "id": "data-analytics",
+      "label": "Data Analytics",
+      "description": "Data analysts, data scientists, and BI professionals who transform raw data into actionable business insights through statistical analysis, trend detection, and forecasting.",
+      "path": "workstreams/data-analytics",
+      "owner": "ai-skills-maintainer",
+      "tags": ["data", "analytics", "statistics", "insights", "business-intelligence"],
       "status": "active"
     }
   ],

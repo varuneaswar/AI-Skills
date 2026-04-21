@@ -31,11 +31,13 @@ AI-Skills/
 │   └── PULL_REQUEST_TEMPLATE.md
 │
 ├── docs/
-│   ├── architecture.md        # Repository design decisions
-│   ├── getting-started.md     # Onboarding guide
-│   ├── standards.md           # Naming, metadata, and quality standards
-│   ├── packaging.md           # How packages work and delivery modes explained
-│   └── adding-workstreams.md  # How to add a new work stream
+│   ├── architecture.md               # Repository design decisions
+│   ├── getting-started.md            # Onboarding guide
+│   ├── standards.md                  # Naming, metadata, and quality standards
+│   ├── packaging.md                  # How packages work and delivery modes explained
+│   ├── adding-workstreams.md         # How to add a new work stream
+│   ├── scripts-guide.md              # Scripts folder structure and usage
+│   └── multi-asset-workstreams.md    # How to build multi-asset workstreams
 │
 ├── templates/                 # Starter files for each content type
 │   ├── skill-template.md
@@ -71,6 +73,7 @@ AI-Skills/
 │   ├── agents/
 │   ├── workflows/
 │   ├── prompts/
+│   ├── scripts/             # Common utility scripts
 │   ├── automations/
 │   └── ideas/
 │
@@ -95,6 +98,7 @@ workstreams/<work-stream>/
 ├── agents/
 ├── workflows/
 ├── prompts/
+├── scripts/          # Data transformation and processing scripts
 ├── automations/
 └── ideas/
 ```
@@ -120,6 +124,7 @@ workstreams/<work-stream>/
 |---|---|
 | `architects` | Solution and enterprise architecture patterns, design reviews, ADRs. |
 | `capacity-management` | Demand forecasting, resource sizing, utilization analysis. |
+| `data-analytics` | Data analysis, statistical insights, trend forecasting, business intelligence. |
 | `developers` | Code generation, review, refactoring, documentation. |
 | `performance-engineers` | Load testing, profiling, bottleneck analysis. |
 | `sre` | Incident response, runbooks, alert triage, reliability automation. |
@@ -163,6 +168,29 @@ The same asset works across all delivery modes — the skill definition is forma
 | `in-house-llm` | 🔄 Planned | Routed via internal API layer — no data leaves the corporate network |
 
 ---
+
+## Multi-Asset Workstreams
+
+The repository includes a **complete reference implementation** showing how multiple asset types work together:
+
+**📊 Data Analytics Workstream** (`workstreams/data-analytics/`)
+
+A comprehensive example demonstrating:
+- **Scripts** (both common and skill-specific)
+- **Prompts** (statistical analysis templates)
+- **Skills** (focused capabilities like sales trend analysis)
+- **Agents** (autonomous orchestration of the complete pipeline)
+- **Workflows** (end-to-end process documentation)
+
+**See:**
+- [Data Analytics README](workstreams/data-analytics/README.md) — Overview
+- [Complete Data Analysis Workflow](workstreams/data-analytics/workflows/complete-data-analysis-workflow.md) — Full example
+- [Multi-Asset Workstreams Guide](docs/multi-asset-workstreams.md) — How to build your own
+- [Scripts Guide](docs/scripts-guide.md) — Scripts folder structure and usage
+
+---
+
+## Getting Started
 
 
 
