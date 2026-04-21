@@ -27,7 +27,9 @@ jobs:
           node-version: "20"
 
       - name: Install ajv-cli and js-yaml
-        run: npm install -g ajv-cli@5 ajv-formats js-yaml
+        run: |
+          npm install -g ajv-cli@5 ajv-formats
+          npm install js-yaml
 
       - name: Extract and validate front-matter
         id: validate
@@ -56,7 +58,7 @@ jobs:
             fi
 
             # Determine asset type from front-matter
-            ASSET_TYPE=$(echo "$FRONTMATTER" | grep -m1 "^type:" | awk '{print $2}' | tr -d '"'"'"' ')
+            ASSET_TYPE=$(echo "$FRONTMATTER" | grep -m1 "^type:" | awk '{print $2}' | tr -d '"' ' ')
             if [ -z "$ASSET_TYPE" ]; then
               continue
             fi
@@ -74,7 +76,8 @@ jobs:
             node -e "
               const yaml = require('js-yaml');
               const fs = require('fs');
-              const fm = \`${FRONTMATTER}\`;
+              const fm = \
+              `"$FRONTMATTER"`;
               try {
                 const data = yaml.load(fm);
                 fs.writeFileSync('$JSON_FILE', JSON.stringify(data, null, 2));
@@ -134,16 +137,21 @@ jobs:
 
             ### Errors
 
-            \`\`\`
+            \
+            \
             ${errors}
-            \`\`\`
-
+            \
             ### How to fix
 
             1. Open the failing file(s).
-            2. Check the YAML front-matter (the block between the first \`---\` and second \`---\`).
-            3. Compare against the relevant template in \`templates/\` and schema in \`schemas/\`.
-            4. Run \`ajv validate -s schemas/<type>.schema.json -d <file>\` locally to verify.
+            2. Check the YAML front-matter (the block between the first \
+            and second \
+            ).
+            3. Compare against the relevant template in \
+            and schema in \
+            .
+            4. Run \
+            locally to verify.
 
             See [CONTRIBUTING.md](../CONTRIBUTING.md) for required front-matter fields.`;
 
@@ -203,4 +211,4 @@ jobs:
             printf '::error::%s\n' "${ERRORS[@]}"
             exit 1
           fi
-          echo "All workstream folders are correctly registered."
+          echo "All workstream folders are correctly registered.";
