@@ -273,7 +273,7 @@ no configuration needed:
 - **App Password:** Store `BB_APP_PASSWORD` as a Secured Repository Variable — it is
   masked in pipeline logs and never visible after creation.
 - **LLM API key:** Store `LLM_API_KEY` as a Secured Repository Variable.
-- **Data scope:** Only the PR diff (truncated to 12 000 chars) and PR metadata (title,
+- **Data scope:** Only the PR diff (truncated to 12,000 chars) and PR metadata (title,
   description) are sent to the LLM. No repository secrets or environment variables from
   the codebase are included.
 - **Confidential code:** Replace the LLM endpoint with your internal API proxy

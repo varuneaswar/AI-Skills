@@ -23,7 +23,7 @@ description: |
   pull request, posts the review report as a PR comment, and blocks merge if Critical
   findings are detected — removing the need for a manual first-pass review.
   This automation is specific to GitHub Actions. For the Bitbucket Pipelines equivalent,
-  see bb-pr-validator.md.
+  see [bb-pr-validator.md](./bb-pr-validator.md).
 security_classification: internal
 delivery_modes:
   - copilot-chat
