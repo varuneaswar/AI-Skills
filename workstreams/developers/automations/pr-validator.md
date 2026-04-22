@@ -22,6 +22,8 @@ description: |
   A GitHub Actions automation that runs the PR Quality Gate Workflow automatically on every
   pull request, posts the review report as a PR comment, and blocks merge if Critical
   findings are detected — removing the need for a manual first-pass review.
+  This automation is specific to GitHub Actions. For the Bitbucket Pipelines equivalent,
+  see bb-pr-validator.md.
 security_classification: internal
 delivery_modes:
   - copilot-chat
@@ -56,6 +58,11 @@ outputs:
 ---
 
 ## Overview
+
+> **⚠️ Platform:** This automation targets **GitHub Actions** only. If your organisation uses
+> Bitbucket, see the
+> [Bitbucket Pipelines PR Validator](./bb-pr-validator.md) for the equivalent pipeline
+> definition, which also includes a Jira issue-key linkage check.
 
 This automation wraps the [`dev-pr-review-workflow`](../workflows/pr-review-workflow.md) in a GitHub Actions workflow that triggers on every pull request. It:
 
@@ -197,7 +204,11 @@ jobs:
           exit 1
 ```
 
-> **Note:** This is a reference implementation. Adapt the `model`, `LLM_API_ENDPOINT`, and prompt text to match your organisation's LLM provider and security requirements. Route through `in-house-llm` for confidential codebases.
+> **Note:** This is a reference implementation for **GitHub Actions**. Adapt the `model`,
+> `LLM_API_ENDPOINT`, and prompt text to match your organisation's LLM provider and security
+> requirements. Route through `in-house-llm` for confidential codebases.
+> For a Bitbucket Pipelines equivalent (including Jira linkage validation), see
+> [`bb-pr-validator.md`](./bb-pr-validator.md).
 
 ## Inputs
 
