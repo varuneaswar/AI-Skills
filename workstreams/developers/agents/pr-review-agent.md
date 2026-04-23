@@ -17,14 +17,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that reviews a pull request end-to-end: summarises changes, runs a
   structured code review, checks test coverage adequacy, and posts a consolidated review
   comment — reducing reviewer load while raising baseline quality.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -186,7 +185,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 Open the PR diff in your IDE, then:
 

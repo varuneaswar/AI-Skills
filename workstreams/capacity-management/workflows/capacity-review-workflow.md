@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that takes raw utilization data for a set of services through
   hotspot identification, 30/60/90-day capacity projection, scaling option evaluation,
@@ -26,7 +25,7 @@ description: |
   with a prioritised action plan ready for stakeholder review.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -235,13 +234,13 @@ UTILIZATION_DATA + SERVICES_LIST + FORECAST_HORIZON + COST_BUDGET
 ### Manual (Copilot Chat — current)
 
 1. Gather current utilization data for all services in scope.
-2. Copy each step prompt in order, substitute the placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy each step prompt in order, substitute the placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output to use as input for the next step.
 4. Share the final `CAPACITY_REVIEW_REPORT` with stakeholders or attach it to the capacity review ticket.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/capacity-management/automations/scaling-recommendation-automation.md` for a ready-to-use GitHub Actions implementation that runs this workflow on a weekly schedule.
+See `workstreams/capacity-management/automations/scaling-recommendation-automation.md` for a ready-to-use Bitbucket Pipelines implementation that runs this workflow on a weekly schedule.
 
 ### API Endpoint (future portal)
 

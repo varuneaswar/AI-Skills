@@ -19,12 +19,11 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Validates that a pull request references a Jira issue key (e.g., PROJ-1234) in its
   title or description. Returns a pass/fail result with the extracted Jira key when
   found, or a suggested fix when missing. Designed to be composed into CI pipelines
-  (Bitbucket Pipelines, GitHub Actions, Jenkins) as a lightweight quality gate step.
+  (Bitbucket Pipelines, Bitbucket Pipelines, Jenkins) as a lightweight quality gate step.
 security_classification: internal
 inputs:
   - name: PR_TITLE
@@ -49,7 +48,7 @@ outputs:
       "PASS" if a valid Jira issue key is found, "FAIL" otherwise — always
       accompanied by a one-sentence explanation and, on PASS, the extracted key.
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -65,7 +64,7 @@ caught immediately, before the more expensive AI code review runs.
 **Typical use cases:**
 
 - Bitbucket Pipelines step that fails the build when a PR has no Jira reference.
-- GitHub Actions check that adds a comment asking the author to add a ticket link.
+- Bitbucket Pipelines check that adds a comment asking the author to add a ticket link.
 - Manual check: paste the PR title and description into any LLM to verify traceability.
 
 ## Inputs
@@ -136,7 +135,7 @@ This skill is embedded as Step 1 in the
 [Bitbucket Pipelines PR Validator](../automations/bb-pr-validator.md).
 See that automation for a complete, ready-to-use pipeline definition.
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 I have a PR with the following details. Check whether it references a Jira issue key.

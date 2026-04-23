@@ -19,7 +19,6 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Analyzes sales data to identify trends, growth patterns, seasonality, and anomalies,
   then generates forecasts and actionable recommendations — helping businesses make
@@ -49,7 +48,7 @@ outputs:
     type: string
     description: "Business recommendations based on trends"
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -199,7 +198,7 @@ Confidence: [High/Medium/Low]
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 After running the data transformation pipeline:
 
@@ -223,7 +222,7 @@ python shared/scripts/data_cleaner.py \
   --input /tmp/sales.json --output /tmp/sales_clean.json
 
 # Step 3: Use sales-trend-analyzer skill with cleaned data
-# (Paste cleaned data into GitHub Copilot Chat with the skill prompt)
+# (Paste cleaned data into LLM Chat with the skill prompt)
 ```
 
 ### API Endpoint (future portal)

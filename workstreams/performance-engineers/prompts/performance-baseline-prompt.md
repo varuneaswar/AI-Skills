@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Generates a structured Performance Baseline Report that evaluates each metric against
   defined SLOs, reports Pass/Fail per metric, calculates variance, classifies failures
@@ -27,7 +26,7 @@ description: |
   before performance regression analysis.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -151,7 +150,7 @@ the most critical issue to address before the service can be considered producti
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Generate a Performance Baseline Report.

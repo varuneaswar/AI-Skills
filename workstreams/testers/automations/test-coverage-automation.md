@@ -13,31 +13,34 @@ tags:
   - testing
   - coverage
   - automation
-  - github-actions
+  - bitbucket-pipelines
   - pull-request
 llm_compatibility:
   - gpt-4o
-  - copilot-gpt-4o
 description: |
-  A GitHub Actions automation that triggers on pull requests, extracts changed source
+  A Bitbucket Pipelines automation that triggers on pull requests, extracts changed source
   files, sends them to an LLM to identify functions and methods lacking test coverage,
   and posts a prioritised coverage gap report as a PR comment — making test gaps visible
   at review time without any manual analysis.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
   - in-house-llm
 inputs:
-  - name: GITHUB_TOKEN
+  - name: BB_USERNAME
     type: string
-    description: GitHub token for posting PR comments (provided automatically by GitHub Actions)
+    description: Bitbucket username — store as Bitbucket Repository Variable
+    required: true
+  - name: BB_APP_PASSWORD
+    type: string
+    description: Bitbucket App Password — store as Bitbucket Secured Variable
     required: true
   - name: LLM_API_KEY
     type: string
-    description: API key for the LLM provider (store in GitHub Secrets)
+    description: API key for the LLM provider (store in Bitbucket Secured Variables)
     required: true
   - name: LLM_API_ENDPOINT
     type: string
@@ -51,7 +54,7 @@ outputs:
 
 ## Overview
 
-This automation wraps the [`test-generation-workflow`](../workflows/test-generation-workflow.md) coverage gap step in a GitHub Actions workflow triggered on every pull request. It:
+This automation wraps the [`test-generation-workflow`](../workflows/test-generation-workflow.md) coverage gap step in a Bitbucket Pipelines workflow triggered on every pull request. It:
 
 1. Extracts the source files changed in the PR (excluding test files themselves).
 2. Sends the changed code to the LLM to identify functions and methods that lack corresponding tests.
@@ -62,136 +65,121 @@ This automation wraps the [`test-generation-workflow`](../workflows/test-generat
 
 ## Prerequisites
 
-- GitHub repository with Actions enabled.
-- An LLM API key stored as `LLM_API_KEY` in GitHub Secrets.
-- The LLM endpoint stored as `LLM_API_ENDPOINT` in GitHub Variables.
-- `jq` and `curl` available on the runner (both present on `ubuntu-latest`).
+- Bitbucket repository with Pipelines enabled.
+- An LLM API key stored as `LLM_API_KEY` in Bitbucket Secured Variables.
+- The LLM endpoint stored as `LLM_API_ENDPOINT` in Bitbucket Repository Variables.
+- `BB_USERNAME` and `BB_APP_PASSWORD` stored as Bitbucket variables (Secured for the password).
+- `jq` and `curl` available on the runner (both present on `atlassian/default-image:4`).
 
 ## Configuration
 
 ```yaml
-# Store these in your repository's Settings → Secrets and variables
-env:
-  LLM_API_KEY: "{{LLM_API_KEY}}"           # GitHub Secret — never commit
-  LLM_API_ENDPOINT: "{{LLM_API_ENDPOINT}}" # e.g. https://api.openai.com/v1
+# Store these in your repository's Settings → Repository variables
+# Mark LLM_API_KEY and BB_APP_PASSWORD as Secured (encrypted at rest).
+BB_USERNAME: "your-service-account"           # plain variable
+BB_APP_PASSWORD: "xxxx"                       # Secured — never commit
+LLM_API_ENDPOINT: "https://api.openai.com/v1" # plain variable
+LLM_API_KEY: "sk-xxxx"                        # Secured — never commit
 ```
 
 ## Implementation
 
 ```yaml
-# .github/workflows/test-coverage-gap.yml
-name: AI Test Coverage Gap Analysis
+# bitbucket-pipelines.yml (pull-requests section)
+# Add to your existing bitbucket-pipelines.yml
+pipelines:
+  pull-requests:
+    '**':
+      - step:
+          name: AI Test Coverage Gap Analysis
+          image: atlassian/default-image:4
+          script:
+            - |
+              # ── Get changed source files ──────────────────────────────────────
+              git fetch origin "${BITBUCKET_TARGET_BRANCH}"
+              DIFF=$(git diff origin/${BITBUCKET_TARGET_BRANCH}...HEAD \
+                -- '*.py' '*.ts' '*.js' '*.java' '*.cs' '*.go' \
+                ':!*test*' ':!*spec*' ':!*__tests__*' \
+                | head -c 8000)
 
-on:
-  pull_request:
-    types: [opened, synchronize, reopened]
-    branches: [main]
+              if [ -z "$DIFF" ]; then
+                echo "true" > no_source_changes.txt
+                echo "No source file changes detected — skipping coverage gap analysis."
+                exit 0
+              fi
 
-permissions:
-  pull-requests: write   # needed to post and update PR comments
-  contents: read
+              echo "false" > no_source_changes.txt
+              printf '%s' "$DIFF" > source_diff.txt
 
-jobs:
-  coverage-gap:
-    name: Identify test coverage gaps
-    runs-on: ubuntu-latest
+              if [ "$(cat no_source_changes.txt 2>/dev/null)" = "true" ]; then
+                echo "No source file changes detected — skipping coverage gap analysis."
+                exit 0
+              fi
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+              # ── Analyse coverage gaps via LLM ─────────────────────────────────
+              SOURCE_DIFF=$(cat source_diff.txt)
 
-      - name: Get changed source files
-        id: changed-files
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          # Collect changed non-test source files (first 8 000 chars of diff)
-          DIFF=$(git diff origin/${{ github.base_ref }}...HEAD \
-            -- '*.py' '*.ts' '*.js' '*.java' '*.cs' '*.go' \
-            ':!*test*' ':!*spec*' ':!*__tests__*' \
-            | head -c 8000)
+              SYSTEM_PROMPT="You are a senior QA engineer performing test coverage gap analysis on a code diff.
 
-          if [ -z "$DIFF" ]; then
-            echo "no_source_changes=true" >> "$GITHUB_OUTPUT"
-          else
-            echo "no_source_changes=false" >> "$GITHUB_OUTPUT"
-            printf '%s' "$DIFF" > source_diff.txt
-          fi
+              Identify every function, method, or code path in the diff that:
+              1. Is not already covered by a corresponding test file visible in the diff.
+              2. Contains logic (conditionals, loops, error handling) that warrants a test.
 
-      - name: Skip if no source changes
-        if: steps.changed-files.outputs.no_source_changes == 'true'
-        run: echo "No source file changes detected — skipping coverage gap analysis."
+              For each gap, output:
 
-      - name: Analyse coverage gaps via LLM
-        if: steps.changed-files.outputs.no_source_changes == 'false'
-        id: gap-analysis
-        env:
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          LLM_API_ENDPOINT: ${{ vars.LLM_API_ENDPOINT }}
-        run: |
-          SOURCE_DIFF=$(cat source_diff.txt)
+              **GAP-NNN: [Short title]**
+              - File: filename
+              - Function/Method: name
+              - Risk: High / Medium / Low
+              - What is missing: one sentence
+              - Suggested test case:
+                Given [precondition]
+                When [action]
+                Then [expected result]
 
-          SYSTEM_PROMPT="You are a senior QA engineer performing test coverage gap analysis on a code diff.
+              After listing gaps, add a ## Coverage Summary paragraph with an overall assessment.
+              Sort gaps by Risk descending."
 
-          Identify every function, method, or code path in the diff that:
-          1. Is not already covered by a corresponding test file visible in the diff.
-          2. Contains logic (conditionals, loops, error handling) that warrants a test.
+              USER_MSG="Code diff to analyse for test coverage gaps:
+              ${SOURCE_DIFF}"
 
-          For each gap, output:
+              RESPONSE=$(curl -sS "${LLM_API_ENDPOINT}/chat/completions" \
+                -H "Authorization: Bearer ${LLM_API_KEY}" \
+                -H "Content-Type: application/json" \
+                -d "$(jq -n \
+                  --arg system "$SYSTEM_PROMPT" \
+                  --arg user "$USER_MSG" \
+                  '{model:"gpt-4o",temperature:0.2,messages:[{role:"system",content:$system},{role:"user",content:$user}]}')")
 
-          **GAP-NNN: [Short title]**
-          - File: filename
-          - Function/Method: name
-          - Risk: High / Medium / Low
-          - What is missing: one sentence
-          - Suggested test case:
-            Given [precondition]
-            When [action]
-            Then [expected result]
+              REPORT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // "Error: no response from LLM"')
+              printf '%s' "$REPORT" > coverage_report.txt
 
-          After listing gaps, add a ## Coverage Summary paragraph with an overall assessment.
-          Sort gaps by Risk descending."
+              # ── Post or update coverage gap comment ───────────────────────────
+              REPORT_TEXT=$(cat coverage_report.txt)
+              FULL_COMMENT="🧪 **AI Test Coverage Gap Report** — generated by \`test-coverage-automation\`
 
-          USER_MSG="Code diff to analyse for test coverage gaps:
-          ${SOURCE_DIFF}"
+${REPORT_TEXT}"
 
-          RESPONSE=$(curl -sS "${LLM_API_ENDPOINT}/chat/completions" \
-            -H "Authorization: Bearer ${LLM_API_KEY}" \
-            -H "Content-Type: application/json" \
-            -d "$(jq -n \
-              --arg system "$SYSTEM_PROMPT" \
-              --arg user "$USER_MSG" \
-              '{model:"gpt-4o",temperature:0.2,messages:[{role:"system",content:$system},{role:"user",content:$user}]}')")
+              # Delete previous coverage gap comment if it exists (idempotent on re-runs)
+              PREV_ID=$(curl -sS \
+                -u "${BB_USERNAME}:${BB_APP_PASSWORD}" \
+                "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_FULL_NAME}/pullrequests/${BITBUCKET_PR_ID}/comments?q=content.raw+%7E+%22AI+Test+Coverage+Gap+Report%22&pagelen=5" \
+                | jq -r '.values[0].id // empty')
 
-          REPORT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // "Error: no response from LLM"')
-          printf '%s' "$REPORT" > coverage_report.txt
+              if [ -n "$PREV_ID" ]; then
+                curl -sS -X DELETE \
+                  -u "${BB_USERNAME}:${BB_APP_PASSWORD}" \
+                  "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_FULL_NAME}/pullrequests/${BITBUCKET_PR_ID}/comments/${PREV_ID}"
+              fi
 
-      - name: Post or update coverage gap comment
-        if: steps.changed-files.outputs.no_source_changes == 'false'
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          REPORT=$(cat coverage_report.txt)
-          MARKER="<!-- ai-coverage-gap -->"
-          HEADER="${MARKER}
-          > 🧪 **AI Test Coverage Gap Report** — generated by \`test-coverage-automation\`
+              curl -sS -X POST \
+                -u "${BB_USERNAME}:${BB_APP_PASSWORD}" \
+                -H "Content-Type: application/json" \
+                "https://api.bitbucket.org/2.0/repositories/${BITBUCKET_REPO_FULL_NAME}/pullrequests/${BITBUCKET_PR_ID}/comments" \
+                -d "$(jq -n --arg body "$FULL_COMMENT" '{content:{raw:$body}}')"
 
-          "
-          FULL_COMMENT="${HEADER}${REPORT}"
-
-          PR_NUMBER="${{ github.event.pull_request.number }}"
-
-          # Delete previous coverage gap comment if it exists (idempotent on re-runs)
-          PREV_ID=$(gh api "repos/${{ github.repository }}/issues/${PR_NUMBER}/comments" \
-            --jq '.[] | select(.body | startswith("<!-- ai-coverage-gap -->")) | .id' | head -1)
-
-          if [ -n "$PREV_ID" ]; then
-            gh api "repos/${{ github.repository }}/issues/comments/${PREV_ID}" -X DELETE
-          fi
-
-          printf '%s' "$FULL_COMMENT" | gh pr comment "$PR_NUMBER" --body-file=-
+              rm -f source_diff.txt coverage_report.txt no_source_changes.txt
+              echo "✅ Coverage gap analysis complete."
 ```
 
 > **Note:** This is a reference implementation. Adapt the `model`, `LLM_API_ENDPOINT`, file glob patterns, and diff size limit to match your codebase and LLM provider. Route through `in-house-llm` for confidential repositories.
@@ -200,9 +188,10 @@ jobs:
 
 | Name | Type | Required | Description |
 |---|---|---|---|
-| `LLM_API_KEY` | string | Yes | API key — store in GitHub Secrets |
-| `LLM_API_ENDPOINT` | string | Yes | LLM base URL — store in GitHub Variables |
-| `GITHUB_TOKEN` | string | Yes | Provided automatically by GitHub Actions |
+| `BB_USERNAME` | string | Yes | Bitbucket username — store as Repository Variable |
+| `BB_APP_PASSWORD` | string | Yes | Bitbucket App Password — store as Secured Variable |
+| `LLM_API_KEY` | string | Yes | API key — store in Bitbucket Secured Variables |
+| `LLM_API_ENDPOINT` | string | Yes | LLM base URL — store in Bitbucket Repository Variables |
 
 ## Outputs
 
@@ -212,7 +201,8 @@ jobs:
 
 ## Security Notes
 
-- **API key:** Store `LLM_API_KEY` in GitHub Secrets — never in the workflow file or repository.
+- **API key:** Store `LLM_API_KEY` in Bitbucket Secured Variables — never in the pipeline file or repository.
+- **App Password:** Store `BB_APP_PASSWORD` as a Bitbucket Secured Variable — masked in pipeline logs.
 - **Data scope:** Only the changed source file diff (truncated to 8 000 chars) is sent to the LLM. No secrets, credentials, or environment variables from the codebase are included.
 - **Confidential code:** Replace the LLM endpoint with your internal API proxy (`in-house-llm`) before using on confidential repositories.
 - **Idempotency:** Each run deletes the previous coverage gap comment before posting a new one — safe to trigger multiple times on the same PR.
@@ -222,7 +212,7 @@ jobs:
 
 | Environment | Tested | Notes |
 |---|---|---|
-| GitHub Actions (ubuntu-latest) | ✅ | 2026-04-20. Tested with OpenAI gpt-4o endpoint on a Python service PR. |
+| Bitbucket Pipelines (atlassian/default-image:4) | ✅ | 2026-04-20. Tested with OpenAI gpt-4o endpoint on a Python service PR. |
 | Local (bash + curl) | ✅ | 2026-04-20. Runs end-to-end in ~20 seconds on a 150-line diff. |
 
 ## Changelog

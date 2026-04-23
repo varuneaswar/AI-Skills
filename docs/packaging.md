@@ -78,7 +78,7 @@ This is how the repository differentiates between what works **today** and what 
 
 | Delivery Mode | Availability | How It Works |
 |---|---|---|
-| `copilot-chat` | **Current** | Copy the skill definition from the Markdown file, paste as system prompt into GitHub Copilot Chat, ChatGPT, Claude, or any IDE LLM interface. |
+| `copilot-chat` | **Current** | Copy the skill definition from the Markdown file, paste as system prompt into LLM Chat, ChatGPT, Claude, or any IDE LLM interface. |
 | `api-endpoint` | **Planned** | A future REST API serves the packaged skill. The portal calls `POST /packages/<id>/invoke` with the inputs payload and returns the LLM response. |
 | `mcp-tool` | **Planned** | The skill is registered as an MCP (Model Context Protocol) tool. IDEs, bots, or agent frameworks call it by tool name. |
 | `copilot-studio` | **Planned** | The package is imported as a Copilot Studio custom skill or connector, making it available in Microsoft 365 Copilot and Teams. |

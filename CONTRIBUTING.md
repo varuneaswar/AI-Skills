@@ -7,7 +7,7 @@ Thank you for contributing! This guide explains how to add or improve content in
 ## Table of Contents
 
 - [Two Ways to Contribute](#two-ways-to-contribute)
-- [Lane 2 — Non-Technical: Submit an Idea via GitHub Issues](#lane-2--non-technical-submit-an-idea-via-github-issues)
+- [Lane 2 — Non-Technical: Submit an Idea via Jira](#lane-2--non-technical-submit-an-idea-via-github-issues)
 - [Lane 1 — Technical: Contribute Assets via Pull Request](#lane-1--technical-contribute-assets-via-pull-request)
   - [Before You Start](#before-you-start)
   - [Content Types and When to Use Each](#content-types-and-when-to-use-each)
@@ -26,18 +26,18 @@ Thank you for contributing! This guide explains how to add or improve content in
 
 | Lane | Who it's for | How |
 |---|---|---|
-| **Lane 2** | Anyone — product managers, domain experts, business analysts | Submit an idea as a GitHub Issue. Maintainers convert approved ideas to assets. |
+| **Lane 2** | Anyone — product managers, domain experts, business analysts | Submit an idea as a Jira ticket. Maintainers convert approved ideas to assets. |
 | **Lane 1** | Technical contributors — engineers, architects | Create or update Markdown assets directly via Pull Request. |
 
 ---
 
-## Lane 2 — Non-Technical: Submit an Idea via GitHub Issues
+## Lane 2 — Non-Technical: Submit an Idea via Jira
 
 You do not need to know Git, YAML, or Markdown to contribute an idea. Here is all you need to do:
 
-### Step 1 — Open a GitHub Issue
+### Step 1 — Open a Jira ticket
 
-1. Go to [github.com/varuneaswar/AI-Skills/issues](https://github.com/varuneaswar/AI-Skills/issues).
+1. Go to [your issue tracker](your issue tracker).
 2. Click **New Issue**.
 3. Select the **Idea Submission** template.
 
@@ -99,7 +99,7 @@ idea:under-review
 ### Before You Start
 
 1. Search the repository to ensure your contribution does not duplicate something that already exists.
-2. If you have an early-stage idea, open a GitHub Issue using the **Idea Submission** template before writing content.
+2. If you have an early-stage idea, open a Jira ticket using the **Idea Submission** template before writing content.
 3. Read [SECURITY.md](SECURITY.md) to ensure your content meets the responsible-AI and data-classification standards.
 4. Read [docs/best-practices.md](docs/best-practices.md) for prompt engineering tips and quality checklists.
 5. Read [docs/building-ideas.md](docs/building-ideas.md) for a step-by-step walkthrough of every asset type.
@@ -159,7 +159,7 @@ version: "1.0.0"
 status: draft | active | deprecated
 workstream:
   - developers                    # one or more work streams; use "shared" for cross-cutting
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -237,7 +237,7 @@ All contributions go through a pull-request review:
 1. A maintainer will review the content for quality, accuracy, and adherence to standards within **5 business days**.
 2. Security-sensitive content (agents, automations with external integrations) requires a secondary review from the security team.
 3. Once approved, the PR is merged and the asset status is changed from `draft` to `active`.
-4. `catalog/index.json` is automatically rebuilt on merge by the `catalog-sync` GitHub Action.
+4. `catalog/index.json` is automatically rebuilt on merge by the `catalog-sync` pipeline automation.
 
 ---
 

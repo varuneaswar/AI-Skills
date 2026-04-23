@@ -18,14 +18,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A comprehensive end-to-end workflow demonstrating how multiple assets (scripts, prompts,
   skills, and agents) work together in a complete data analysis pipeline — from raw CSV
   files to actionable business insights and recommendations.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -195,7 +194,7 @@ Substitute placeholders:
 - ANALYSIS_FOCUS: all
 - BUSINESS_CONTEXT: {{BUSINESS_CONTEXT}}
 
-Paste into GitHub Copilot Chat or your LLM
+Paste into LLM Chat or your LLM
 ```
 
 **What it does:**
@@ -225,7 +224,7 @@ Substitute placeholders:
 - TIME_PERIOD: daily
 - FORECAST_DAYS: 7
 
-Paste into GitHub Copilot Chat or your LLM
+Paste into LLM Chat or your LLM
 ```
 
 **What it does:**

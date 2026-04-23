@@ -18,14 +18,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that transforms a user story into a full test suite: extract
   testable behaviours, generate test cases, write BDD Gherkin scenarios, and identify
   coverage gaps — producing a ready-to-use test suite with minimal manual effort.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -213,13 +212,13 @@ USER_STORY + EXISTING_TESTS + FRAMEWORK
 ### Manual (Copilot Chat — current)
 
 1. Open your user story document in your IDE.
-2. Copy each step prompt in order, substitute the placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy each step prompt in order, substitute the placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output to use as input for the next step.
 4. Combine all outputs into a single test suite document for your test management tool.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/testers/automations/test-coverage-automation.md` for a ready-to-use GitHub Actions implementation of this workflow.
+See `workstreams/testers/automations/test-coverage-automation.md` for a ready-to-use Bitbucket Pipelines implementation of this workflow.
 
 ### API Endpoint (future portal)
 

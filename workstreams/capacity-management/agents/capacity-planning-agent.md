@@ -19,15 +19,14 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that ingests a fleet-wide utilization report, forecasts capacity
   breaches for each service over a 30/60/90-day horizon, identifies at-risk services,
-  and produces a prioritised scaling recommendation report with draft GitHub Issue bodies
+  and produces a prioritised scaling recommendation report with draft Jira ticket bodies
   for P1 services — reducing manual capacity review effort across large service fleets.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -64,7 +63,7 @@ outputs:
     description: Prioritised scaling action table covering all at-risk services
   - name: PLANNING_TICKETS
     type: string
-    description: Draft GitHub Issue body (Markdown) for each P1 breach-risk service
+    description: Draft Jira ticket body (Markdown) for each P1 breach-risk service
 ---
 
 ## Overview
@@ -96,7 +95,7 @@ Step 2: For each service → run utilization analysis (cap-utilization-analysis)
          ▼
 Step 3: For each service → run capacity forecast (cap-capacity-forecast-prompt)
          │
-         ├─ Breach within 30 days ──▶ P1 — draft GitHub Issue, flag IMMEDIATE ACTION
+         ├─ Breach within 30 days ──▶ P1 — draft Jira ticket, flag IMMEDIATE ACTION
          │
          ├─ Breach within 31–60 days ──▶ P2 — add to scaling recommendations
          │
@@ -124,7 +123,7 @@ Your goals:
 3. Forecast capacity breaches at 30, 60, and 90 days using linear growth rates.
 4. Classify breach risk: P1 (≤30 days), P2 (31–60 days), P3 (61–90 days).
 5. Produce a consolidated capacity planning report, breach risk list, scaling recommendations,
-   and draft GitHub Issues for P1 services.
+   and draft Jira for P1 services.
 
 Tools available to you:
 - utilization_analysis: call with (service, metrics, resource_type, time_period) → analysis
@@ -134,7 +133,7 @@ Rules:
 - Process every service in SERVICES_IN_SCOPE (or all services if "all" is specified).
 - Use 80% as the warning threshold and 90% as the critical breach threshold.
 - When COST_CONSTRAINTS are provided, prefer horizontal scaling options that fit within budget.
-- P1 services must always include a draft GitHub Issue body in PLANNING_TICKETS.
+- P1 services must always include a draft Jira ticket body in PLANNING_TICKETS.
 - Do not fabricate metrics — if a service's data is missing a dimension, note it as "data unavailable".
 - Order BREACH_RISK_LIST by time-to-breach ascending (most urgent first).
 - Scaling recommendations must include estimated lead time so teams can plan procurement or deployments.
@@ -156,7 +155,7 @@ Output format:
 {prioritised action table for all at-risk services}
 
 ### Planning Tickets (P1 services)
-{one GitHub Issue draft per P1 service}
+{one Jira ticket draft per P1 service}
 
 ### Fleet Health Summary
 {table: Service | Status | Next Review Trigger}
@@ -190,18 +189,18 @@ tools:
 | `CAPACITY_REPORT` | string | Full fleet capacity planning report |
 | `BREACH_RISK_LIST` | string | Services at breach risk, ordered by urgency |
 | `SCALING_RECOMMENDATIONS` | string | Prioritised action table for at-risk services |
-| `PLANNING_TICKETS` | string | Draft GitHub Issue bodies for P1 services |
+| `PLANNING_TICKETS` | string | Draft Jira ticket bodies for P1 services |
 
 ## Security Considerations
 
 - The agent reads utilization metrics but never modifies infrastructure directly.
 - Utilization data may include internal service names and capacity figures — route through `in-house-llm` for confidential fleet data.
-- Draft GitHub Issues contain service names and capacity details; review before posting to ensure no sensitive data is exposed in public repositories.
+- Draft Jira contain service names and capacity details; review before posting to ensure no sensitive data is exposed in public repositories.
 - `COST_CONSTRAINTS` may contain budget figures — treat as confidential and do not log.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 @workspace
@@ -325,7 +324,7 @@ CPU saturation will cause request queuing and latency spikes within 2 weeks.
 | Model | Tested | Notes |
 |---|---|---|
 | gpt-4o | ✅ | 2026-04-20. Handles 2-service fleet correctly. Breach dates accurate. |
-| claude-3-5-sonnet | ✅ | 2026-04-20. More detailed GitHub Issue bodies. Slightly longer output. |
+| claude-3-5-sonnet | ✅ | 2026-04-20. More detailed Jira ticket bodies. Slightly longer output. |
 
 ## Changelog
 

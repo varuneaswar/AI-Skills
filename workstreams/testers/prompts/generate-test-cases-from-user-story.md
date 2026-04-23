@@ -18,7 +18,6 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Generates a comprehensive set of test cases (happy path, edge cases, and negative scenarios)
   from a user story and its acceptance criteria, formatted as Gherkin scenarios.
@@ -95,7 +94,7 @@ user authentication or data access is involved.
 
 ## Usage
 
-### GitHub Copilot Chat
+### LLM Chat
 
 ```
 Generate BDD test cases for this user story:

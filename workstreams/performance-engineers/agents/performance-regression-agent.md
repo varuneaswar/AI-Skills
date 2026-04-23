@@ -19,7 +19,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that compares two load test runs, identifies performance regressions
   (>5% degradation), classifies them by severity (Critical/>50%, High/20–50%, Medium/5–20%),
@@ -27,7 +26,7 @@ description: |
   prioritised fix recommendations — accelerating post-load-test triage and release decisions.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -212,7 +211,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 @workspace

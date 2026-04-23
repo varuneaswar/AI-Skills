@@ -63,7 +63,7 @@ outputs:
     type: string
     description: Structured review findings
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -85,13 +85,13 @@ delivery_modes:
 ```
 1. Open the skill file (e.g., workstreams/developers/skills/code-review.md).
 2. Copy the text inside the ``` block under ## Skill Definition.
-3. In GitHub Copilot Chat / ChatGPT / Claude:
+3. In LLM Chat / ChatGPT / Claude:
    - Set the system prompt to the copied text.
    - Replace {{PLACEHOLDER}} values with your actual inputs.
 4. Send your user message.
 ```
 
-**GitHub Copilot Chat shortcut:**
+**LLM Chat shortcut:**
 
 ```
 @workspace #file:workstreams/developers/skills/code-review.md

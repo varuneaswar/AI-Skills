@@ -17,7 +17,6 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
   - all
 description: |
   Translates any technical concept into clear, jargon-free language tailored to a specified
@@ -41,7 +40,7 @@ outputs:
     type: string
     description: Plain-language explanation tailored to the specified audience
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -90,7 +89,7 @@ Provide only the explanation. Do not add preamble like "Sure, here is..." or "Gr
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Explain "{{CONCEPT}}" to a {{AUDIENCE}} audience in the context of {{CONTEXT}}.

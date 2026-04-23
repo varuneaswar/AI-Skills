@@ -26,7 +26,7 @@ description: |
   step if Critical findings are detected — removing the need for a manual first-pass review.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -79,9 +79,6 @@ Bitbucket Pipelines definition that triggers automatically on every pull-request
 3. **Sends the diff and metadata to an LLM** using the PR Quality Gate Workflow prompts.
 4. **Posts the consolidated review** as a PR comment via the Bitbucket REST API.
 5. **Fails the pipeline step** if the verdict is `request-changes` (blocking merge).
-
-> **GitHub Actions equivalent:** See
-> [`pr-validator.md`](./pr-validator.md) for the GitHub Actions version of this automation.
 
 **Trigger:** Pull request created or updated (`pullrequest:created`,
 `pullrequest:updated`) — configured in `bitbucket-pipelines.yml`.

@@ -17,14 +17,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A three-step workflow that takes a pull request from raw diff to a structured, actionable
   review: summarise the changes, run a code review, then assess test coverage — producing a
   consolidated quality-gate report ready to post as a PR comment.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -206,13 +205,13 @@ PR_TITLE + PR_DESCRIPTION + CHANGED_FILES + LANGUAGE + REVIEW_FOCUS
 ### Manual (Copilot Chat — current)
 
 1. Open the PR diff in your IDE or browser.
-2. Copy each step prompt in order, substitute the placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy each step prompt in order, substitute the placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output to use as input for the next.
 4. Post the final `QUALITY_GATE_REPORT` as a PR review comment.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/developers/automations/pr-validator.md` for a ready-to-use GitHub Actions implementation of this workflow.
+See `workstreams/developers/automations/pr-validator.md` for a ready-to-use Bitbucket Pipelines implementation of this workflow.
 
 ### API Endpoint (future portal)
 

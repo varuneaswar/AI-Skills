@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -53,7 +53,7 @@ outputs:
 ## Skill Definition
 
 <!--
-  For a GitHub Copilot skill, this is typically a system prompt or a set of instructions
+  For an LLM skill, this is typically a system prompt or a set of instructions
   that define the skill's behaviour. For an MCP tool, describe the tool definition.
 -->
 
@@ -74,7 +74,7 @@ Always format your response as:
 
 ## Usage
 
-### GitHub Copilot Chat
+### LLM Chat
 
 ```
 @workspace #file:path/to/relevant-file.ts

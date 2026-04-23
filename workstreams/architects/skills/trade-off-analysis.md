@@ -45,7 +45,7 @@ outputs:
     type: string
     description: Structured trade-off analysis with recommendation
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -113,7 +113,7 @@ Bulleted list of the top 3 risks and how they could be mitigated.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Compare {{OPTIONS}} for {{DECISION_CONTEXT}}.

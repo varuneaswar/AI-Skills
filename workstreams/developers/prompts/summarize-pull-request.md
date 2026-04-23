@@ -17,7 +17,6 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Generates a concise, reviewer-friendly summary of a pull request from its title, description,
   and list of changed files. Reduces review time by surfacing intent and risk areas up front.
@@ -96,7 +95,7 @@ Keep the tone professional and concise. Do not repeat the raw file list verbatim
 
 ## Usage
 
-### GitHub Copilot Chat
+### LLM Chat
 
 Open Copilot Chat in your IDE and type:
 

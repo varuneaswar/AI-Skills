@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that reviews a proposed architecture design against a defined set
   of quality attributes, identifies risks and gaps, evaluates trade-offs, and produces
@@ -26,7 +25,7 @@ description: |
   reducing the time architects spend on first-pass design reviews.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -192,7 +191,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 You are an architecture review agent.

@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -85,7 +85,7 @@ outputs:
 3. Take the output of Step 1 and use it as input to Step 2.
 4. The output of Step 2 is your final result.
 
-> **Automation tip:** If you have access to a workflow engine (e.g., GitHub Actions, Azure Logic Apps, n8n), you can automate these steps — see `automations/` for reference implementations.
+> **Automation tip:** If you have access to a workflow engine (e.g., Bitbucket Pipelines, Azure Logic Apps, n8n), you can automate these steps — see `automations/` for reference implementations.
 
 ## Examples
 

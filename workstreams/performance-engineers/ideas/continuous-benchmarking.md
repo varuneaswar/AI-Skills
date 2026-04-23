@@ -28,7 +28,7 @@ Performance regressions are often introduced silently by individual PRs. This ag
 ## Proposed Approach
 
 **Asset type:** `agent`  
-**Potential delivery mode:** `api-endpoint` (CI/CD webhook) + `github-actions`
+**Potential delivery mode:** `api-endpoint` (CI/CD webhook) + `bitbucket-pipelines`
 
 The agent would:
 1. Trigger a lightweight load test on a preview environment when a PR is opened.

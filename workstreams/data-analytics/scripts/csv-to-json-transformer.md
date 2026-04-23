@@ -300,7 +300,7 @@ if __name__ == "__main__":
 ## Invocation from an Automation
 
 ```yaml
-# GitHub Actions workflow excerpt
+# Bitbucket Pipelines workflow excerpt
 - name: Install dependencies
   run: pip install pandas>=2.0.0
 

@@ -18,14 +18,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that orchestrates the complete data analysis pipeline: data
   transformation, cleaning, statistical analysis, trend identification, and insight
   generation — producing a comprehensive analysis report with recommendations automatically.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -211,7 +210,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 @workspace You are a data insights agent.

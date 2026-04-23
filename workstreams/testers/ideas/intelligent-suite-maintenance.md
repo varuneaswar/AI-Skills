@@ -53,7 +53,7 @@ The agent would:
 ## Open Questions
 
 - How should the agent handle flakiness caused by environmental issues vs. test code?
-- Which CI systems to integrate with first? (GitHub Actions, Jenkins, GitLab CI)
+- Which CI systems to integrate with first? (Bitbucket Pipelines, Jenkins, GitLab CI)
 
 ## References
 

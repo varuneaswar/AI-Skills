@@ -34,7 +34,7 @@ The agent would:
 1. Parse infrastructure-as-code (Terraform, Helm charts, Kubernetes manifests) to extract the current topology.
 2. Compare against the documented architecture (system design docs, ADRs).
 3. Use `arch-trade-off-analysis` for each detected deviation to assess impact.
-4. Raise a GitHub Issue with a summary of drifts, grouped by severity.
+4. Raise a Jira ticket with a summary of drifts, grouped by severity.
 5. Suggest which ADRs need to be updated or superseded.
 
 ## Expected Benefits

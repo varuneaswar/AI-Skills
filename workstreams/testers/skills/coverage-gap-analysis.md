@@ -17,7 +17,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Analyses an existing test suite description or list of test cases against a feature's
   requirements or source code to identify untested scenarios, missing edge cases, and
@@ -41,7 +40,7 @@ outputs:
     type: string
     description: Prioritised list of coverage gaps with suggested test cases
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -109,7 +108,7 @@ Sort gaps by risk descending. Focus on {{RISK_AREAS}} first if specified.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 @workspace #file:<test-file>

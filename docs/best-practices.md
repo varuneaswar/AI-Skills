@@ -235,7 +235,7 @@ A good workflow is:
 - [ ] **`delivery_modes` declared** — at minimum `copilot-chat`.
 - [ ] **Flow diagram** — ASCII or Mermaid diagram showing inputs → steps → outputs.
 - [ ] **Hand-offs explicit** — each step documents what it takes as input and what it produces as output.
-- [ ] **Usage section** — explains both manual (LLM chat) and automated (GitHub Actions / API) usage.
+- [ ] **Usage section** — explains both manual (LLM chat) and automated (Bitbucket Pipelines / API) usage.
 - [ ] **Dependencies cross-referenced** — `dependencies` field lists all skill/prompt IDs used.
 - [ ] **End-to-end example** — shows a complete run through all steps with real (redacted) values.
 
@@ -251,7 +251,7 @@ A good automation is:
 - [ ] **Implementation is runnable** — the script or workflow YAML is complete, not pseudocode.
 - [ ] **Idempotent** — safe to run multiple times without unintended side effects.
 - [ ] **No hardcoded secrets** — all credentials use environment variable placeholders.
-- [ ] **GitHub Actions example** — shows how to run the automation in CI.
+- [ ] **Bitbucket Pipelines example** — shows how to run the automation in CI.
 - [ ] **Security Notes** — covers what systems are accessed, what credentials are needed, and how to manage them.
 - [ ] **Tested** — at least one environment row in the Testing Notes table is marked ✅.
 

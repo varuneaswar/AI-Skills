@@ -56,7 +56,7 @@ Document how these values should be supplied (environment variables, a secrets m
 If a secret is accidentally committed, immediately:
 
 1. Rotate the credential.
-2. Open a GitHub Issue with the `Security` label (or email the security team directly).
+2. Open a Jira ticket with the `Security` label (or email the security team directly).
 3. Follow the repository's incident-response runbook.
 
 ---
@@ -86,7 +86,7 @@ When designing prompts or agents:
 
 If you discover a security vulnerability in this repository (e.g., a prompt injection risk, an automation that could leak data, or an accidentally committed secret):
 
-1. **Do not open a public GitHub Issue.**
+1. **Do not open a public Jira ticket.**
 2. Email the security team at: `security@example.com` *(replace with your organization's address)*
 3. Include:
    - A description of the vulnerability.

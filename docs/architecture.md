@@ -63,7 +63,7 @@ Issue and PR templates guide contributors to provide the information maintainers
 ## Asset Lifecycle
 
 ```
-Idea (GitHub Issue)
+Idea (Jira ticket)
    │
    ▼
 draft (file created, PR open)
@@ -99,7 +99,7 @@ Every asset and package manifest declares which delivery modes it supports and w
 
 | Delivery Mode | Availability | Description |
 |---|---|---|
-| `copilot-chat` | **Current** | Skill definition is copied from the Markdown file and pasted into any LLM interface (GitHub Copilot Chat, ChatGPT, Claude, etc.) |
+| `copilot-chat` | **Current** | Skill definition is copied from the Markdown file and pasted into any LLM interface (LLM Chat, ChatGPT, Claude, etc.) |
 | `api-endpoint` | **Planned** | A portal REST API accepts a skill invocation request and returns the LLM response |
 | `mcp-tool` | **Planned** | Skill is registered as an MCP (Model Context Protocol) tool, callable by agents and IDEs |
 | `copilot-studio` | **Planned** | Package imported as a Copilot Studio connector for Teams / M365 Copilot |
@@ -156,7 +156,7 @@ For the full adapter specification — including pseudocode, request/response sh
 
 ### CI / CD integration
 
-Two GitHub Actions enforce consistency:
+Two Bitbucket Pipelines enforce consistency:
 
 | Workflow | Trigger | What it does |
 |---|---|---|

@@ -16,7 +16,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Guides the on-call engineer through structured incident triage by analysing alert details
   and recent changes to suggest probable root causes and immediate mitigation steps.
@@ -90,7 +89,7 @@ Keep the response concise and actionable. The on-call engineer is under time pre
 
 ## Usage
 
-### GitHub Copilot Chat
+### LLM Chat
 
 ```
 @workspace
