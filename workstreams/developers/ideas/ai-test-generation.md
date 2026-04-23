@@ -32,7 +32,7 @@ Writing unit tests is time-consuming, repetitive, and often skipped under deadli
 
 **Asset type:** `skill` (single-purpose, callable unit)  
 **Potential delivery modes:**
-- `copilot-chat` — immediately available; developer pastes function, receives test file
+- `llm-chat` — immediately available; developer pastes function, receives test file
 - `api-endpoint` — future: integrated into CI pipeline to auto-generate tests on new functions
 - `mcp-tool` — future: IDE extension that auto-suggests tests as functions are written
 

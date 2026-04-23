@@ -161,7 +161,7 @@ The same asset works across all delivery modes — the skill definition is forma
 
 | Mode | Availability | How It Works |
 |---|---|---|
-| `copilot-chat` | ✅ **Current** | Copy the skill definition, paste as system prompt in Copilot Chat or any LLM |
+| `llm-chat` | ✅ **Current** | Copy the skill definition, paste as system prompt in Copilot Chat or any LLM |
 | `api-endpoint` | 🔄 Planned | Portal calls `POST /packages/<id>/invoke` and returns the LLM response |
 | `mcp-tool` | 🔄 Planned | Skill registered as an MCP tool for IDE/agent framework invocation |
 | `copilot-studio` | 🔄 Planned | Package imported as a Copilot Studio custom skill |

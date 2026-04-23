@@ -152,7 +152,7 @@ a live server are not included — consider adding them if this is a high-traffi
 |---|---|---|
 | gpt-4o | ✅ | Tested 2024-01-01. Consistent structure across runs. |
 | claude-3-5-sonnet | ✅ | Tested 2024-01-01. Slightly more verbose but well-structured. |
-| copilot-gpt-4o | ✅ | Works well inline in IDE chat. |
+| gpt-4o | ✅ | Works well inline in IDE chat. |
 
 ## Changelog
 

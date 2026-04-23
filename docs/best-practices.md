@@ -199,7 +199,7 @@ A good prompt is:
 A good skill is:
 
 - [ ] **Required front-matter complete** — `id`, `title`, `type`, `version`, `status`, `workstream`, `author`, `created`, `updated`, `tags`, `llm_compatibility`, `description`, `inputs`, `outputs` all present.
-- [ ] **`delivery_modes` declared** — at minimum `copilot-chat`.
+- [ ] **`delivery_modes` declared** — at minimum `llm-chat`.
 - [ ] **Inputs/outputs defined** — each with `name`, `type`, `description`, `required`.
 - [ ] **Skill Definition section** — complete system prompt that can be copy-pasted directly.
 - [ ] **Usage section** — Copilot Chat, standalone, API, and MCP examples.
@@ -217,7 +217,7 @@ A good agent is:
 
 - [ ] **Architecture section** — lists all skills and tools used, with a decision flow diagram.
 - [ ] **System Prompt / Agent Instructions** — complete, with goals, tools list, rules, and output format.
-- [ ] **`delivery_modes` declared** — at minimum `copilot-chat`.
+- [ ] **`delivery_modes` declared** — at minimum `llm-chat`.
 - [ ] **Configuration section** — model, temperature, max_iterations, tools list.
 - [ ] **Security Considerations** — explicitly covers: what systems it accesses, blast radius, guardrails.
 - [ ] **Human approval points** — documented for any destructive or irreversible action.
@@ -232,7 +232,7 @@ A good agent is:
 A good workflow is:
 
 - [ ] **Each step has its own prompt** — copy-paste ready, not "see the skill definition".
-- [ ] **`delivery_modes` declared** — at minimum `copilot-chat`.
+- [ ] **`delivery_modes` declared** — at minimum `llm-chat`.
 - [ ] **Flow diagram** — ASCII or Mermaid diagram showing inputs → steps → outputs.
 - [ ] **Hand-offs explicit** — each step documents what it takes as input and what it produces as output.
 - [ ] **Usage section** — explains both manual (LLM chat) and automated (Bitbucket Pipelines / API) usage.
@@ -269,4 +269,4 @@ These rules apply to **all** asset types:
 4. **One asset, one purpose** — if a skill is doing two things, split it into two skills.
 5. **Tested before submission** — the `## Testing Notes` table must have at least one ✅ row.
 6. **Catalog entry** — every new asset must be registered in `catalog/index.json`.
-7. **`delivery_modes` on skills, agents, and workflows** — declare at minimum `copilot-chat` and add future modes commented out.
+7. **`delivery_modes` on skills, agents, and workflows** — declare at minimum `llm-chat` and add future modes commented out.

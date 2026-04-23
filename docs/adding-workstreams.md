@@ -87,7 +87,7 @@ Open `catalog/index.json` and add an entry for your new asset. Example:
   "description": "Analyses pipeline run logs to identify failures, backpressure, and data quality issues.",
   "path": "workstreams/data-engineers/skills/pipeline-health-check.md",
   "updated": "YYYY-MM-DD",
-  "delivery_modes": ["copilot-chat", "api-endpoint"]
+  "delivery_modes": ["llm-chat", "api-endpoint"]
 }
 ```
 

@@ -189,7 +189,7 @@ docs: add architecture diagram and contribution guide link to README
 |---|---|---|
 | gpt-4o | ✅ | 2026-04-20. Excellent subject line quality. Rarely needs editing. |
 | claude-3-5-sonnet | ✅ | 2026-04-20. More verbose body paragraphs — good for complex changes. |
-| copilot-gpt-4o | ✅ | 2026-04-20. Works well in Copilot Chat with `#terminalSelection`. |
+| gpt-4o | ✅ | 2026-04-20. Works well in Copilot Chat with `#terminalSelection`. |
 
 ## Changelog
 

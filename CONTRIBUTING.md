@@ -177,7 +177,7 @@ Optional fields (include when relevant):
 
 ```yaml
 delivery_modes:
-  - copilot-chat          # current: copy-paste into any LLM interface
+  - llm-chat             # current: copy-paste into any LLM interface
   - api-endpoint          # future: portal REST API
   - mcp-tool              # future: MCP server
   - copilot-studio        # future: Copilot Studio connector

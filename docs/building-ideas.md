@@ -480,7 +480,7 @@ Follow the existing format. Minimum required fields:
   "description": "Generates a Conventional Commits message from a diff or description.",
   "path": "workstreams/developers/prompts/commit-message-generator.md",
   "updated": "2026-04-20",
-  "delivery_modes": ["copilot-chat"],
+  "delivery_modes": ["llm-chat"],
   "package_ids": ["developers-core-pack"]
 }
 ```

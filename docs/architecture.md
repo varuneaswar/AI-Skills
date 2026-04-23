@@ -99,13 +99,13 @@ Every asset and package manifest declares which delivery modes it supports and w
 
 | Delivery Mode | Availability | Description |
 |---|---|---|
-| `copilot-chat` | **Current** | Skill definition is copied from the Markdown file and pasted into any LLM interface (LLM Chat, ChatGPT, Claude, etc.) |
+| `llm-chat` | **Current** | Skill definition is copied from the Markdown file and pasted into any LLM interface (LLM Chat, ChatGPT, Claude, etc.) |
 | `api-endpoint` | **Planned** | A portal REST API accepts a skill invocation request and returns the LLM response |
 | `mcp-tool` | **Planned** | Skill is registered as an MCP (Model Context Protocol) tool, callable by agents and IDEs |
 | `copilot-studio` | **Planned** | Package imported as a Copilot Studio connector for Teams / M365 Copilot |
 | `in-house-llm` | **Planned** | Skill routed to an internal API layer — no data leaves the corporate network |
 
-Assets that support all delivery modes simply declare `"delivery_modes": ["copilot-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]`. The same asset file works for all delivery modes because the skill definition (system prompt) is format-agnostic.
+Assets that support all delivery modes simply declare `"delivery_modes": ["llm-chat", "api-endpoint", "mcp-tool", "copilot-studio", "in-house-llm"]`. The same asset file works for all delivery modes because the skill definition (system prompt) is format-agnostic.
 
 The `catalog/index.json` file is designed to be consumed by a web portal. Each entry contains enough metadata for a search card (id, title, type, description, tags, work stream). A backend API can serve this file or read individual Markdown files on demand.
 
@@ -146,7 +146,7 @@ No changes to the Markdown file are required when adding a new delivery mode. Th
 
 | Delivery Mode | How the asset is consumed |
 |---|---|
-| `copilot-chat` | User copies `## Skill Definition` block and pastes into any LLM interface |
+| `llm-chat` | User copies `## Skill Definition` block and pastes into any LLM interface |
 | `api-endpoint` | Portal backend reads file, extracts system prompt, substitutes inputs, calls LLM |
 | `mcp-tool` | MCP server auto-generates tool definition from `inputs[]`; calls LLM with extracted system prompt |
 | `copilot-studio` | Connector YAML auto-generated from package manifest + asset `inputs[]`/`outputs[]` |

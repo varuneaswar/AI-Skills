@@ -9,7 +9,7 @@ This is the canonical contract for the runtime team. Asset Markdown files need *
 ## Table of Contents
 
 - [The Canonical Skill Contract](#the-canonical-skill-contract)
-- [Delivery Mode 1: Copilot Chat (current)](#delivery-mode-1-copilot-chat-current)
+- [Delivery Mode 1: LLM Chat (current)](#delivery-mode-1-llm-chat-current)
 - [Delivery Mode 2: REST API Endpoint (future portal)](#delivery-mode-2-rest-api-endpoint-future-portal)
 - [Delivery Mode 3: MCP Tool (future)](#delivery-mode-3-mcp-tool-future)
 - [Delivery Mode 4: Copilot Studio Connector (future)](#delivery-mode-4-copilot-studio-connector-future)
@@ -74,7 +74,7 @@ delivery_modes:
 
 ---
 
-## Delivery Mode 1: Copilot Chat (current)
+## Delivery Mode 1: LLM Chat (current)
 
 **How it works:** The user copies the system prompt from the `## Skill Definition` section, sets it as the LLM's system message, and provides their inputs as the user message.
 
@@ -354,7 +354,7 @@ The switching cost between delivery modes is **near zero** because:
 
 | Phase | Action |
 |---|---|
-| **Today** | Declare `delivery_modes: [copilot-chat]` on all new assets. Copy-paste usage works immediately. |
+| **Today** | Declare `delivery_modes: [llm-chat]` on all new assets. Copy-paste usage works immediately. |
 | **Portal phase** | Enable `api-endpoint` in front-matter for assets to be served via REST. Run the adapter server. |
 | **MCP phase** | Enable `mcp-tool` in front-matter. Run the MCP server — it auto-generates tool definitions. |
 | **Copilot Studio** | Enable `copilot-studio`. Run the connector generator against each package manifest. |
