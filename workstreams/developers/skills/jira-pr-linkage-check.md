@@ -23,7 +23,7 @@ description: |
   Validates that a pull request references a Jira issue key (e.g., PROJ-1234) in its
   title or description. Returns a pass/fail result with the extracted Jira key when
   found, or a suggested fix when missing. Designed to be composed into CI pipelines
-  (Bitbucket Pipelines, Bitbucket Pipelines, Jenkins) as a lightweight quality gate step.
+  (Bitbucket Pipelines, GitLab CI, Jenkins) as a lightweight quality gate step.
 security_classification: internal
 inputs:
   - name: PR_TITLE

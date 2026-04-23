@@ -201,9 +201,10 @@ pipelines:
               JIRA_DESCRIPTION=$(jq -n \
                 --arg summary "$ISSUE_TITLE" \
                 --arg body "$(cat forecast.md)" \
+                --arg project_key "$JIRA_PROJECT_KEY" \
                 '{
                   fields: {
-                    project: { key: env.JIRA_PROJECT_KEY },
+                    project: { key: $project_key },
                     summary: $summary,
                     description: {
                       type: "doc",
