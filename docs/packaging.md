@@ -40,7 +40,7 @@ Every package is described by a JSON manifest in `catalog/packages/<package-id>.
   ],
 
   "delivery_modes": [
-    { "mode": "copilot-chat",   "availability": "current",  "instructions": "..." },
+    { "mode": "llm-chat",   "availability": "current",  "instructions": "..." },
     { "mode": "api-endpoint",   "availability": "planned",  "endpoint": "{{API_BASE_URL}}/..." },
     { "mode": "mcp-tool",       "availability": "planned",  "endpoint": "{{MCP_SERVER_URL}}/..." },
     { "mode": "copilot-studio", "availability": "planned",  "instructions": "..." },
@@ -78,7 +78,7 @@ This is how the repository differentiates between what works **today** and what 
 
 | Delivery Mode | Availability | How It Works |
 |---|---|---|
-| `copilot-chat` | **Current** | Copy the skill definition from the Markdown file, paste as system prompt into GitHub Copilot Chat, ChatGPT, Claude, or any IDE LLM interface. |
+| `llm-chat` | **Current** | Copy the skill definition from the Markdown file, paste as system prompt into LLM Chat, ChatGPT, Claude, or any IDE LLM interface. |
 | `api-endpoint` | **Planned** | A future REST API serves the packaged skill. The portal calls `POST /packages/<id>/invoke` with the inputs payload and returns the LLM response. |
 | `mcp-tool` | **Planned** | The skill is registered as an MCP (Model Context Protocol) tool. IDEs, bots, or agent frameworks call it by tool name. |
 | `copilot-studio` | **Planned** | The package is imported as a Copilot Studio custom skill or connector, making it available in Microsoft 365 Copilot and Teams. |
@@ -113,7 +113,7 @@ User (any work stream)
   AI-Skills Portal
   (web UI — searches catalog, selects package)
         │
-        ├──► copilot-chat   → "Use in IDE" button (copies skill to clipboard)
+        ├──► llm-chat   → "Use in IDE" button (copies skill to clipboard)
         │
         ├──► api-endpoint   → Portal calls POST /packages/<id>/invoke
         │                     → In-house API layer or Azure OpenAI / external LLM
@@ -139,7 +139,7 @@ When a user requests a package through the portal (future state):
 3. **Portal reads** the `catalog/packages/<package-id>.json` manifest.
 4. **Portal collects** all files listed in the `assets` array (from their respective `source_folder` paths).
 5. **Portal delivers** the package in the format matching the chosen `delivery_mode`:
-   - `copilot-chat`: Returns a formatted system prompt ready to paste.
+   - `llm-chat`: Returns a formatted system prompt ready to paste.
    - `api-endpoint`: Calls the LLM API and returns the result.
    - `mcp-tool`: Returns the MCP tool definition JSON.
    - `copilot-studio`: Returns a connector definition YAML.

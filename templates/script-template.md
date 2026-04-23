@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -140,7 +140,7 @@ if __name__ == "__main__":
     main()
 ```
 
-> **Note:** This is a reference implementation. Replace the `transform()` body with your actual aggregation or transformation logic. Keep the `argparse` / env-var interface so automations and GitHub Actions can invoke the script consistently.
+> **Note:** This is a reference implementation. Replace the `transform()` body with your actual aggregation or transformation logic. Keep the `argparse` / env-var interface so automations and Bitbucket Pipelines can invoke the script consistently.
 
 ## Inputs
 
@@ -157,7 +157,7 @@ if __name__ == "__main__":
 ## Invocation from an Automation
 
 ```yaml
-# Excerpt from a GitHub Actions workflow that calls this script
+# Excerpt from a Bitbucket Pipelines workflow that calls this script
 - name: Install script dependencies
   run: pip install requests>=2.31.0
 

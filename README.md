@@ -13,7 +13,7 @@ The repository is designed to be:
 - **Reusable** — every asset follows a consistent schema so it can be discovered and consumed easily.
 - **Collaborative** — any team member can propose ideas, refine existing content, and review contributions through pull requests.
 - **Secure** — all contributions are reviewed against the security standards described in [SECURITY.md](SECURITY.md).
-- **Portable** — content is stored as plain text (Markdown + JSON) so it works with any LLM runtime today (GitHub Copilot, GPT, Claude, Gemini) and can be surfaced through a future portal or API layer.
+- **Portable** — content is stored as plain text (Markdown + JSON) so it works with any LLM runtime today (Copilot, GPT, Claude, Gemini) and can be surfaced through a future portal or API layer.
 
 ---
 
@@ -161,7 +161,7 @@ The same asset works across all delivery modes — the skill definition is forma
 
 | Mode | Availability | How It Works |
 |---|---|---|
-| `copilot-chat` | ✅ **Current** | Copy the skill definition, paste as system prompt in Copilot Chat or any LLM |
+| `llm-chat` | ✅ **Current** | Copy the skill definition, paste as system prompt in Copilot Chat or any LLM |
 | `api-endpoint` | 🔄 Planned | Portal calls `POST /packages/<id>/invoke` and returns the LLM response |
 | `mcp-tool` | 🔄 Planned | Skill registered as an MCP tool for IDE/agent framework invocation |
 | `copilot-studio` | 🔄 Planned | Package imported as a Copilot Studio custom skill |
@@ -197,7 +197,7 @@ A comprehensive example demonstrating:
 1. **Browse** existing content in `workstreams/` or `shared/`.
 2. **Use a template** from the `templates/` folder to create a new asset.
 3. **Submit** your asset via a pull request — see [CONTRIBUTING.md](CONTRIBUTING.md).
-4. **Discuss** ideas early by opening a GitHub Issue with the *Idea Submission* template.
+4. **Discuss** ideas early by opening a Jira ticket with the *Idea Submission* template.
 
 ---
 
@@ -207,7 +207,7 @@ Assets in this repository are designed to be LLM-agnostic. Each prompt or skill 
 
 | LLM | Status |
 |---|---|
-| GitHub Copilot (GPT-4o) | ✅ Supported |
+| Copilot (GPT-4o) | ✅ Supported |
 | OpenAI GPT-4 / GPT-4 Turbo | ✅ Supported |
 | Anthropic Claude 3 / 3.5 | ✅ Supported |
 | Google Gemini 1.5 | ✅ Supported |

@@ -17,7 +17,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that takes an architecture design document through contextualisation,
   quality-attribute evaluation, risk and anti-pattern identification, and recommendations
@@ -25,7 +24,7 @@ description: |
   can use directly in Architecture Review Board meetings.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -229,14 +228,14 @@ DESIGN_DOCUMENT + QUALITY_ATTRIBUTES [+ CONSTRAINTS]
 ### Manual (Copilot Chat — current)
 
 1. Prepare your design document (or a concise description of the design).
-2. Copy Step 1 prompt, substitute placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy Step 1 prompt, substitute placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output and carry it forward as input for the next step.
 4. Use the final `DESIGN_REVIEW_REPORT` as the basis for your ARB meeting discussion.
 5. For each Critical or High recommendation, create an ADR using `arch-adr-generator` to record the resulting decision.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/architects/automations/adr-sync-automation.md` for a GitHub Actions automation that runs an LLM-assisted review when architecture documents are modified in a PR.
+See `workstreams/architects/automations/adr-sync-automation.md` for a Bitbucket Pipelines automation that runs an LLM-assisted review when architecture documents are modified in a PR.
 
 ### API Endpoint (future portal)
 

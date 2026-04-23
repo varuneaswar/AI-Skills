@@ -21,7 +21,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step cross-workstream workflow that takes a new feature from architectural decision
   all the way to acceptance tests. Architects produce an ADR, System Designers produce a
@@ -29,7 +28,7 @@ description: |
   delivering a complete DELIVERY_PACKAGE that can be handed to developers to implement.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -308,9 +307,9 @@ jobs:
         uses: org/ai-skills-action@v1
         with:
           workflow_id: shared-design-to-delivery-workflow
-          inputs: ${{ toJson(github.event.inputs) }}
+          inputs: ${CUSTOM_VARIABLE}
       - name: Commit artefacts to docs/
-        run: git add docs/adr docs/api && git commit -m "docs: add delivery package for ${{ github.event.inputs.feature_description }}"
+        run: git add docs/adr docs/api && git commit -m "docs: add delivery package for ${FEATURE_DESCRIPTION}"
 ```
 
 ### API Endpoint (future portal)

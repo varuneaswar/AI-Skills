@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -18,7 +18,7 @@ description: |
   One or two sentences describing what this workflow orchestrates and the end-to-end outcome.
 security_classification: internal
 delivery_modes:
-  - copilot-chat          # available now — copy/paste into any LLM interface
+  - llm-chat             # available now — copy/paste into any LLM interface
   # - api-endpoint        # uncomment when portal REST API is available
   # - mcp-tool            # uncomment when MCP server is deployed
   # - copilot-studio      # uncomment when Copilot Studio connector is configured
@@ -85,7 +85,7 @@ outputs:
 3. Take the output of Step 1 and use it as input to Step 2.
 4. The output of Step 2 is your final result.
 
-> **Automation tip:** If you have access to a workflow engine (e.g., GitHub Actions, Azure Logic Apps, n8n), you can automate these steps — see `automations/` for reference implementations.
+> **Automation tip:** If you have access to a workflow engine (e.g., Bitbucket Pipelines, Azure Logic Apps, n8n), you can automate these steps — see `automations/` for reference implementations.
 
 ## Examples
 

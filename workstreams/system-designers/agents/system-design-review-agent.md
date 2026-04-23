@@ -18,14 +18,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that reviews a system design document for completeness, identifies
   missing components and design smells, and produces a structured improvement report with
   a completeness score and prioritised recommendations — reducing design review cycles.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -192,7 +191,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 Open the design document in your IDE, then:
 

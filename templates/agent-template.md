@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -18,7 +18,7 @@ description: |
   One or two sentences describing what this agent does and when to deploy it.
 security_classification: internal
 delivery_modes:
-  - copilot-chat          # available now — copy/paste into any LLM interface
+  - llm-chat             # available now — copy/paste into any LLM interface
   # - api-endpoint        # uncomment when portal REST API is available
   # - mcp-tool            # uncomment when MCP server is deployed
   # - copilot-studio      # uncomment when Copilot Studio connector is configured

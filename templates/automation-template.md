@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -87,30 +87,23 @@ OUTPUT_ONE=$(echo "${RESPONSE}" | jq -r '.result')
 echo "OUTPUT_ONE=${OUTPUT_ONE}"
 ```
 
-> **Note:** This is a reference implementation. Adapt it to your environment, secrets management solution, and execution platform (GitHub Actions, Jenkins, Azure DevOps, etc.).
+> **Note:** This is a reference implementation. Adapt it to your environment, secrets management solution, and execution platform (Bitbucket Pipelines, Jenkins, Azure DevOps, etc.).
 
-## GitHub Actions Example
+## Bitbucket Pipelines Example
 
 ```yaml
-name: Run Automation
-on:
-  workflow_dispatch:
-    inputs:
-      input_one:
-        description: INPUT_ONE value
-        required: true
-
-jobs:
-  run:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Execute automation
-        env:
-          API_ENDPOINT: ${{ vars.API_ENDPOINT }}
-          API_KEY: ${{ secrets.API_KEY }}
-          INPUT_ONE: ${{ inputs.input_one }}
-        run: bash workstreams/<work-stream>/automations/automation-name.sh
+# bitbucket-pipelines.yml
+pipelines:
+  custom:
+    run-automation:
+      - step:
+          name: Execute automation
+          image: atlassian/default-image:4
+          variables:
+            - name: INPUT_ONE
+          script:
+            - bash workstreams/<work-stream>/automations/automation-name.sh
+          # API_ENDPOINT and API_KEY are stored as Repository Variables / Secured Variables
 ```
 
 ## Inputs
@@ -137,7 +130,7 @@ jobs:
 | Environment | Tested | Notes |
 |---|---|---|
 | Local (bash) | ✅ | Tested on YYYY-MM-DD |
-| GitHub Actions | ⬜ | Not yet tested |
+| Bitbucket Pipelines | ⬜ | Not yet tested |
 
 ## Changelog
 

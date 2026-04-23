@@ -40,7 +40,7 @@ outputs:
     type: string
     description: Classified bottleneck findings with remediation steps
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -107,7 +107,7 @@ List any fixes that are Low effort with High impact.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Analyse this performance test output for {{SYSTEM_DESCRIPTION}}.

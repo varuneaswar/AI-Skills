@@ -52,7 +52,7 @@ The agent would:
 
 ## Open Questions
 
-- Which change event sources should be integrated first? (GitHub Actions, PagerDuty, Terraform)
+- Which change event sources should be integrated first? (Bitbucket Pipelines, PagerDuty, Terraform)
 - How to handle runbooks that contain confidential system details?
 
 ## References

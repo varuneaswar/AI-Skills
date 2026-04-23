@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream   # architects | capacity-management | developers | performance-engineers | sre | system-designers | testers | shared
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -61,7 +61,7 @@ Respond in plain text / bullet list / JSON (choose one and delete the others).
 2. Replace `{{PLACEHOLDER_ONE}}` and `{{PLACEHOLDER_TWO}}` with your values.
 3. Paste into your LLM interface (Copilot Chat, ChatGPT, Claude, etc.).
 
-**GitHub Copilot Chat shortcut:**
+**LLM Chat shortcut:**
 ```
 @workspace /explain {{PLACEHOLDER_ONE}}
 ```

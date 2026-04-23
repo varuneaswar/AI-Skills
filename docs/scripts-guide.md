@@ -391,7 +391,7 @@ python shared/scripts/data_cleaner.py \
 echo "Data ready for analysis: /tmp/sales_clean.json"
 ```
 
-### Pattern 2: GitHub Actions Workflow
+### Pattern 2: Bitbucket Pipelines Workflow
 
 ```yaml
 jobs:
@@ -476,7 +476,7 @@ DATA=$(cat clean.json)
 
 # Copy prompt from prompts/statistical-analysis-prompt.md
 # Replace {{DATA}} placeholder with $DATA
-# Paste into GitHub Copilot Chat
+# Paste into LLM Chat
 ```
 
 ### Scripts → Skills

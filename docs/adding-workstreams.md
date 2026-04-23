@@ -22,7 +22,7 @@ Open `workstreams/registry.json` and add a new entry to the `workstreams` array:
   "label": "Data Engineers",
   "description": "Engineers responsible for data pipelines, data quality, and analytics infrastructure.",
   "path": "workstreams/data-engineers",
-  "owner": "your-github-username-or-team",
+  "owner": "your-username-or-team",
   "tags": ["data", "pipelines", "analytics"],
   "status": "active"
 }
@@ -87,7 +87,7 @@ Open `catalog/index.json` and add an entry for your new asset. Example:
   "description": "Analyses pipeline run logs to identify failures, backpressure, and data quality issues.",
   "path": "workstreams/data-engineers/skills/pipeline-health-check.md",
   "updated": "YYYY-MM-DD",
-  "delivery_modes": ["copilot-chat", "api-endpoint"]
+  "delivery_modes": ["llm-chat", "api-endpoint"]
 }
 ```
 
@@ -155,5 +155,5 @@ Yes. The `workstream` field is an array. An asset like `arch-trade-off-analysis`
 **Q: When should something go in `shared/` instead of a work stream folder?**  
 Use `shared/` only when an asset is genuinely reused by three or more work streams and has no single owner. Otherwise, place it in the work stream that created it and tag the other workstreams in the `workstream` array.
 
-**Q: Do I need to update any GitHub Actions CI checks?**  
+**Q: Do I need to update any Bitbucket Pipelines CI checks?**  
 No. The current CI check validates front matter format, not the list of valid workstream names. If a strict validation check is added in future, it will read from `workstreams/registry.json` automatically.

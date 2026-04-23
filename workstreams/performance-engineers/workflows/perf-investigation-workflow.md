@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that takes baseline and current load test results through metric
   comparison and SLO compliance, bottleneck identification, severity classification and
@@ -26,7 +25,7 @@ description: |
   investigation report with prioritised fix recommendations.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -244,13 +243,13 @@ BASELINE_RESULTS + CURRENT_RESULTS + SERVICE_NAME + SLO_THRESHOLDS
 ### Manual (Copilot Chat — current)
 
 1. Gather baseline and current load test results in a consistent format (p50/p95/p99 latency, throughput, error rate).
-2. Copy each step prompt in order, substitute the placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy each step prompt in order, substitute the placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output to use as input for the next step.
 4. Post the final `PERF_INVESTIGATION_REPORT` as a PR comment or attach it to the release ticket.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/performance-engineers/automations/benchmark-ci-automation.md` for a ready-to-use GitHub Actions implementation that runs this workflow on every PR.
+See `workstreams/performance-engineers/automations/benchmark-ci-automation.md` for a ready-to-use Bitbucket Pipelines implementation that runs this workflow on every PR.
 
 ### API Endpoint (future portal)
 

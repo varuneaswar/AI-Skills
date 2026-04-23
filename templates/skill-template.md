@@ -6,7 +6,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - replace-with-workstream
-author: your-github-username
+author: your-username
 created: YYYY-MM-DD
 updated: YYYY-MM-DD
 tags:
@@ -18,7 +18,7 @@ description: |
   One or two sentences describing what this skill does and when to use it.
 security_classification: internal
 delivery_modes:
-  - copilot-chat          # available now — copy/paste into any LLM interface
+  - llm-chat             # available now — copy/paste into any LLM interface
   # - api-endpoint        # uncomment when portal REST API is available
   # - mcp-tool            # uncomment when MCP server is deployed
   # - copilot-studio      # uncomment when Copilot Studio connector is configured
@@ -53,7 +53,7 @@ outputs:
 ## Skill Definition
 
 <!--
-  For a GitHub Copilot skill, this is typically a system prompt or a set of instructions
+  For an LLM skill, this is typically a system prompt or a set of instructions
   that define the skill's behaviour. For an MCP tool, describe the tool definition.
 -->
 
@@ -74,7 +74,7 @@ Always format your response as:
 
 ## Usage
 
-### GitHub Copilot Chat
+### LLM Chat
 
 ```
 @workspace #file:path/to/relevant-file.ts

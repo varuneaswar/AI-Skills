@@ -16,7 +16,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Reviews a code snippet or file for correctness, maintainability, security issues,
   and adherence to best practices, returning findings categorised by severity.
@@ -43,7 +42,7 @@ outputs:
     type: string
     description: Structured review with findings grouped by severity
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -109,7 +108,7 @@ Code to review:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 @workspace #file:<filename>

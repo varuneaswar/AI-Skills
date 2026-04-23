@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that transforms a design brief into a complete system design
   document: extract components, generate sequence diagrams for key flows, define API
@@ -26,7 +25,7 @@ description: |
   producing a structured, review-ready system design document.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -238,13 +237,13 @@ DESIGN_BRIEF + DESIGN_GOALS + CONSTRAINTS
 ### Manual (Copilot Chat — current)
 
 1. Start a new Copilot Chat session.
-2. Copy each step prompt in order, substitute the placeholders with your design brief and goals, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy each step prompt in order, substitute the placeholders with your design brief and goals, and paste into LLM Chat or your preferred LLM.
 3. Save each step's output to use as input for the next step.
 4. Combine all four outputs into a single design document (Markdown).
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/system-designers/automations/diagram-generation-automation.md` for a GitHub Actions implementation that automates Steps 2 and 3 on PRs modifying design files.
+See `workstreams/system-designers/automations/diagram-generation-automation.md` for a Bitbucket Pipelines implementation that automates Steps 2 and 3 on PRs modifying design files.
 
 ### API Endpoint (future portal)
 

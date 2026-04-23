@@ -31,7 +31,7 @@ Open `catalog/index.json` for a machine-readable list of every asset with key me
 
 ### Search by Tag
 
-Use GitHub's search to filter by tags:
+Use the repository search to filter by tags:
 
 ```
 repo:varuneaswar/AI-Skills "tags:" "tag1"
@@ -48,7 +48,7 @@ repo:varuneaswar/AI-Skills "tags:" "tag1"
 
 ---
 
-## 3. Use a Skill in GitHub Copilot
+## 3. Use a Skill with an LLM
 
 1. Find the skill file in `workstreams/<work-stream>/skills/` or `shared/skills/`.
 2. Follow the instructions in the skill's **Usage** section.
@@ -77,19 +77,19 @@ git add .
 git commit -m "feat(developers/prompts): add my-new-prompt"
 git push origin feat/developers/prompts/my-new-prompt
 
-# 6. Open a pull request on GitHub
+# 6. Open a pull request
 ```
 
 ---
 
 ## 5. Propose an Idea
 
-Not ready to write a full asset? Open a GitHub Issue using the **Idea Submission** template. A maintainer or community member may pick it up, or you can return to it later.
+Not ready to write a full asset? Open a Jira ticket using the **Idea Submission** template. A maintainer or community member may pick it up, or you can return to it later.
 
 ---
 
 ## 6. Get Help
 
 - Open a GitHub Discussion for questions.
-- Open a GitHub Issue with the `question` label for specific repository problems.
+- Open a Jira ticket with the `question` label for specific repository problems.
 - Tag a maintainer in your PR if you are stuck during review.

@@ -19,7 +19,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A three-step workflow that chains a Python aggregator script, a bottleneck-analysis
   skill, and the benchmark CI automation to deliver a complete regression analysis on
@@ -27,7 +26,7 @@ description: |
   in a single end-to-end AI pipeline.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -166,10 +165,10 @@ Limit to 5 actions maximum.
 **Output:** PR comment posted; CI step fails if `regression_found = true`.
 
 ```yaml
-# GitHub Actions excerpt — calls the benchmark CI automation
+# Bitbucket Pipelines excerpt — calls the benchmark CI automation
 - name: Post PR comment with analysis
   env:
-    GH_TOKEN: ${{ github.token }}
+    GH_TOKEN: $BB_APP_PASSWORD
     REGRESSION_FOUND: ${{ steps.delta.outputs.regression_found }}
   run: |
     TABLE=$(jq -r '.markdown_table' /tmp/benchmark_comparison.json)
@@ -200,7 +199,7 @@ Limit to 5 actions maximum.
 
 ---
 
-## Complete GitHub Actions Implementation
+## Complete Bitbucket Pipelines Implementation
 
 ```yaml
 # .github/workflows/benchmark-regression-workflow.yml
@@ -298,7 +297,7 @@ jobs:
       # ── Step 3: perf-benchmark-ci-automation (automation) ─────────────────
       - name: "[Step 3] Post PR comment and gate CI (perf-benchmark-ci-automation)"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: $BB_APP_PASSWORD
           REGRESSION_FOUND: ${{ steps.delta.outputs.regression_found }}
         run: |
           TABLE=$(jq -r '.markdown_table' /tmp/benchmark_comparison.json)

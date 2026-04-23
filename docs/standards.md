@@ -48,7 +48,7 @@ All assets must start with a YAML front-matter block (between `---` delimiters).
 - `gemini-1.5-pro`
 - `gemini-1.5-flash`
 - `azure-openai-gpt-4o`
-- `copilot-gpt-4o`
+- `gpt-4o`
 - `all` *(use only for simple, model-agnostic prompts)*
 
 ### Optional but Recommended Fields

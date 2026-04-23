@@ -284,25 +284,25 @@ if __name__ == "__main__":
 |---|---|---|
 | `OUTPUT_FILE` | string | JSON file with `summary`, `at_risk_services`, `services[]` (with projections), and `markdown_table` |
 
-## Invocation from an Automation (GitHub Actions excerpt)
+## Invocation from an Automation (Bitbucket Pipelines excerpt)
 
 ```yaml
-- name: Install transformer dependencies
-  run: pip install python-dateutil>=2.8.2
-
-- name: Transform utilization data
-  env:
-    UTILIZATION_FILE: ${{ vars.METRICS_FILE_PATH || 'data/utilization.json' }}
-    OUTPUT_FILE: /tmp/utilization_summary.json
-  run: python shared/scripts/utilization_transformer.py
-
-- name: Read transformed summary for LLM prompt
-  id: summary
-  run: |
-    AT_RISK=$(jq -r '.at_risk_count' /tmp/utilization_summary.json)
-    TABLE=$(jq -r '.markdown_table' /tmp/utilization_summary.json)
-    echo "at_risk_count=${AT_RISK}" >> "$GITHUB_OUTPUT"
-    printf 'markdown_table<<EOF\n%s\nEOF\n' "$TABLE" >> "$GITHUB_OUTPUT"
+# bitbucket-pipelines.yml (step excerpt)
+- step:
+    name: Transform utilization data
+    image: python:3.11-slim
+    script:
+      - pip install python-dateutil>=2.8.2
+      - UTILIZATION_FILE="${METRICS_FILE_PATH:-data/utilization.json}"
+        OUTPUT_FILE=utilization_summary.json
+        python shared/scripts/utilization_transformer.py
+      - AT_RISK=$(jq -r '.at_risk_count' utilization_summary.json)
+      - TABLE=$(jq -r '.markdown_table' utilization_summary.json)
+      - echo "at_risk_count=${AT_RISK}"  # use pipeline artifacts in CI
+      - printf '%s' "$TABLE" > markdown_table.txt  # use pipeline artifacts in CI
+    artifacts:
+      - utilization_summary.json
+      - markdown_table.txt
 ```
 
 ## Calling Asset Reference

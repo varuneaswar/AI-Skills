@@ -21,7 +21,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous cross-workstream agent that assesses overall platform health by combining
   SRE incident awareness, performance regression detection, and capacity utilisation
@@ -29,7 +28,7 @@ description: |
   and the report concludes with prioritised recommended actions across all three disciplines.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -259,7 +258,7 @@ health_score_thresholds:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 Open a new Copilot Chat session and paste:
 

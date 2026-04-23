@@ -44,7 +44,7 @@ outputs:
     type: string
     description: Brief explanation of the diagram
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -96,7 +96,7 @@ Output format:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Generate a Mermaid sequence diagram for:

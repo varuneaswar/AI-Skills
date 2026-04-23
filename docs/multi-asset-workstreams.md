@@ -403,7 +403,7 @@ python shared/scripts/data_cleaner.py \
 # Step 3: Use skill with cleaned data
 # Copy skill definition from skills/sales-trend-analyzer.md
 # Paste clean.json contents into {{SALES_DATA}} placeholder
-# Run in GitHub Copilot Chat
+# Run in LLM Chat
 ```
 
 **Integration point:** Bash script chains steps; human runs skill

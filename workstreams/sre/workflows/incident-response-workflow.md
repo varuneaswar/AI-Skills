@@ -17,7 +17,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step workflow that takes a raw alert through triage, runbook retrieval,
   mitigation planning, and stakeholder communication — giving on-call engineers a
@@ -25,7 +24,7 @@ description: |
   context from scratch under pressure.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -253,15 +252,15 @@ ALERT_NAME + SERVICE_NAME + SYSTEM_CONTEXT [+ SEVERITY]
 ### Manual (Copilot Chat — current)
 
 1. Receive the alert from PagerDuty or Alertmanager.
-2. Copy Step 1 prompt, substitute placeholders, and paste into GitHub Copilot Chat or your preferred LLM.
+2. Copy Step 1 prompt, substitute placeholders, and paste into LLM Chat or your preferred LLM.
 3. Save the `TRIAGE_RESULT` output and use it as input for Step 2.
 4. Continue through Steps 3 and 4 in order, carrying forward each step's output.
 5. Post the `STAKEHOLDER_COMMUNICATION` to the #incidents Slack channel.
 6. Save the `INCIDENT_REPORT` to your incident management system.
 
-### Automated (GitHub Actions — current)
+### Automated (Bitbucket Pipelines — current)
 
-See `workstreams/sre/automations/on-call-alert-handler.md` for a ready-to-use GitHub Actions implementation of this workflow.
+See `workstreams/sre/automations/on-call-alert-handler.md` for a ready-to-use Bitbucket Pipelines implementation of this workflow.
 
 ### API Endpoint (future portal)
 

@@ -45,7 +45,7 @@ outputs:
     type: string
     description: Utilization analysis with findings, risks, and recommendations
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -111,7 +111,7 @@ State the metric thresholds that should trigger a follow-up capacity review.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Analyse this resource utilization data for {{RESOURCE_TYPE}} over {{TIME_PERIOD}}:

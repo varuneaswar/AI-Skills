@@ -263,7 +263,7 @@ if __name__ == "__main__":
 | `OUTPUT_FILE` | string | JSON file with `metrics[]`, `regression_found`, `overall_verdict`, and `markdown_table` |
 | `REGRESSION_FOUND` | string | `true` / `false` printed to stdout — capture with `$(...)` or `>> $GITHUB_OUTPUT` |
 
-## Invocation from an Automation (GitHub Actions excerpt)
+## Invocation from an Automation (Bitbucket Pipelines excerpt)
 
 ```yaml
 - name: Run benchmark delta calculator

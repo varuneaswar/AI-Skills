@@ -30,7 +30,7 @@ The full journey from idea to shipped asset:
 
 ```
 Stage 0: Capture idea
-    │  (GitHub Issue or ideas/ Markdown file)
+    │  (Jira ticket or ideas/ Markdown file)
     ▼
 Stage 1: Choose asset type
     │  (Prompt? Skill? Agent? Workflow? Automation?)
@@ -54,7 +54,7 @@ Stage 5: Review and merge
 
 Before writing any content, record the idea so it can be vetted.
 
-### Option A — Submit via GitHub Issue (non-technical / Lane 2)
+### Option A — Submit via Jira ticket (non-technical / Lane 2)
 
 1. Go to the repository on GitHub.
 2. Click **Issues** → **New Issue**.
@@ -131,7 +131,7 @@ version: "1.0.0"
 status: draft
 workstream:
   - developers
-author: your-github-username
+author: your-username
 created: 2026-04-20
 updated: 2026-04-20
 tags:
@@ -144,7 +144,7 @@ description: |
   Generates a Conventional Commits message from a git diff or plain-language description.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
 inputs:
   - name: CHANGE_DESCRIPTION
     type: string
@@ -173,7 +173,7 @@ Generate a commit message for the following change:
 
 ### Step 4 — Iterate with an LLM
 
-1. Open GitHub Copilot Chat, ChatGPT, or Claude.
+1. Open LLM Chat, ChatGPT, or Claude.
 2. Paste your prompt, replacing placeholders with real values.
 3. Check the output. Adjust the prompt until the output is consistently good.
 4. Save a real example as your `## Examples` section.
@@ -219,7 +219,7 @@ outputs:
     type: string
     description: Structured findings by severity
 delivery_modes:
-  - copilot-chat
+  - llm-chat
 ```
 
 **Rule:** If you cannot define clear inputs and outputs, it is probably a **Prompt** or an **Idea**, not a Skill.
@@ -388,7 +388,7 @@ Include an ASCII or Mermaid diagram in the `## Flow Diagram` section. This is wh
 
 Show how to run the workflow:
 1. Manually (step by step in an LLM chat window)
-2. Automatically (GitHub Actions, API, or other trigger)
+2. Automatically (Bitbucket Pipelines, API, or other trigger)
 
 **Reference:** See `workstreams/developers/workflows/pr-review-workflow.md` for a complete example.
 
@@ -420,13 +420,13 @@ cp templates/automation-template.md workstreams/<workstream>/automations/<your-a
 ### Step 4 — Write the Implementation
 
 Include a complete, runnable script or workflow YAML. Reference implementations:
-- GitHub Actions: see `workstreams/developers/automations/pr-validator.md`
+- Bitbucket Pipelines: see `workstreams/developers/automations/pr-validator.md`
 - Shell script: use the bash template in `templates/automation-template.md`
 
 ### Step 5 — Document security requirements
 
 For automations, the `## Security Notes` section is **required**. Cover:
-- What credentials are required and how they are stored (always GitHub Secrets)
+- What credentials are required and how they are stored (always Bitbucket Secured Variables)
 - What systems the automation accesses
 - Whether the automation is idempotent
 
@@ -458,7 +458,7 @@ Before submitting, test your asset thoroughly:
 
 ### For Automations
 
-1. **Run locally first** — before pushing to GitHub Actions.
+1. **Run locally first** — before pushing to Bitbucket Pipelines.
 2. **Test idempotency** — run it twice and verify the second run does not double-post or duplicate work.
 
 ---
@@ -480,7 +480,7 @@ Follow the existing format. Minimum required fields:
   "description": "Generates a Conventional Commits message from a diff or description.",
   "path": "workstreams/developers/prompts/commit-message-generator.md",
   "updated": "2026-04-20",
-  "delivery_modes": ["copilot-chat"],
+  "delivery_modes": ["llm-chat"],
   "package_ids": ["developers-core-pack"]
 }
 ```
@@ -553,7 +553,7 @@ Some ideas grow into a full stack:
 3. Skill: dev-summarize-pull-request (already exists)
 4. Agent: dev-pr-review-agent (orchestrates both skills dynamically)
 5. Workflow: dev-pr-review-workflow (fixed sequence for teams that prefer determinism)
-6. Automation: dev-pr-validator (runs the workflow on every PR via GitHub Actions)
+6. Automation: dev-pr-validator (runs the workflow on every PR via Bitbucket Pipelines)
 ```
 
 Cross-reference all of these in `dependencies[]` and `catalog/index.json`.

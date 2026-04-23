@@ -314,23 +314,20 @@ if __name__ == "__main__":
 ## Invocation from an Automation
 
 ```yaml
-# GitHub Actions workflow excerpt
-- name: Install script dependencies
-  run: pip install pandas>=2.0.0 numpy>=1.24.0
-
-- name: Clean raw data
-  env:
-    INPUT_FILE: data/sales_raw.csv
-    OUTPUT_FILE: /tmp/sales_clean.json
-    REMOVE_DUPLICATES: true
-    FILL_MISSING: mean
-  run: python shared/scripts/data_cleaner.py
-
-- name: Read quality report
-  id: quality
-  run: |
-    SCORE=$(jq -r '.data_quality_score' /tmp/sales_clean_quality_report.json)
-    echo "quality_score=${SCORE}" >> "$GITHUB_OUTPUT"
+# bitbucket-pipelines.yml (step excerpt)
+- step:
+    name: Clean raw data
+    image: python:3.11-slim
+    script:
+      - pip install pandas>=2.0.0 numpy>=1.24.0
+      - INPUT_FILE=data/sales_raw.csv OUTPUT_FILE=sales_clean.json
+        REMOVE_DUPLICATES=true FILL_MISSING=mean
+        python shared/scripts/data_cleaner.py
+      - SCORE=$(jq -r '.data_quality_score' sales_clean_quality_report.json)
+      - echo "Quality score:${SCORE}"  # use pipeline artifacts in CI
+    artifacts:
+      - sales_clean.json
+      - sales_clean_quality_report.json
 ```
 
 ## Calling Asset Reference

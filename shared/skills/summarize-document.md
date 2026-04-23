@@ -17,7 +17,6 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
   - all
 description: |
   Produces a structured summary of any document or long text block with configurable detail
@@ -46,7 +45,7 @@ outputs:
     type: string
     description: The generated summary in the requested format
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -105,7 +104,7 @@ Focus area: {{FOCUS_AREA}}
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Summarize the following text at {{DETAIL_LEVEL}} detail as a {{OUTPUT_FORMAT}},

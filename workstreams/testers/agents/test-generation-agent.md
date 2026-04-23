@@ -19,7 +19,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that takes a user story, generates a comprehensive test plan
   (functional, edge case, negative), produces BDD scenarios in Gherkin (Given/When/Then),
@@ -27,7 +26,7 @@ description: |
   hours to minutes.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -186,7 +185,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 Open your test file or requirements document, then:
 

@@ -18,14 +18,13 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Generates a 30/60/90-day capacity forecast from current utilization metrics, weekly
   growth trend data, and optional seasonality context — producing projected breach dates,
   headroom timelines, and prioritised scaling recommendations in a structured Markdown table report.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -139,7 +138,7 @@ State the metric thresholds that should trigger a follow-up capacity forecast.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Generate a capacity forecast for {{SERVICE_NAME}}.

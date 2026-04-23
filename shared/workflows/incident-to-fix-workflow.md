@@ -20,7 +20,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   A four-step cross-workstream workflow that takes a live incident from initial alert all the
   way to a merged hotfix with regression tests. SRE triages and classifies the incident, the
@@ -28,7 +27,7 @@ description: |
   generates regression test cases — producing a complete, ready-to-act INCIDENT_REPORT package.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -276,7 +275,7 @@ INCIDENT_DESCRIPTION + ALERT_DETAILS + AFFECTED_SERVICE
 4. Run Step 3 to generate the PR description and commit message. Save as `HOTFIX_PR`.
 5. Run Step 4 to generate regression tests. Combine all four outputs into the incident ticket.
 
-### Automated (GitHub Actions — future)
+### Automated (Bitbucket Pipelines — future)
 
 ```yaml
 # .github/workflows/incident-fix-pipeline.yml (illustrative)
@@ -296,7 +295,7 @@ jobs:
         uses: org/ai-skills-action@v1
         with:
           workflow_id: shared-incident-to-fix-workflow
-          inputs: ${{ toJson(github.event.inputs) }}
+          inputs: ${CUSTOM_VARIABLE}
 ```
 
 ### API Endpoint (future portal)

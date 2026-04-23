@@ -19,14 +19,13 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Generates comprehensive statistical analysis and actionable insights from structured data,
   including descriptive statistics, trend identification, anomaly detection, and business
   recommendations — transforming raw numbers into decision-ready insights.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -178,7 +177,7 @@ Perform the following analysis:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Analyze this data:

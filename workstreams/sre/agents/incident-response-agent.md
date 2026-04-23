@@ -18,7 +18,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   An autonomous agent that manages the full incident response lifecycle: triages alert
   severity, retrieves or generates the relevant runbook, proposes concrete mitigation
@@ -26,7 +25,7 @@ description: |
   fixing issues rather than assembling context.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -195,7 +194,7 @@ tools:
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 Paste the alert details into Copilot Chat:
 

@@ -16,7 +16,6 @@ tags:
 llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
-  - copilot-gpt-4o
 description: |
   Generates a structured operational runbook for a service or alert, including
   description, escalation path, diagnostic steps, and resolution procedures.
@@ -43,7 +42,7 @@ outputs:
     type: string
     description: Completed runbook in Markdown format
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -137,7 +136,7 @@ Steps to safely roll back if resolution fails.
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Generate a runbook for the "{{ALERT_OR_SCENARIO}}" alert on {{SERVICE_NAME}}.

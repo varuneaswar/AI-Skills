@@ -19,14 +19,13 @@ llm_compatibility:
   - gpt-4o
   - claude-3-5-sonnet
   - gemini-1.5-pro
-  - copilot-gpt-4o
 description: |
   Generates a complete OpenAPI 3.0 YAML contract stub from a plain-language API description,
   including paths, request/response schemas, authentication, and standard error responses —
   accelerating API-first design and ensuring consistent contracts across services.
 security_classification: internal
 delivery_modes:
-  - copilot-chat
+  - llm-chat
   - api-endpoint
   - mcp-tool
   - copilot-studio
@@ -110,7 +109,7 @@ Output only the YAML content inside a fenced ```yaml code block. No prose before
 
 ## Usage
 
-### GitHub Copilot Chat (current)
+### LLM Chat (current)
 
 ```
 Generate an OpenAPI 3.0 contract for this API:
